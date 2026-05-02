@@ -5,6 +5,25 @@ from .market import analyze_market
 from .pricing import calculate_cost, calculate_sale_price
 from .ranking import get_top3
 from .description import generate_description_cached
+from .currency import convert_to_try
+
+def _resolve_price_try(price, currency, usd_try=1.0):
+    currency = (currency or "TRY").strip().lower()
+    try:
+        price = float(price)
+    except Exception:
+        price = 0.0
+
+    if currency == "usd" and usd_try != 1.0:
+        return round(price * usd_try, 2)
+
+    try:
+        return round(convert_to_try(price, currency), 2)
+    except Exception:
+        if currency == "try":
+            return round(price, 2)
+        return round(price, 2)
+
 
 def process(products, usd_try=1.0):
     """
@@ -12,6 +31,8 @@ def process(products, usd_try=1.0):
     Global ürünler kendi para birimiyle, TR ürünleri TRY ile ayrı değerlendirilir.
     """
     products = preprocess(products)
+    for p in products:
+        p["price_try"] = _resolve_price_try(p.get("price", 0), p.get("currency", "TRY"), usd_try)
     products = compute_embeddings(products)
     clusters = cluster_products(products)
 
@@ -58,6 +79,7 @@ def clean_product(p):
         "source": p["source"],
         "region": p["region"],
         "price": round(p["price"], 2),
-        "price_try": round(p["price"], 2),  # ham değeri olduğu gibi taşıyoruz
+        "price_try": round(p.get("price_try", p["price"]), 2),
+        "currency": p.get("currency", "TRY"),
         "url": p.get("url")
     }

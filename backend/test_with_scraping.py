@@ -54,8 +54,12 @@ def print_section(title: str):
 
 def format_price(price: float, currency: str = "USD") -> str:
     """Fiyatı formatla."""
-    symbol = "$" if currency == "USD" else "₺"
-    return f"{symbol}{price:,.2f}"
+    currency = (currency or "TRY").upper()
+    symbols = {"USD": "$", "TRY": "₺", "EUR": "€"}
+    symbol = symbols.get(currency, "")
+    if symbol:
+        return f"{symbol}{price:,.2f}"
+    return f"{price:,.2f} {currency}"
 
 
 def print_product_card(product: dict, index: int = 1):
@@ -132,7 +136,7 @@ async def run_pipeline(product_name: str):
     
     try:
         print(f"  İşleniyor (Preprocessing, Embedding, Clustering, Pricing)...", end=" ", flush=True)
-        result = ai_process(all_products, market_region="TR")
+        result = ai_process(all_products)
         print("✓\n")
         
         if not result:
@@ -146,21 +150,31 @@ async def run_pipeline(product_name: str):
             print(f"  {i}. Küme Sonucu:")
             print(f"     ├─ Ürün: {item.get('product', 'N/A')[:50]}")
             print(f"     ├─ Maliyet: {format_price(item.get('cost', 0), 'TRY')}")
-            print(f"     ├─ Önerilen Fiyat: {format_price(item.get('price', 0), 'TRY')}")
-            
             pricing = item.get('pricing', {})
+            recommended_price = pricing.get('price', 0)
+            print(f"     ├─ Önerilen Fiyat: {format_price(recommended_price, 'TRY')}")
+
             if isinstance(pricing, dict):
                 print(f"     ├─ Fiyatlandırma:")
                 print(f"     │  ├─ Status: {pricing.get('status', 'N/A')}")
                 print(f"     │  ├─ Price: {format_price(pricing.get('price', 0), 'TRY')}")
-                print(f"     │  └─ Margin: {pricing.get('margin', 'N/A')}")
-            
+                print(f"     │  ├─ Margin: {pricing.get('margin', 'N/A')}")
+                print(f"     │  └─ Currency: TRY")
+
+            if item.get('description'):
+                description = item['description'].replace('\n', ' ').strip()
+                print(f"     ├─ Açıklama: {description[:120]}")
+
+            if item.get('ref_suggestion'):
+                suggestion = item['ref_suggestion'].replace('\n', ' ').strip()
+                print(f"     ├─ Öneri Fiyat (AI): {suggestion}")
+
             # Top 3
             top3 = item.get('top3', [])
             if top3:
                 print(f"     └─ En İyi 3 Fiyat: ({len(top3)} ürün)")
                 for j, p in enumerate(top3[:3], 1):
-                    print(f"        {j}. {p.get('source', 'N/A')}: {format_price(p.get('price', 0), p.get('currency', 'TRY'))}")
+                    print(f"        {j}. {p.get('source', 'N/A')}: {format_price(p.get('price', 0), p.get('currency', 'TRY'))} ({format_price(p.get('price_try', 0), 'TRY')} TRY)")
             print()
         
     except Exception as e:

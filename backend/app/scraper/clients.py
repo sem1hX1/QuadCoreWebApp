@@ -10,7 +10,7 @@ from dotenv import load_dotenv
 load_dotenv()
 logger = logging.getLogger(__name__)
 
-_TIMEOUT = 10.0 # Daha hızlı yanıt için düşürüldü
+_TIMEOUT = 30.0 # Daha stabil yanıt için arttırıldı
 
 def _parse_price(text: str) -> float:
     if not text: return 0.0
@@ -48,19 +48,7 @@ class MasterScraper:
         except:
             all_results = []
 
-        if not all_results:
-             # Eğer hiçbir yerden sonuç gelmezse veya timeout olursa akıllı demo verisi dön
-             import random
-             base_eur = random.uniform(1.5, 5.0)
-             all_results = [
-                 {"title": f"{part_number} - Global Veri Merkezi", "price": round(base_eur, 2), "source": "DigiKey", "region": "global", "currency": "EUR", "url": "https://www.digikey.de"},
-                 {"title": f"{part_number} - Global Stok", "price": round(base_eur * 1.05, 2), "source": "Mouser", "region": "global", "currency": "EUR", "url": "https://www.mouser.com"},
-                 {"title": f"{part_number} - Global Dağıtım", "price": round(base_eur * 1.08, 2), "source": "Arrow", "region": "global", "currency": "EUR", "url": "https://www.arrow.com"},
-                 {"title": f"{part_number} - Global Katalog", "price": round(base_eur * 1.10, 2), "source": "Farnell", "region": "global", "currency": "EUR", "url": "https://www.farnell.com"},
-                 {"title": f"{part_number} - Global Tedarik", "price": round(base_eur * 1.12, 2), "source": "Newark", "region": "global", "currency": "EUR", "url": "https://www.newark.com"},
-                 {"title": f"{part_number} - Yerel Tedarik", "price": round(base_eur * 42, 2), "source": "Robotistan", "region": "TR", "currency": "TRY", "url": "https://www.robotistan.com"}
-             ]
-        
+        # Fallback dummy verisi kaldırıldı. Artık sadece gerçek veriler dönülecek.
         return all_results
 
     async def _scrape_global(self, part):
@@ -78,16 +66,20 @@ class MasterScraper:
                         name = dist_title.text.strip().split(' ')[0]
                         rows = block.find_all('tr')
                         for row in rows:
-                            part_el = row.find(class_='v-part-name')
-                            price_el = row.find(class_='v-price')
-                            if part_el and price_el:
-                                p_val = _parse_price(price_el.text)
-                                if p_val > 0:
-                                    results.append({
-                                        "title": part_el.text.strip(), "price": p_val,
-                                        "source": name, "region": "global", "currency": "EUR", "url": url
-                                    })
-                                    break
+                            part_name = row.get('data-mfrpartnumber')
+                            price_data_str = row.get('data-price')
+                            if part_name and price_data_str:
+                                try:
+                                    price_data = json.loads(price_data_str)
+                                    if price_data and len(price_data) > 0:
+                                        p_val = float(price_data[0][2])
+                                        if p_val > 0:
+                                            results.append({
+                                                "title": part_name, "price": p_val,
+                                                "source": name, "region": "global", "currency": "EUR", "url": url
+                                            })
+                                            break
+                                except: pass
         except: pass
         return results
 
@@ -96,7 +88,7 @@ class MasterScraper:
         configs = {
             "Robotistan": {
                 "url": f"https://www.robotistan.com/arama?q={part}",
-                "item": ".product-item", "title": ".product-title a", "price": ".price"
+                "item": ".product-item", "title": ".product-title", "price": ".product-price"
             },
             "Direnc.net": {
                 "url": f"https://www.direnc.net/arama?q={part}",
