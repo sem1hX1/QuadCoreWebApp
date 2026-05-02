@@ -1,77 +1,42 @@
-import axios from 'axios';
+﻿import axios from 'axios';
 
-// FastAPI Backend adresi
-const API_URL = 'http://localhost:8000';
-// Mock/Ayarlar Servisi (Express) adresi
-const SETTINGS_URL = 'http://localhost:5000/api';
+const BASE_URL = import.meta.env.VITE_API_URL || 'http://localhost:8000';
 
-// Gerçek backend bağlantısı için false yapıldı
-const USE_MOCK = false; 
+const SUPPLIER_COLORS = {
+  DigiKey: '#e53935',
+  Mouser: '#1e88e5',
+  LCSC: '#2e7d32',
+  AliExpress: '#ff6d00',
+  Trendyol: '#f57c00',
+  Hepsiburada: '#ff8f00',
+  Amazon: '#ffa000',
+};
 
-/**
- * Ürün arama fonksiyonu.
- * FastAPI tarafında /products endpoint'ini kullanarak veritabanındaki ürünleri listeler.
- * Eğer ürün yoksa yeni bir ürün oluşturulup arama yapılabilir.
- */
+function transformToCards(analysisResponse) {
+  const { results, best_deal, suggested_price } = analysisResponse;
+  const aiHint = `En iyi teklif: ${best_deal.source} ($${best_deal.price.toFixed(2)}), Önerilen: $${suggested_price.toFixed(2)}`;
+
+  return results.map((item, index) => ({
+    id: index + 1,
+    name: item.title,
+    supplier: item.source,
+    supplierColor: SUPPLIER_COLORS[item.source] || '#607d8b',
+    price: item.price,
+    stock: item.region === 'TR' ? 'TR Pazar' : 'Global Stok',
+    status: item.region === 'TR' ? 'TR' : 'Global',
+    ai: aiHint,
+    category: item.brand || 'Elektronik',
+  }));
+}
+
 export const searchComponents = async (query) => {
-  if (USE_MOCK) {
-    await new Promise(r => setTimeout(r, 800));
-    return [];
-  }
-  
-  try {
-    // Önce mevcut ürünleri getir
-    const response = await axios.get(`${API_URL}/products/`);
-    const results = response.data;
-    
-    // Query'e göre filtrele
-    const filtered = results.filter(c => c.name.toLowerCase().includes(query.toLowerCase()));
-    
-    // Eğer veritabanında bu isimde bir ürün yoksa ve kullanıcı bir şey arıyorsa, 
-    // otomatik olarak yeni bir ürün kaydı oluşturup onu döndürebiliriz (veya boş döneriz)
-    if (filtered.length === 0 && query.length > 2) {
-      const createRes = await axios.post(`${API_URL}/products/`, { name: query });
-      return [createRes.data];
-    }
-    
-    return filtered;
-  } catch (error) {
-    console.error("Search error:", error);
-    return [];
-  }
+  const { data } = await axios.get(`${BASE_URL}/products/search`, {
+    params: { q: query },
+  });
+  return transformToCards(data);
 };
 
-/**
- * Ürün analizi fonksiyonu.
- * FastAPI /products/{id}/analyze endpoint'ini kullanır.
- */
-export const analyzeComponent = async (componentData) => {
-  if (USE_MOCK) {
-    await new Promise(r => setTimeout(r, 1500));
-    return {};
-  }
-
-  try {
-    const response = await axios.post(`${API_URL}/products/${componentData.id}/analyze`);
-    const data = response.data;
-
-    // Frontend'in beklediği formata dönüştür
-    return {
-      recommendation: data.best_deal,
-      summary: `AI Analizi: ${componentData.name} için önerilen satış fiyatı ${data.suggested_price} ${data.best_deal.currency}.`,
-      charts: {
-        priceData: data.results.map(r => ({ name: r.source, fiyat: r.price }))
-      }
-    };
-  } catch (error) {
-    console.error("Analysis error:", error);
-    throw error;
-  }
+export const analyzeComponent = async (productId) => {
+  const { data } = await axios.post(`${BASE_URL}/products/${productId}/analyze`);
+  return data;
 };
-
-// Ayarlar servisi Express mock sunucusundan devam ediyor
-export const getSettings = async () => {
-  const response = await axios.get(`${SETTINGS_URL}/settings`);
-  return response.data;
-};
-
