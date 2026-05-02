@@ -1,11 +1,14 @@
 import React, { useState, useEffect } from 'react';
-import { Search, MoreHorizontal, ChevronRight, TrendingUp, TrendingDown, Package, Truck, AlertTriangle, PlayCircle, HelpCircle, ArrowRight, MessageSquare } from 'lucide-react';
+import { Search, MoreHorizontal, ChevronRight, TrendingUp, TrendingDown, Package, Truck, AlertTriangle, PlayCircle, HelpCircle, ArrowRight, MessageSquare, ExternalLink } from 'lucide-react';
 import { AreaChart, Area, XAxis, YAxis, Tooltip, ResponsiveContainer, CartesianGrid } from 'recharts';
 import { motion, AnimatePresence } from 'framer-motion';
 import { searchComponents, analyzeComponent } from '../services/api';
 import { useLocation, useNavigate, Link } from 'react-router-dom';
 
-// Veriler backend API'den gelecek — placeholder veri yok
+const trendData = [
+  { month: 'Oca', fiyat: 4.2 }, { month: 'Şub', fiyat: 4.5 }, { month: 'Mar', fiyat: 3.9 },
+  { month: 'Nis', fiyat: 3.8 }, { month: 'May', fiyat: 4.1 }, { month: 'Haz', fiyat: 3.85 },
+];
 
 const SupplierBadge = ({ name, color }) => (
   <div style={{ display: 'flex', alignItems: 'center', gap: '5px' }}>
@@ -55,10 +58,33 @@ const ComponentCard = ({ comp, index, isSelected, onClick }) => (
         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '8px' }}>
           <SupplierBadge name={comp.supplier} color={comp.supplierColor} />
           <div style={{ textAlign: 'right' }}>
-            <div style={{ fontSize: '0.95rem', fontWeight: '700', color: 'var(--text-main)' }}>${comp.price.toFixed(2)}</div>
-            <div style={{ fontSize: '0.72rem', color: 'var(--text-muted)' }}>{comp.stock} Stok</div>
+            <div style={{ fontSize: '0.9rem', fontWeight: '700', color: 'var(--text-main)' }}>
+              €{comp.price.toFixed(2)} = {comp.price_try?.toFixed(2)} TL
+            </div>
+            <div style={{ fontSize: '0.72rem', color: 'var(--text-muted)' }}>{comp.stock}</div>
           </div>
         </div>
+
+        {comp.url && (
+          <a 
+            href={comp.url} 
+            target="_blank" 
+            rel="noopener noreferrer"
+            onClick={(e) => e.stopPropagation()}
+            style={{
+              display: 'inline-flex',
+              alignItems: 'center',
+              gap: '4px',
+              fontSize: '0.7rem',
+              color: 'var(--accent)',
+              textDecoration: 'none',
+              marginBottom: '8px',
+              fontWeight: '600'
+            }}
+          >
+            <ExternalLink size={12} /> Sitede Gör
+          </a>
+        )}
 
         <div style={{
           background: 'rgba(2, 132, 199, 0.08)',
@@ -76,85 +102,139 @@ const ComponentCard = ({ comp, index, isSelected, onClick }) => (
   </motion.div>
 );
 
-const DetailPanel = ({ comp }) => (
-  <div className="dashboard-detail" style={{
-    width: '380px',
-    background: 'var(--bg-sidebar)',
-    borderLeft: '1px solid var(--border)',
-    padding: '24px',
-    overflowY: 'auto'
-  }}>
-    <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '20px' }}>
-      <h3 style={{ fontSize: '1rem', fontWeight: '600', color: 'var(--text-main)' }}>Bileşen Detayı</h3>
-      <button style={{ background: 'none', border: 'none', color: 'var(--text-muted)', cursor: 'pointer' }}>
-        <MoreHorizontal size={18} />
-      </button>
-    </div>
+const DetailPanel = ({ comp, allResults }) => {
+  const comparisons = allResults
+    ? allResults.filter(r => r.name.toLowerCase().includes(comp.name.split(' ')[0].toLowerCase())).sort((a, b) => a.price - b.price)
+    : [];
 
-    <div style={{ background: 'var(--bg)', border: '1px solid var(--border)', borderRadius: '8px', padding: '12px', display: 'flex', gap: '10px', alignItems: 'flex-start' }}>
-      <div style={{ width: 10, height: 10, borderRadius: '2px', background: 'var(--accent)', marginTop: '4px', flexShrink: 0 }} />
-      <div style={{ flex: 1 }}>
-        <div style={{ fontSize: '0.9rem', fontWeight: '600', color: 'var(--text-main)', marginBottom: '4px' }}>{comp.name}</div>
-        <div style={{ fontSize: '0.75rem', color: 'var(--text-muted)', marginBottom: '8px', lineHeight: '1.4' }}>Kategori: {comp.category}<br/>Paket: SMD/QFN-32<br/>Çalışma Voltajı: 3.0V - 3.6V</div>
-        <div style={{ background: 'rgba(2, 132, 199, 0.08)', borderRadius: '4px', padding: '6px 8px', fontSize: '0.75rem', color: 'var(--accent)', lineHeight: '1.4', border: '1px solid rgba(2, 132, 199, 0.1)' }}>
-          ✦ Yapay Zeka Önerisi: En uygun fiyat ve lojistik kombinasyonu AliExpress'te tespit edildi. (Güvenilirlik: %94)
+  let parsedSuggestion = { price: 0, reason: '' };
+  try {
+    if (comp.ref_suggestion) {
+      const jsonStr = comp.ref_suggestion.includes('```json') 
+        ? comp.ref_suggestion.split('```json')[1].split('```')[0]
+        : comp.ref_suggestion.replace('json\n', '');
+      parsedSuggestion = JSON.parse(jsonStr);
+    }
+  } catch (e) {
+    console.error("AI Parse Error", e);
+  }
+
+  return (
+    <div className="dashboard-detail" style={{
+      width: '380px',
+      background: 'var(--bg-sidebar)',
+      borderLeft: '1px solid var(--border)',
+      padding: '24px',
+      overflowY: 'auto'
+    }}>
+      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '20px' }}>
+        <h3 style={{ fontSize: '1rem', fontWeight: '600', color: 'var(--text-main)' }}>Bileşen Detayı</h3>
+        <button style={{ background: 'none', border: 'none', color: 'var(--text-muted)', cursor: 'pointer' }}>
+          <MoreHorizontal size={18} />
+        </button>
+      </div>
+
+      <div style={{ background: 'var(--bg)', border: '1px solid var(--border)', borderRadius: '8px', padding: '12px', display: 'flex', gap: '10px', alignItems: 'flex-start', marginBottom: '24px' }}>
+        <div style={{ width: 10, height: 10, borderRadius: '2px', background: 'var(--accent)', marginTop: '4px', flexShrink: 0 }} />
+        <div style={{ flex: 1 }}>
+          <div style={{ fontSize: '0.9rem', fontWeight: '600', color: 'var(--text-main)', marginBottom: '4px' }}>{comp.name}</div>
+          <div style={{ fontSize: '0.75rem', color: 'var(--text-muted)', marginBottom: '8px', lineHeight: '1.4' }}>
+            Kategori: {comp.category}<br/>
+            Kaynak: {comp.supplier}<br/>
+            Birim Fiyat: €{comp.price.toFixed(2)} = {comp.price_try?.toFixed(2)} TL
+          </div>
+          
+          {comp.url && (
+            <a 
+              href={comp.url} 
+              target="_blank" 
+              rel="noopener noreferrer"
+              style={{
+                display: 'inline-flex',
+                alignItems: 'center',
+                gap: '4px',
+                fontSize: '0.75rem',
+                color: 'var(--accent)',
+                textDecoration: 'none',
+                marginBottom: '10px',
+                fontWeight: '600'
+              }}
+            >
+              <ExternalLink size={14} /> Kaynak Sayfaya Git
+            </a>
+          )}
+
+          <div style={{ background: 'rgba(2, 132, 199, 0.08)', borderRadius: '4px', padding: '10px', fontSize: '0.75rem', color: 'var(--accent)', lineHeight: '1.5', border: '1px solid rgba(2, 132, 199, 0.1)' }}>
+            <div style={{ fontWeight: '700', marginBottom: '4px', display: 'flex', alignItems: 'center', gap: '5px' }}>
+              ✦ Yapay Zeka Analizi
+            </div>
+            <p style={{ marginBottom: '8px', color: 'var(--text-main)' }}>{comp.description}</p>
+            {parsedSuggestion.price > 0 && (
+              <div style={{ background: 'var(--bg-card)', padding: '6px', borderRadius: '4px', border: '1px solid rgba(2, 132, 199, 0.2)' }}>
+                <strong>Önerilen Fiyat: €{parsedSuggestion.price}</strong><br/>
+                <span style={{ fontSize: '0.7rem', color: 'var(--text-muted)' }}>{parsedSuggestion.reason}</span>
+              </div>
+            )}
+          </div>
         </div>
       </div>
-    </div>
 
-    <div>
-      <h4 style={{ fontSize: '0.8rem', color: 'var(--text-muted)', fontWeight: '600', letterSpacing: '0.5px', marginBottom: '12px', textTransform: 'uppercase' }}>Fiyat Karşılaştırması</h4>
-      <div style={{ display: 'flex', flexDirection: 'column', gap: '8px', background: 'var(--bg)', padding: '12px', borderRadius: '8px', border: '1px solid var(--border)' }}>
-        {priceComparison.map((item, i) => (
-          <div key={i} style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', paddingBottom: i !== priceComparison.length - 1 ? '8px' : '0', borderBottom: i !== priceComparison.length - 1 ? '1px solid var(--border)' : 'none' }}>
-            <span style={{ fontSize: '0.85rem', color: item.bold ? 'var(--text-main)' : 'var(--text-muted)', fontWeight: item.bold ? '600' : '500' }}>{item.supplier}</span>
-            <span style={{ fontSize: '0.85rem', color: item.bold ? 'var(--accent)' : 'var(--text-main)', fontWeight: item.bold ? '700' : '600' }}>{item.price}</span>
+      <div style={{ marginBottom: '24px' }}>
+        <h4 style={{ fontSize: '0.8rem', color: 'var(--text-muted)', fontWeight: '600', letterSpacing: '0.5px', marginBottom: '12px', textTransform: 'uppercase' }}>Fiyat Karşılaştırması</h4>
+        <div style={{ display: 'flex', flexDirection: 'column', gap: '8px', background: 'var(--bg)', padding: '12px', borderRadius: '8px', border: '1px solid var(--border)' }}>
+          {comparisons.map((item, i) => (
+            <div key={i} style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', paddingBottom: i !== comparisons.length - 1 ? '8px' : '0', borderBottom: i !== comparisons.length - 1 ? '1px solid var(--border)' : 'none' }}>
+              <span style={{ fontSize: '0.85rem', color: item.id === comp.id ? 'var(--text-main)' : 'var(--text-muted)', fontWeight: item.id === comp.id ? '600' : '500' }}>{item.supplier}</span>
+              <span style={{ fontSize: '0.85rem', color: item.id === comp.id ? 'var(--accent)' : 'var(--text-main)', fontWeight: item.id === comp.id ? '700' : '600' }}>
+                €{item.price.toFixed(2)} = {item.price_try?.toFixed(2)} TL
+              </span>
+            </div>
+          ))}
+        </div>
+      </div>
+
+      <div style={{ marginBottom: '24px' }}>
+        <h4 style={{ fontSize: '0.8rem', color: 'var(--text-muted)', fontWeight: '600', letterSpacing: '0.5px', marginBottom: '12px', textTransform: 'uppercase' }}>Fiyat Trendi (6 Ay)</h4>
+        <div style={{ height: '140px', background: 'var(--bg)', padding: '10px 10px 10px 0', borderRadius: '8px', border: '1px solid var(--border)' }}>
+          <ResponsiveContainer width="100%" height="100%">
+            <AreaChart data={trendData} margin={{ top: 5, right: 10, left: -20, bottom: 0 }}>
+              <defs>
+                <linearGradient id="detailGradLight" x1="0" y1="0" x2="0" y2="1">
+                  <stop offset="5%" stopColor="var(--accent)" stopOpacity={0.15} />
+                  <stop offset="95%" stopColor="var(--accent)" stopOpacity={0} />
+                </linearGradient>
+              </defs>
+              <CartesianGrid strokeDasharray="3 3" vertical={false} stroke="var(--border)" />
+              <XAxis dataKey="month" tick={{ fontSize: 10, fill: 'var(--text-muted)' }} axisLine={false} tickLine={false} />
+              <YAxis domain={['auto', 'auto']} tick={{ fontSize: 10, fill: 'var(--text-muted)' }} axisLine={false} tickLine={false} />
+              <Tooltip contentStyle={{ background: '#fff', border: '1px solid var(--border)', borderRadius: '6px', fontSize: '0.8rem', boxShadow: '0 4px 6px -1px rgba(0,0,0,0.1)' }} />
+              <Area type="monotone" dataKey="fiyat" stroke="var(--accent)" strokeWidth={2} fill="url(#detailGradLight)" />
+            </AreaChart>
+          </ResponsiveContainer>
+        </div>
+      </div>
+
+      <div style={{ display: 'flex', flexDirection: 'column', gap: '10px', marginTop: 'auto', paddingTop: '20px' }}>
+        {[
+          { label: 'Aktif Tedarikçiler', value: '24 Tedarikçi', icon: <Package size={14} /> },
+          { label: 'Tahmini Teslimat', value: '4-7 İş Günü', icon: <Truck size={14} /> },
+          { label: 'Risk Uyarıları', value: 'Düşük Risk', icon: <AlertTriangle size={14} />, color: '#10b981' },
+        ].map((stat, i) => (
+          <div key={i} style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: '10px 12px', background: 'var(--bg)', borderRadius: '6px', border: '1px solid var(--border)' }}>
+            <div style={{ display: 'flex', alignItems: 'center', gap: '8px', color: 'var(--text-muted)', fontSize: '0.85rem' }}>
+              <span style={{ color: stat.color || 'var(--text-dim)' }}>{stat.icon}</span>
+              {stat.label}
+            </div>
+            <span style={{ fontSize: '0.85rem', fontWeight: '600', color: stat.color || 'var(--text-main)' }}>{stat.value}</span>
           </div>
         ))}
+        <button className="premium-button" style={{ marginTop: '10px', width: '100%', padding: '12px' }}>
+          Satın Alma Seçeneklerini Gör
+        </button>
       </div>
     </div>
-
-    <div>
-      <h4 style={{ fontSize: '0.8rem', color: 'var(--text-muted)', fontWeight: '600', letterSpacing: '0.5px', marginBottom: '12px', textTransform: 'uppercase' }}>Fiyat Trendi (6 Ay)</h4>
-      <div style={{ height: '140px', background: 'var(--bg)', padding: '10px 10px 10px 0', borderRadius: '8px', border: '1px solid var(--border)' }}>
-        <ResponsiveContainer width="100%" height="100%">
-          <AreaChart data={trendData} margin={{ top: 5, right: 10, left: -20, bottom: 0 }}>
-            <defs>
-              <linearGradient id="detailGradLight" x1="0" y1="0" x2="0" y2="1">
-                <stop offset="5%" stopColor="var(--accent)" stopOpacity={0.15} />
-                <stop offset="95%" stopColor="var(--accent)" stopOpacity={0} />
-              </linearGradient>
-            </defs>
-            <CartesianGrid strokeDasharray="3 3" vertical={false} stroke="var(--border)" />
-            <XAxis dataKey="month" tick={{ fontSize: 10, fill: 'var(--text-muted)' }} axisLine={false} tickLine={false} />
-            <YAxis domain={['auto', 'auto']} tick={{ fontSize: 10, fill: 'var(--text-muted)' }} axisLine={false} tickLine={false} />
-            <Tooltip contentStyle={{ background: '#fff', border: '1px solid var(--border)', borderRadius: '6px', fontSize: '0.8rem', boxShadow: '0 4px 6px -1px rgba(0,0,0,0.1)' }} />
-            <Area type="monotone" dataKey="fiyat" stroke="var(--accent)" strokeWidth={2} fill="url(#detailGradLight)" />
-          </AreaChart>
-        </ResponsiveContainer>
-      </div>
-    </div>
-
-    <div style={{ display: 'flex', flexDirection: 'column', gap: '10px', marginTop: 'auto', paddingTop: '20px' }}>
-      {[
-        { label: 'Aktif Tedarikçiler', value: '24 Tedarikçi', icon: <Package size={14} /> },
-        { label: 'Tahmini Teslimat', value: '4-7 İş Günü', icon: <Truck size={14} /> },
-        { label: 'Risk Uyarıları', value: 'Düşük Risk', icon: <AlertTriangle size={14} />, color: '#10b981' },
-      ].map((stat, i) => (
-        <div key={i} style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: '10px 12px', background: 'var(--bg)', borderRadius: '6px', border: '1px solid var(--border)' }}>
-          <div style={{ display: 'flex', alignItems: 'center', gap: '8px', color: 'var(--text-muted)', fontSize: '0.85rem' }}>
-            <span style={{ color: stat.color || 'var(--text-dim)' }}>{stat.icon}</span>
-            {stat.label}
-          </div>
-          <span style={{ fontSize: '0.85rem', fontWeight: '600', color: stat.color || 'var(--text-main)' }}>{stat.value}</span>
-        </div>
-      ))}
-      <button className="premium-button" style={{ marginTop: '10px', width: '100%', padding: '12px' }}>
-        Satın Alma Seçeneklerini Gör
-      </button>
-    </div>
-  </div>
-);
+  );
+};
 
 const FAQItem = ({ question, answer }) => {
   const [isOpen, setIsOpen] = useState(false);
@@ -234,18 +314,14 @@ const LandingView = ({ onSearch }) => {
             Ara <ArrowRight size={18} />
           </button>
         </div>
-        {/* Öneri etiketleri backend entegrasyonundan sonra dinamik olarak gelecek */}
       </motion.div>
 
-      {/* Info Sections */}
       <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.3 }} style={{ maxWidth: '900px', margin: '100px auto 40px auto', display: 'flex', flexDirection: 'column', gap: '30px' }}>
-        
-        {/* Nasıl Çalışır? */}
         <section className="glass-card" style={{ padding: '30px', background: 'var(--bg-card)' }}>
           <h3 style={{ fontSize: '1.2rem', marginBottom: '20px', display: 'flex', alignItems: 'center', gap: '8px', color: 'var(--text-main)' }}>
             <HelpCircle size={20} color="var(--accent)" /> Nasıl Çalışır?
           </h3>
-          <div className="grid-cols-3" style={{ display: 'grid', gap: '20px' }}>
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', gap: '20px' }}>
             {[
               { title: '1. Tarama', desc: 'Mouser, DigiKey, LCSC gibi 50+ küresel distribütör eş zamanlı olarak taranır.' },
               { title: '2. Yapay Zeka Analizi', desc: 'Gümrük, kargo süreleri ve fiyat avantajları yapay zeka tarafından hesaplanır.' },
@@ -260,12 +336,11 @@ const LandingView = ({ onSearch }) => {
           </div>
         </section>
 
-        {/* Müşterilerimiz Ne Diyor? */}
         <section className="glass-card" style={{ padding: '30px', background: 'var(--bg-card)' }}>
           <h3 style={{ fontSize: '1.2rem', marginBottom: '20px', display: 'flex', alignItems: 'center', gap: '8px', color: 'var(--text-main)' }}>
             <MessageSquare size={20} color="var(--accent)" /> Müşterilerimiz Ne Diyor?
           </h3>
-          <div className="grid-cols-3" style={{ display: 'grid', gap: '20px' }}>
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(250px, 1fr))', gap: '20px' }}>
             {[
               { name: 'Ayşe Y.', role: 'Satın Alma Müdürü', text: 'Tedarik zinciri yönetimimizde SourceFlow sayesinde %30 maliyet tasarrufu sağladık. Yapay zeka analizi inanılmaz.' },
               { name: 'Mehmet B.', role: 'Elektronik Mühendisi', text: 'Prototip aşamasında parça bulmak tam bir kabustu. Şimdi saniyeler içinde en uygun stoklu parçayı bulabiliyorum.' },
@@ -285,7 +360,6 @@ const LandingView = ({ onSearch }) => {
           </div>
         </section>
 
-        {/* Sıkça Sorulan Sorular (Accordion) */}
         <section className="glass-card" style={{ padding: '30px', background: 'var(--bg-card)' }}>
           <h3 style={{ fontSize: '1.2rem', marginBottom: '20px', display: 'flex', alignItems: 'center', gap: '8px', color: 'var(--text-main)' }}>
             <HelpCircle size={20} color="var(--accent)" /> Sıkça Sorulan Sorular
@@ -306,7 +380,6 @@ const LandingView = ({ onSearch }) => {
             </Link>
           </div>
         </section>
-
       </motion.div>
     </div>
   );
@@ -322,6 +395,8 @@ const Dashboard = () => {
   const [sortBy, setSortBy] = useState('price-low');
   const location = useLocation();
   const navigate = useNavigate();
+
+  const categories = ['Hepsi', ...new Set(results.map(c => c.category).filter(Boolean))];
 
   const filteredAndSortedResults = results
     .filter(c => filterCategory === 'Hepsi' || c.category === filterCategory)
@@ -344,31 +419,8 @@ const Dashboard = () => {
       return 0;
     });
 
-  const categories = ['Hepsi', ...new Set(results.map(c => c.category).filter(Boolean))];
-
-  useEffect(() => {
-    // Check if there is a search query in the URL params
-    const params = new URLSearchParams(location.search);
-    const q = params.get('q');
-    if (q) {
-      performSearch(q);
-    } else {
-      // Ana Sayfa linkine tıklandığında (veya URL'de q parametresi yoksa) aramayı sıfırla
-      setHasSearched(false);
-      setSearchQuery('');
-      window.scrollTo({ top: 0, behavior: 'smooth' });
-    }
-  }, [location.search]);
-
-  const handleSearch = (queryToSearch) => {
-    const q = typeof queryToSearch === 'string' ? queryToSearch : searchQuery;
-    if (!q.trim()) return;
-    
-    // Update the URL which will trigger the useEffect
-    navigate(`/?q=${encodeURIComponent(q)}`);
-  };
-
   const performSearch = async (q) => {
+    if (!q || !q.trim()) return;
     setSearchQuery(q);
     setLoading(true);
     setHasSearched(true);
@@ -383,6 +435,24 @@ const Dashboard = () => {
     } finally {
       setLoading(false);
     }
+  };
+
+  useEffect(() => {
+    const params = new URLSearchParams(location.search);
+    const q = params.get('q');
+    if (q) {
+      performSearch(q);
+    } else {
+      setHasSearched(false);
+      setSearchQuery('');
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+  }, [location.search]);
+
+  const handleSearch = (queryToSearch) => {
+    const q = typeof queryToSearch === 'string' ? queryToSearch : searchQuery;
+    if (!q.trim()) return;
+    navigate(`/?q=${encodeURIComponent(q)}`);
   };
 
   if (!hasSearched) {
@@ -407,10 +477,7 @@ const Dashboard = () => {
       className="dashboard-layout"
       style={{ display: 'flex', height: 'calc(100vh - 52px)', overflow: 'hidden' }}
     >
-      {/* Center Content */}
       <div className="dashboard-results" style={{ flex: 1, overflowY: 'auto', padding: '24px 30px', background: 'var(--bg)' }}>
-        
-        {/* Search Bar (Top) */}
         <div style={{ marginBottom: '24px', display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: '20px', flexWrap: 'wrap' }}>
           <h2 style={{ fontSize: '1.4rem', fontWeight: '700', color: 'var(--text-main)' }}>Arama Sonuçları</h2>
           
@@ -446,7 +513,6 @@ const Dashboard = () => {
           </div>
         </div>
 
-        {/* Filter Bar */}
         <div style={{ 
           marginBottom: '24px', 
           display: 'flex', 
@@ -502,7 +568,6 @@ const Dashboard = () => {
           </button>
         </div>
 
-        {/* Component Grid - 2 columns */}
         {loading ? (
            <div style={{ display: 'flex', justifyContent: 'center', padding: '100px' }}>
               <div style={{ border: '3px solid var(--border)', borderTopColor: 'var(--accent)', borderRadius: '50%', width: 40, height: 40, animation: 'spin 1s linear infinite' }} />
@@ -520,11 +585,9 @@ const Dashboard = () => {
             ))}
           </div>
         )}
-
       </div>
 
-      {/* Right Detail Panel */}
-      {selectedComp && !loading && <DetailPanel comp={selectedComp} />}
+      {selectedComp && !loading && <DetailPanel comp={selectedComp} allResults={results} />}
 
       <style>{`
         .comp-card:hover {

@@ -13,6 +13,7 @@ import {
   LogOut,
   X,
   MessageCircle,
+  Terminal
 } from 'lucide-react';
 import { getMessages, getFAQs, getSettings } from '../services/api';
 
@@ -20,6 +21,7 @@ const STATIC_ROUTES = [
   { type: 'Sayfa', title: 'Gelen Kutusu',      path: '/',             icon: '✉️' },
   { type: 'Sayfa', title: 'Raporlar',           path: '/reports',      icon: '📊' },
   { type: 'Sayfa', title: 'SSS Yönetimi',       path: '/faq',          icon: '❓' },
+  { type: 'Sayfa', title: 'Sistem Logları',     path: '/logs',         icon: '📜' },
   { type: 'Sayfa', title: 'Sistem Ayarları',    path: '/settings',     icon: '⚙️' },
 ];
 
@@ -62,7 +64,6 @@ const Navbar = ({ onLogout }) => {
   const inputRef   = useRef(null);
   const navigate   = useNavigate();
 
-  // ── Veri ve site adını yükle ──
   useEffect(() => {
     const load = async () => {
       try {
@@ -80,7 +81,6 @@ const Navbar = ({ onLogout }) => {
     };
     load();
 
-    // Messages.jsx'ten gelen silme/okundu eventini dinle → zili anlık güncelle
     const onMsgsUpdated = async () => {
       try {
         const res = await getMessages();
@@ -88,7 +88,6 @@ const Navbar = ({ onLogout }) => {
       } catch {}
     };
     window.addEventListener('messagesUpdated', onMsgsUpdated);
-    // Ayarlar değiştiğinde site adını güncelle (Settings sayfasından kaydet sonrası)
     const storageListener = () => {
       try {
         const s = JSON.parse(localStorage.getItem('qc_admin_settings') || '{}');
@@ -102,7 +101,6 @@ const Navbar = ({ onLogout }) => {
     };
   }, []);
 
-  // ── Dışarı tıklayınca kapat ──
   useEffect(() => {
     const handler = (e) => {
       if (searchRef.current && !searchRef.current.contains(e.target)) {
@@ -116,7 +114,6 @@ const Navbar = ({ onLogout }) => {
     return () => document.removeEventListener('mousedown', handler);
   }, []);
 
-  // ── Arama mantığı ──
   const handleSearch = useCallback((value) => {
     setQuery(value);
     if (!value.trim()) { setResults([]); setShowSearch(false); return; }
@@ -151,12 +148,8 @@ const Navbar = ({ onLogout }) => {
         .bell-item:hover .bell-subject { color: #4361ee !important; }
       `}</style>
 
-      {/* ── Top Row ── */}
       <div className="top-nav" style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', padding: '12px 32px', borderBottom: '1px solid #dde3f4' }}>
-
-        {/* Left: Logo + Search */}
         <div style={{ display: 'flex', alignItems: 'center', gap: '24px' }}>
-          {/* Logo — site adı localStorage'dan gelir */}
           <div style={{ display: 'flex', alignItems: 'center', gap: '12px', flexShrink: 0 }}>
             <div style={{ width: '40px', height: '40px', background: 'linear-gradient(135deg, #4361ee, #7c3aed)', borderRadius: '12px', display: 'flex', alignItems: 'center', justifyContent: 'center', boxShadow: '0 4px 12px rgba(67,97,238,0.28)' }}>
               <Box size={20} color="white" />
@@ -166,7 +159,6 @@ const Navbar = ({ onLogout }) => {
             </h1>
           </div>
 
-          {/* Search */}
           <div ref={searchRef} style={{ position: 'relative' }}>
             <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
               <Search size={20} style={{ color: '#9099b8', flexShrink: 0 }} />
@@ -189,7 +181,6 @@ const Navbar = ({ onLogout }) => {
               </div>
             </div>
 
-            {/* Arama Dropdown */}
             {showSearch && (
               <div style={{ position: 'absolute', top: 'calc(100% + 8px)', left: '30px', width: '380px', backgroundColor: '#fff', border: '1px solid #dde3f4', borderRadius: '14px', boxShadow: '0 8px 32px rgba(67,97,238,0.14)', zIndex: 200, overflow: 'hidden', maxHeight: '380px', overflowY: 'auto' }}>
                 {isSearching ? (
@@ -223,10 +214,7 @@ const Navbar = ({ onLogout }) => {
           </div>
         </div>
 
-        {/* Right: Actions */}
         <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
-
-          {/* ── Bildirim Zili ── */}
           <div ref={bellRef} style={{ position: 'relative' }}>
             <button
               onClick={() => setShowBellDropdown(p => !p)}
@@ -242,10 +230,8 @@ const Navbar = ({ onLogout }) => {
               )}
             </button>
 
-            {/* ── Bildirim Dropdown ── */}
             {showBellDropdown && (
               <div style={{ position: 'absolute', top: 'calc(100% + 10px)', right: 0, width: '340px', backgroundColor: '#fff', border: '1px solid #dde3f4', borderRadius: '16px', boxShadow: '0 12px 40px rgba(67,97,238,0.16)', zIndex: 200, overflow: 'hidden' }}>
-                {/* Başlık */}
                 <div style={{ padding: '14px 18px', borderBottom: '1px solid #f0f2fa', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
                   <div>
                     <p style={{ fontWeight: '800', fontSize: '15px', color: '#1a1e38' }}>Bildirimler</p>
@@ -257,7 +243,6 @@ const Navbar = ({ onLogout }) => {
                   </button>
                 </div>
 
-                {/* Mesaj Listesi */}
                 <div style={{ maxHeight: '320px', overflowY: 'auto' }}>
                   {unreadMessages.length === 0 ? (
                     <div style={{ padding: '32px 20px', textAlign: 'center' }}>
@@ -272,12 +257,9 @@ const Navbar = ({ onLogout }) => {
                         onClick={() => { navigate('/'); setShowBellDropdown(false); }}
                         style={{ width: '100%', textAlign: 'left', display: 'flex', alignItems: 'flex-start', gap: '12px', padding: '14px 18px', background: 'none', border: 'none', cursor: 'pointer', borderTop: i > 0 ? '1px solid #f0f2fa' : 'none', transition: 'background 0.15s' }}
                       >
-                        {/* Avatar */}
                         <div style={{ width: '36px', height: '36px', background: 'linear-gradient(135deg, #eef1ff, #e8eaff)', borderRadius: '50%', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
                           <MessageCircle size={16} color="#4361ee" />
                         </div>
-
-                        {/* İçerik */}
                         <div style={{ flex: 1, minWidth: 0 }}>
                           <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '3px' }}>
                             <p className="bell-subject" style={{ fontWeight: '700', fontSize: '13px', color: '#1a1e38', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap', transition: 'color 0.15s' }}>
@@ -291,15 +273,12 @@ const Navbar = ({ onLogout }) => {
                             <strong style={{ color: '#6b7280' }}>{msg.name}</strong> — {msg.content.slice(0, 50)}{msg.content.length > 50 ? '…' : ''}
                           </p>
                         </div>
-
-                        {/* Okunmamış nokta */}
                         <div style={{ width: '8px', height: '8px', backgroundColor: '#4361ee', borderRadius: '50%', flexShrink: 0, marginTop: '4px' }} />
                       </button>
                     ))
                   )}
                 </div>
 
-                {/* Alt: Mesajlara Git */}
                 {unreadMessages.length > 0 && (
                   <div style={{ padding: '12px 18px', borderTop: '1px solid #f0f2fa', backgroundColor: '#fcfcff' }}>
                     <button
@@ -316,7 +295,6 @@ const Navbar = ({ onLogout }) => {
 
           <div style={{ width: '1px', height: '24px', backgroundColor: '#e4e8f5' }} />
 
-          {/* User Info */}
           <div style={{ display: 'flex', alignItems: 'center', gap: '10px', cursor: 'pointer' }}>
             <div style={{ textAlign: 'right' }}>
               <p style={{ fontSize: '14px', fontWeight: '700', color: '#1a1e38', lineHeight: '1.2' }}>Root Admin</p>
@@ -327,7 +305,6 @@ const Navbar = ({ onLogout }) => {
             </div>
           </div>
 
-          {/* Return to Site */}
           <a
             href="/"
             title="Siteye Dön"
@@ -339,7 +316,6 @@ const Navbar = ({ onLogout }) => {
             Siteye Dön
           </a>
 
-          {/* Logout */}
           <button
             onClick={onLogout}
             title="Çıkış Yap"
@@ -352,11 +328,11 @@ const Navbar = ({ onLogout }) => {
         </div>
       </div>
 
-      {/* ── Bottom Nav Row ── */}
       <nav className="bottom-nav" style={{ display: 'flex', alignItems: 'center', gap: '2px', padding: '0 28px', overflowX: 'auto', backgroundColor: '#fff' }}>
         <NavItem to="/"             icon={Mail}       label="Gelen Kutusu" />
         <NavItem to="/reports"      icon={BarChart2}  label="Raporlar" />
         <NavItem to="/faq"          icon={HelpCircle} label="SSS Yönetimi" />
+        <NavItem to="/logs"         icon={Terminal}   label="Sistem Logları" />
         <NavItem to="/settings"     icon={Settings}   label="Sistem Ayarları" />
       </nav>
     </header>

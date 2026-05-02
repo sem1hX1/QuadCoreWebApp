@@ -42,7 +42,7 @@ def process(products, usd_try=1.0):
             "cost": cost,
             "pricing": pricing,
             "ref_suggestion": ref_suggestion,
-            "top3": [clean_product(x) for x in sorted(global_products, key=lambda x: x["price"])[:3]],
+            "top3": [clean_product(x) for x in sorted(global_products, key=lambda x: x["price"])[:6]],
             "market_refs": [],
             "description": generate_description_cached(cluster[0]),
         })

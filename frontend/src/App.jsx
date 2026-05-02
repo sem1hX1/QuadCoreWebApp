@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { BrowserRouter as Router, Routes, Route, Link, useLocation } from 'react-router-dom';
 import { AnimatePresence, motion } from 'framer-motion';
-import { Settings, Cpu, Search, History, Plus, MessageSquare, Menu, X, Clock, Edit, Aperture, PanelLeftOpen, PanelLeftClose, MoreHorizontal, Pin, Trash2, BookOpen, HelpCircle } from 'lucide-react';
+import { Settings, Cpu, Search, History, Plus, MessageSquare, Menu, X, Clock, Edit, Aperture, MoreHorizontal, Pin, Trash2, BookOpen, HelpCircle, ChevronLeft, ChevronRight } from 'lucide-react';
 import Dashboard from './pages/Dashboard';
 import About from './pages/About';
 import Iletisim from './pages/Iletisim';
@@ -9,8 +9,6 @@ import Sss from './pages/Sss';
 import Gizlilik from './pages/Gizlilik';
 import Kullanim from './pages/Kullanim';
 import { getSettings } from './services/api';
-
-
 
 function Sidebar({ isOpen, setIsOpen, siteName }) {
   const [isHovered, setIsHovered] = useState(false);
@@ -54,12 +52,10 @@ function Sidebar({ isOpen, setIsOpen, siteName }) {
     setRenamingId(null);
   };
 
-  // Sort: pinned items first
   const sortedItems = [...items].sort((a, b) => (b.pinned ? 1 : 0) - (a.pinned ? 1 : 0));
 
   return (
     <>
-      {/* Mobile Backdrop overlay */}
       {isOpen && (
         <div
           onClick={() => setIsOpen(false)}
@@ -88,7 +84,6 @@ function Sidebar({ isOpen, setIsOpen, siteName }) {
           overflow: 'hidden',
           whiteSpace: 'nowrap'
         }}>
-        {/* Top Section: Navigation Controls */}
         <div 
           onMouseEnter={() => setIsHovered(true)}
           style={{ 
@@ -100,7 +95,6 @@ function Sidebar({ isOpen, setIsOpen, siteName }) {
             gap: '16px'
           }}
         >
-          {/* Logo */}
           <Link to="/" style={{ display: 'flex', alignItems: 'center', gap: '10px', textDecoration: 'none', color: 'inherit', marginLeft: isExpanded ? '0' : '-2px', transition: 'all 0.2s' }}>
             <div style={{ width: 28, height: 28, borderRadius: '6px', background: 'var(--accent)', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
               <Aperture size={16} color="#fff" />
@@ -110,7 +104,6 @@ function Sidebar({ isOpen, setIsOpen, siteName }) {
             </span>
           </Link>
 
-          {/* Row 1: Hamburger Menu (PC) */}
           <button 
             onClick={() => setIsOpen(!isOpen)} 
             title="Menü"
@@ -124,7 +117,6 @@ function Sidebar({ isOpen, setIsOpen, siteName }) {
             <Menu size={20} />
           </button>
 
-          {/* Mobile Close Button (Sadece Mobilde Görünür) */}
           <button 
             onClick={() => setIsOpen(false)} 
             title="Menüyü Kapat"
@@ -138,7 +130,6 @@ function Sidebar({ isOpen, setIsOpen, siteName }) {
             <X size={20} />
           </button>
 
-          {/* Row 2: Panel Toggle */}
           <button 
             onClick={() => setIsOpen(!isOpen)}
             title={isOpen ? "Paneli Daralt" : "Paneli Genişlet"}
@@ -149,12 +140,11 @@ function Sidebar({ isOpen, setIsOpen, siteName }) {
             }}
             className="hamburger-btn"
           >
-            {isOpen ? <PanelLeftClose size={20} /> : <PanelLeftOpen size={20} />}
+            {isOpen ? <ChevronLeft size={20} /> : <ChevronRight size={20} />}
           </button>
         </div>
 
         <div style={{ flex: 1, overflowY: 'auto', padding: '16px 8px', overflowX: 'hidden' }}>
-          {/* Quick Actions */}
           <div style={{ marginBottom: '20px', display: 'flex', flexDirection: 'column', gap: '4px' }}>
             <Link to="/" className="sidebar-history-item" style={{
               display: 'flex', alignItems: 'center', gap: '12px',
@@ -179,7 +169,6 @@ function Sidebar({ isOpen, setIsOpen, siteName }) {
             </Link>
           </div>
 
-          {/* History List */}
           <p style={{
             color: 'var(--text-dim)', fontSize: '0.72rem', fontWeight: '600', letterSpacing: '1px',
             padding: isExpanded ? '0 8px' : '0', marginBottom: '10px', textTransform: 'uppercase',
@@ -279,7 +268,6 @@ function Sidebar({ isOpen, setIsOpen, siteName }) {
           </div>
         </div>
 
-        {/* Bottom Logo */}
         <div style={{ padding: '14px 16px', borderTop: '1px solid var(--border)', display: 'flex', alignItems: 'center', gap: '8px' }}>
           <div style={{ width: 22, height: 22, borderRadius: '4px', background: 'var(--accent)', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
             <Cpu size={12} color="#fff" />
@@ -288,7 +276,6 @@ function Sidebar({ isOpen, setIsOpen, siteName }) {
         </div>
       </aside>
 
-      {/* Delete Confirmation Modal */}
       <AnimatePresence>
         {itemToDelete && (
           <div style={{ position: 'fixed', inset: 0, zIndex: 9999, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
@@ -353,7 +340,6 @@ function TopNav({ isSidebarOpen, setIsSidebarOpen, siteName }) {
       padding: '0 28px',
       transition: 'left 0.2s ease'
     }}>
-      {/* Left side: Hamburger if sidebar is closed */}
       <div style={{ display: 'flex', alignItems: 'center', gap: '15px' }}>
         {!isSidebarOpen && (
           <div style={{ display: 'flex', alignItems: 'center', gap: '8px', color: 'var(--text-main)', fontWeight: '700' }}>
@@ -362,7 +348,6 @@ function TopNav({ isSidebarOpen, setIsSidebarOpen, siteName }) {
         )}
       </div>
 
-      {/* Nav Links - centered */}
       <div style={{ display: 'flex', alignItems: 'center', gap: '8px', flex: 1, justifyContent: 'center' }}>
         {navLinks.map(link => {
           const isActive = location.pathname === link.to;
@@ -387,8 +372,6 @@ function TopNav({ isSidebarOpen, setIsSidebarOpen, siteName }) {
           );
         })}
       </div>
-
-      {/* Right - Spacing */}
       <div style={{ width: '40px' }}></div>
     </nav>
   );
@@ -411,127 +394,47 @@ function Footer({ siteName }) {
           <p style={{ color: 'var(--text-muted)', fontSize: '0.85rem', lineHeight: '1.6' }}>
             Akıllı tedarik zinciri optimizasyonu ile donanım üretim süreçlerinizi hızlandırın. En iyi parçaları en uygun fiyata bulun.
           </p>
-          <div style={{ display: 'flex', gap: '16px', marginTop: '10px' }}>
-            <a href="#" style={{ color: 'var(--text-muted)', transition: 'color 0.2s', display: 'flex' }} onMouseEnter={(e) => e.currentTarget.style.color = 'var(--accent)'} onMouseLeave={(e) => e.currentTarget.style.color = 'var(--text-muted)'} title="LinkedIn">
-              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path><rect x="2" y="9" width="4" height="12"></rect><circle cx="4" cy="4" r="2"></circle></svg>
-            </a>
-            <a href="#" style={{ color: 'var(--text-muted)', transition: 'color 0.2s', display: 'flex' }} onMouseEnter={(e) => e.currentTarget.style.color = 'var(--accent)'} onMouseLeave={(e) => e.currentTarget.style.color = 'var(--text-muted)'} title="Instagram">
-              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line></svg>
-            </a>
-            <a href="#" style={{ color: 'var(--text-muted)', transition: 'color 0.2s', display: 'flex' }} onMouseEnter={(e) => e.currentTarget.style.color = 'var(--accent)'} onMouseLeave={(e) => e.currentTarget.style.color = 'var(--text-muted)'} title="X (Twitter)">
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"></path></svg>
-            </a>
-          </div>
         </div>
         
         <div style={{ display: 'flex', gap: '50px' }}>
           <div style={{ display: 'flex', flexDirection: 'column', gap: '10px' }}>
             <h4 style={{ color: 'var(--text-main)', fontSize: '0.9rem', fontWeight: '600' }}>Platform</h4>
-            <Link to="/" style={{ color: 'var(--text-muted)', textDecoration: 'none', fontSize: '0.85rem', transition: 'color 0.2s' }} onMouseEnter={(e) => e.currentTarget.style.color = 'var(--accent)'} onMouseLeave={(e) => e.currentTarget.style.color = 'var(--text-muted)'}>Arama Motoru</Link>
-            <Link to="/about" style={{ color: 'var(--text-muted)', textDecoration: 'none', fontSize: '0.85rem', transition: 'color 0.2s' }} onMouseEnter={(e) => e.currentTarget.style.color = 'var(--accent)'} onMouseLeave={(e) => e.currentTarget.style.color = 'var(--text-muted)'}>Hakkımızda</Link>
-            <Link to="/iletisim" style={{ color: 'var(--text-muted)', textDecoration: 'none', fontSize: '0.85rem', transition: 'color 0.2s' }} onMouseEnter={(e) => e.currentTarget.style.color = 'var(--accent)'} onMouseLeave={(e) => e.currentTarget.style.color = 'var(--text-muted)'}>İletişim</Link>
+            <Link to="/" style={{ color: 'var(--text-muted)', textDecoration: 'none', fontSize: '0.85rem' }}>Arama Motoru</Link>
+            <Link to="/about" style={{ color: 'var(--text-muted)', textDecoration: 'none', fontSize: '0.85rem' }}>Hakkımızda</Link>
           </div>
-          
-          <div style={{ display: 'flex', flexDirection: 'column', gap: '10px' }}>
-            <h4 style={{ color: 'var(--text-main)', fontSize: '0.9rem', fontWeight: '600' }}>Yasal</h4>
-            <Link to="/gizlilik" style={{ color: 'var(--text-muted)', textDecoration: 'none', fontSize: '0.85rem', transition: 'color 0.2s' }} onMouseEnter={(e) => e.currentTarget.style.color = 'var(--accent)'} onMouseLeave={(e) => e.currentTarget.style.color = 'var(--text-muted)'}>Gizlilik Politikası</Link>
-            <Link to="/kullanim" style={{ color: 'var(--text-muted)', textDecoration: 'none', fontSize: '0.85rem', transition: 'color 0.2s' }} onMouseEnter={(e) => e.currentTarget.style.color = 'var(--accent)'} onMouseLeave={(e) => e.currentTarget.style.color = 'var(--text-muted)'}>Kullanım Şartları</Link>
-            <Link to="/sss" style={{ color: 'var(--text-muted)', textDecoration: 'none', fontSize: '0.85rem', transition: 'color 0.2s' }} onMouseEnter={(e) => e.currentTarget.style.color = 'var(--accent)'} onMouseLeave={(e) => e.currentTarget.style.color = 'var(--text-muted)'}>S.S.S.</Link>
-          </div>
-        </div>
-      </div>
-      <div style={{ 
-        maxWidth: '1200px', 
-        margin: '30px auto 0 auto', 
-        padding: '20px 20px 0 20px', 
-        borderTop: '1px solid var(--border)', 
-        display: 'flex', 
-        justifyContent: 'space-between', 
-        alignItems: 'center',
-        color: 'var(--text-dim)', 
-        fontSize: '0.8rem' 
-      }}>
-        <div>&copy; {new Date().getFullYear()} {siteName || 'SourceFlow'} AI. Tüm hakları saklıdır.</div>
-        <div style={{ display: 'flex', gap: '16px' }}>
-          <a href="#" style={{ color: 'var(--text-dim)', transition: 'color 0.2s', display: 'flex' }} onMouseEnter={(e) => e.currentTarget.style.color = 'var(--accent)'} onMouseLeave={(e) => e.currentTarget.style.color = 'var(--text-dim)'} title="LinkedIn">
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path><rect x="2" y="9" width="4" height="12"></rect><circle cx="4" cy="4" r="2"></circle></svg>
-          </a>
-          <a href="#" style={{ color: 'var(--text-dim)', transition: 'color 0.2s', display: 'flex' }} onMouseEnter={(e) => e.currentTarget.style.color = 'var(--accent)'} onMouseLeave={(e) => e.currentTarget.style.color = 'var(--text-dim)'} title="Instagram">
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line></svg>
-          </a>
-          <a href="#" style={{ color: 'var(--text-dim)', transition: 'color 0.2s', display: 'flex' }} onMouseEnter={(e) => e.currentTarget.style.color = 'var(--accent)'} onMouseLeave={(e) => e.currentTarget.style.color = 'var(--text-dim)'} title="X (Twitter)">
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"></path></svg>
-          </a>
         </div>
       </div>
     </footer>
   );
 }
 
-function PageTitleUpdater({ siteName }) {
-  const location = useLocation();
-  useEffect(() => {
-    const site = siteName || 'SourceFlow';
-    const titles = {
-      '/': `${site} AI | Akıllı Tedarik ve Komponent Analiz Aracı`,
-      '/about': `Hakkımızda | ${site} AI`,
-      '/iletisim': `İletişim | ${site} AI`,
-      '/sss': `Sıkça Sorulan Sorular | ${site} AI`,
-      '/gizlilik': `Gizlilik Politikası | ${site} AI`,
-      '/kullanim': `Kullanım Şartları | ${site} AI`,
-    };
-    document.title = titles[location.pathname] || `${site} AI`;
-  }, [location]);
-  return null;
-}
+class ErrorBoundary extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = { hasError: false, error: null, errorInfo: null };
+  }
 
-function CookieConsent() {
-  const [visible, setVisible] = useState(!localStorage.getItem('cookieConsent'));
-  if (!visible) return null;
-  return (
-    <motion.div initial={{ y: 100, opacity: 0 }} animate={{ y: 0, opacity: 1 }} style={{ position: 'fixed', bottom: '20px', left: '20px', right: '20px', zIndex: 1000, display: 'flex', justifyContent: 'center' }}>
-      <div style={{ background: 'var(--bg-card)', border: '1px solid var(--border)', padding: '16px 24px', borderRadius: '12px', boxShadow: '0 10px 30px rgba(0,0,0,0.1)', display: 'flex', alignItems: 'center', gap: '20px', maxWidth: '800px', flexWrap: 'wrap' }}>
-        <p style={{ fontSize: '0.85rem', color: 'var(--text-muted)', flex: 1, margin: 0 }}>
-          Deneyiminizi geliştirmek için çerezleri kullanıyoruz. Sitemizi kullanarak çerez politikamızı kabul etmiş olursunuz.
-        </p>
-        <div style={{ display: 'flex', gap: '10px' }}>
-          <Link to="/gizlilik" style={{ fontSize: '0.85rem', color: 'var(--accent)', textDecoration: 'none' }}>Detaylı Bilgi</Link>
-          <button onClick={() => { localStorage.setItem('cookieConsent', 'true'); setVisible(false); }} className="premium-button" style={{ padding: '8px 16px', fontSize: '0.85rem' }}>Anladım</button>
+  static getDerivedStateFromError(error) {
+    return { hasError: true, error };
+  }
+
+  componentDidCatch(error, errorInfo) {
+    console.error("ErrorBoundary caught an error", error, errorInfo);
+    this.setState({ errorInfo });
+  }
+
+  render() {
+    if (this.state.hasError) {
+      return (
+        <div style={{ padding: '20px', color: 'red', background: '#fee' }}>
+          <h2>BİR HATA OLUŞTU!</h2>
+          <pre>{this.state.error && this.state.error.toString()}</pre>
+          <pre style={{ fontSize: '10px' }}>{this.state.errorInfo && this.state.errorInfo.componentStack}</pre>
         </div>
-      </div>
-    </motion.div>
-  );
-}
-
-function SupportWidget() {
-  const [isOpen, setIsOpen] = useState(false);
-  return (
-    <div style={{ position: 'fixed', bottom: '25px', right: '25px', zIndex: 1000 }}>
-      <AnimatePresence>
-        {isOpen && (
-          <motion.div initial={{ scale: 0.8, opacity: 0, y: 20 }} animate={{ scale: 1, opacity: 1, y: 0 }} exit={{ scale: 0.8, opacity: 0, y: 20 }} style={{ position: 'absolute', bottom: '70px', right: 0, width: '300px', background: 'var(--bg-card)', border: '1px solid var(--border)', borderRadius: '16px', boxShadow: '0 15px 40px rgba(0,0,0,0.15)', overflow: 'hidden' }}>
-            <div style={{ background: 'var(--accent)', padding: '20px', color: '#fff' }}>
-              <h4 style={{ margin: 0, fontSize: '1rem' }}>Müşteri Desteği</h4>
-              <p style={{ margin: '4px 0 0 0', fontSize: '0.8rem', opacity: 0.9 }}>Size nasıl yardımcı olabiliriz?</p>
-            </div>
-            <div style={{ padding: '20px', display: 'flex', flexDirection: 'column', gap: '12px' }}>
-              <button onClick={() => window.location.href='/iletisim'} style={{ display: 'flex', alignItems: 'center', gap: '10px', width: '100%', padding: '12px', border: '1px solid var(--border)', borderRadius: '8px', background: 'var(--bg)', cursor: 'pointer', textAlign: 'left', transition: 'all 0.2s' }}>
-                <MessageSquare size={16} color="var(--accent)" />
-                <span style={{ fontSize: '0.9rem', color: 'var(--text-main)' }}>Bize Mesaj Gönderin</span>
-              </button>
-              <button onClick={() => window.location.href='/sss'} style={{ display: 'flex', alignItems: 'center', gap: '10px', width: '100%', padding: '12px', border: '1px solid var(--border)', borderRadius: '8px', background: 'var(--bg)', cursor: 'pointer', textAlign: 'left', transition: 'all 0.2s' }}>
-                <HelpCircle size={16} color="var(--accent)" />
-                <span style={{ fontSize: '0.9rem', color: 'var(--text-main)' }}>Sıkça Sorulan Sorular</span>
-              </button>
-            </div>
-          </motion.div>
-        )}
-      </AnimatePresence>
-      <button onClick={() => setIsOpen(!isOpen)} style={{ width: '56px', height: '56px', borderRadius: '28px', background: 'var(--accent)', color: '#fff', border: 'none', cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center', boxShadow: '0 8px 24px rgba(2, 132, 199, 0.3)', transition: 'transform 0.2s' }} onMouseEnter={(e) => e.currentTarget.style.transform = 'scale(1.05)'} onMouseLeave={(e) => e.currentTarget.style.transform = 'scale(1)'}>
-        {isOpen ? <X size={24} /> : <MessageSquare size={24} />}
-      </button>
-    </div>
-  );
+      );
+    }
+    return this.props.children;
+  }
 }
 
 function App() {
@@ -540,46 +443,24 @@ function App() {
 
   useEffect(() => {
     const fetchSettings = async () => {
-      const data = await getSettings();
-      if (data) setSiteSettings(data);
+      try {
+        const data = await getSettings();
+        if (data) setSiteSettings(data);
+      } catch (err) {
+        console.error('Ayarlar çekilirken hata:', err);
+      }
     };
     fetchSettings();
-    
-    // Admin panelinden değişiklik yapıldığında (storage event) güncelle
-    window.addEventListener('storage', fetchSettings);
-    return () => window.removeEventListener('storage', fetchSettings);
   }, []);
 
   const siteName = siteSettings?.siteName;
 
-  if (siteSettings?.maintenanceMode) {
-    return (
-      <div style={{ height: '100vh', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', background: 'var(--bg)', textAlign: 'center', padding: '20px' }}>
-        <div style={{ width: 80, height: 80, borderRadius: '50%', background: 'rgba(2, 132, 199, 0.1)', display: 'flex', alignItems: 'center', justifyContent: 'center', color: 'var(--accent)', marginBottom: '24px' }}>
-          <Settings size={40} className="spin-slow" />
-        </div>
-        <h1 style={{ fontSize: '2rem', fontWeight: '800', color: 'var(--text-main)', marginBottom: '16px' }}>Bakım Çalışması Yapılıyor</h1>
-        <p style={{ maxWidth: '500px', color: 'var(--text-muted)', lineHeight: '1.6', marginBottom: '32px' }}>
-          {siteName || 'Sitemiz'} şu anda daha iyi bir deneyim sunmak için güncelleniyor. Lütfen kısa bir süre sonra tekrar deneyin.
-        </p>
-        <div style={{ fontSize: '0.85rem', color: 'var(--text-dim)' }}>
-          &copy; {new Date().getFullYear()} {siteName || 'SourceFlow'} AI
-        </div>
-        <style>{`
-          .spin-slow { animation: spin 4s linear infinite; }
-          @keyframes spin { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
-        `}</style>
-      </div>
-    );
-  }
-
   return (
-    <Router>
-      <PageTitleUpdater siteName={siteName} />
-      <div style={{ background: 'var(--bg)', minHeight: '100vh', color: 'var(--text-main)', display: 'flex' }}>
+    <ErrorBoundary>
+      <Router>
+        <div style={{ background: 'var(--bg)', minHeight: '100vh', color: 'var(--text-main)', display: 'flex' }}>
         <Sidebar isOpen={isSidebarOpen} setIsOpen={setIsSidebarOpen} siteName={siteName} />
         
-        {/* Main Wrapper */}
         <div className="main-wrapper" style={{ 
           flex: 1, 
           marginLeft: isSidebarOpen ? '200px' : '64px', 
@@ -591,7 +472,6 @@ function App() {
         }}>
           <TopNav isSidebarOpen={isSidebarOpen} setIsSidebarOpen={setIsSidebarOpen} siteName={siteName} />
           
-          {/* Page content offset for navbar */}
           <div style={{ paddingTop: '52px', flex: 1, display: 'flex', flexDirection: 'column' }}>
             <Routes>
               <Route path="/" element={<Dashboard />} />
@@ -605,18 +485,8 @@ function App() {
           </div>
         </div>
       </div>
-
-      <CookieConsent />
-      <SupportWidget />
-
-      <style>{`
-        .sidebar-history-item:hover { background: rgba(0,0,0,0.04) !important; color: var(--text-main) !important; }
-        .top-nav-link:hover { background: rgba(0,0,0,0.04) !important; color: var(--text-main) !important; }
-        .admin-link:hover { background: rgba(0,0,0,0.04) !important; color: var(--text-main) !important; }
-        .hamburger-btn:hover { background: rgba(0,0,0,0.06) !important; }
-        .cookie-btn-outline:hover { background: var(--bg-sidebar) !important; border-color: var(--text-dim) !important; }
-      `}</style>
     </Router>
+    </ErrorBoundary>
   );
 }
 

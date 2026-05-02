@@ -1,10 +1,23 @@
+import logging
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from .db.session import engine
 from .db import models
-from .api import products
+from .api import products, admin
 
-# Veritabanı tablolarını oluştur (SQLite için başlangıçta kolaylık sağlar)
+# Logging yapılandırması
+logging.basicConfig(
+    level=logging.INFO,
+    format="%(asctime)s [%(levelname)s] %(name)s: %(message)s",
+    handlers=[
+        logging.FileHandler("app.log", encoding="utf-8"),
+        logging.StreamHandler()
+    ]
+)
+logger = logging.getLogger(__name__)
+logger.info("Uygulama başlatılıyor...")
+
+# Veritabanı tablolarını oluştur
 models.Base.metadata.create_all(bind=engine)
 
 app = FastAPI(title="QuadCore API", version="1.0.0")
@@ -20,6 +33,7 @@ app.add_middleware(
 
 # Routerları ekle
 app.include_router(products.router)
+app.include_router(admin.router)
 
 @app.get("/")
 async def root():

@@ -79,7 +79,7 @@ class TradeService:
             "cost": round(best_deal["price"] * 1.10, 2),
             "pricing": {"status": "ok", "price": round(best_deal["price"] * 1.3, 2), "margin": 0.2},
             "ref_suggestion": f"json\\n{{\\n  \\\"price\\\": {round(best_deal['price'] * 1.3, 2)},\\n  \\\"reason\\\": \\\"Global Euro fiyatları ve yerel pazar verileri analiz edilmiştir.\\\"\\n}}\\n",
-            "top3": [clean(p) for p in sorted(global_prods, key=lambda x: x["price"])[:3]],
+            "top3": [clean(p) for p in sorted(global_prods, key=lambda x: x["price"])[:6]],
             "market_refs": [clean(p) for p in tr_prods],
             "description": f"{product.name}: 5'ten fazla yerel ve global distribütör üzerinden analiz edilmiştir."
         }]

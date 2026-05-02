@@ -5,6 +5,7 @@ import Navbar from './components/Navbar';
 import Messages from './pages/Messages';
 import FAQ from './pages/FAQ';
 import Settings from './pages/Settings';
+import Logs from './pages/Logs';
 import Login from './pages/Login';
 import Placeholder from './pages/Placeholder';
 import { getSettings } from './services/api';
@@ -31,6 +32,7 @@ const AdminLayout = ({ onLogout }) => (
         <Route path="/"             element={<Messages />} />
         <Route path="/reports"      element={<Placeholder title="Raporlar" description="Genel sistem analiz raporları." icon={BarChart2} />} />
         <Route path="/faq"          element={<FAQ />} />
+        <Route path="/logs"         element={<Logs />} />
         <Route path="/settings"     element={<Settings />} />
         <Route path="*"             element={<Messages />} />
       </Routes>

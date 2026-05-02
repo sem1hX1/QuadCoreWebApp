@@ -62,9 +62,50 @@ const mockDelay = (ms = 800) => new Promise(r => setTimeout(r, ms));
 // API Fonksiyonları
 // ============================================================================
 
+// ─── Yardımcı: Backend Verisini UI Kartlarına Dönüştür ────────────────────────
+const SUPPLIER_COLORS = {
+  'DigiKey': '#cc0000',
+  'Mouser': '#0054a6',
+  'Robotistan': '#f59e0b',
+  'Direnc.net': '#10b981',
+  'LCSC': '#3b82f6',
+  'Arrow': '#f7b500',
+  'Newark': '#00558c',
+  'Farnell': '#ff6b00'
+};
+
+function transformToCards(aiAnalysisList) {
+  if (!aiAnalysisList || aiAnalysisList.length === 0) return [];
+  
+  const analysis = aiAnalysisList[0];
+  const { top3 = [], market_refs = [], pricing } = analysis;
+  
+  // Tüm ürünleri (top3 + market_refs) birleştir
+  const allResults = [...top3, ...market_refs];
+  
+  const aiHint = pricing ? `AI Önerisi: €${pricing.price} (Kâr: %${(pricing.margin * 100).toFixed(1)})` : '';
+
+  return allResults.map((item, index) => ({
+    id: index + 1,
+    name: item.title,
+    supplier: item.source,
+    supplierColor: SUPPLIER_COLORS[item.source] || '#607d8b',
+    price: item.price,
+    price_try: item.price_try,
+    stock: item.region === 'TR' ? 'Yerel Stok' : 'Global Stok',
+    status: item.region === 'TR' ? 'Türkiye' : 'Global',
+    ai: aiHint,
+    category: item.region === 'TR' ? 'Yerel Piyasa' : 'Distribütör',
+    url: item.url,
+    // Detay paneli için orijinal analiz verilerini taşıyoruz
+    description: analysis.description,
+    ref_suggestion: analysis.ref_suggestion,
+    pricing: pricing,
+    cost: analysis.cost
+  }));
+}
+
 // ─── 1. Komponent Arama ─────────────────────────────────────────────────────
-// Backend endpoint: GET /products (veya henüz bir search endpoint'i yoksa 
-// frontend filtreleme yapar)
 export const searchComponents = async (query) => {
   if (USE_MOCK) {
     await mockDelay(800);
@@ -74,17 +115,13 @@ export const searchComponents = async (query) => {
   }
 
   try {
-    // Öncelikle backend'de search endpoint varsa kullan
-    const response = await apiClient.get('/products', {
-      params: { search: query }
+    const response = await apiClient.get('/products/search', {
+      params: { q: query }
     });
-    return response.data;
+    return transformToCards(response.data);
   } catch (error) {
     console.error('[API] searchComponents hatası:', error.message);
-    // Backend erişilemezse mock veriye düş
-    return mockSearchResults.filter(c =>
-      c.name.toLowerCase().includes(query.toLowerCase())
-    );
+    return [];
   }
 };
 
