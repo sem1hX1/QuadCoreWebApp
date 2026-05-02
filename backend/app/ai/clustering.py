@@ -1,4 +1,4 @@
-from .matching import is_same_product
+from matching import is_same_product
 
 def cluster_products(products):
     clusters = []

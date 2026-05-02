@@ -19,6 +19,14 @@ products = [
         "source": "Digikey"
     },
     {
+        "title": "ESP32-Wroom-32e",
+        "brand": "Espressive Systems",
+        "price": 1.4,
+        "currency": "USD",
+        "region": "global",
+        "source": "Digikey"
+    },
+    {
         "title": "ATmega328",
         "brand": "Microchip",
         "price": 1.6,
@@ -33,9 +41,17 @@ products = [
         "currency": "TRY",
         "region": "TR",
         "source": "Trendyol"
+    },
+    {
+        "title": "ATMEGA328 DIP28 AVR",
+        "brand": "Microchip",
+        "price": 195,
+        "currency": "TRY",
+        "region": "TR",
+        "source": "Hepsiburada"
     }
 ]
 
-results = process(products)
+results = process(products, market_region="TR")
 
 print(results)

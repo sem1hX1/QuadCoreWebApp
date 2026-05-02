@@ -24,7 +24,7 @@ def generate_description(product):
 
         prompt = f"{product['title']} için kısa, teknik ve Türkçe bir açıklama yaz."
         response = client.models.generate_content(
-            model="gemini-2.5-flash",
+            model="gemini-3.1-flash-lite-preview",
             contents=prompt,
         )
         return response.text
@@ -32,3 +32,44 @@ def generate_description(product):
     except Exception as e:
         print("Gemini error:", e)
         return f"{product['brand']} üretimi {product['title']} elektronik projelerde kullanılabilir."
+    
+
+def generate_price_decision(product_title, cost, ref_suggestion, market, market_refs):
+    try:
+        if client is None:
+            raise RuntimeError("GEMINI_API_KEY not set")
+
+        prompt = f"""
+Sen bir ürün fiyatlama asistanısın.
+
+Ürün: {product_title}
+Maliyet: {cost} TRY
+
+Piyasa özeti:
+- Min: {market['min'] if market else 'yok'}
+- Avg: {market['avg'] if market else 'yok'}
+- Max: {market['max'] if market else 'yok'}
+
+Referanslardan üretilen aday fiyatlar:
+{ref_suggestion['candidates'] if ref_suggestion else []}
+
+Kurallar:
+- Fiyat maliyetin altında olamaz.
+- Mümkünse referans min fiyatın biraz altında veya referans ortalamasına yakın olmalı.
+- Tek bir sayı döndür.
+- Sadece JSON döndür:
+{{
+  "price": 0,
+  "reason": "kısa açıklama"
+}}
+"""
+
+        response = client.models.generate_content(
+            model="gemini-3.1-flash-lite-preview",
+            contents=prompt,
+        )
+        return response.text
+
+    except Exception as e:
+        print("Gemini error:", e)
+        return None
