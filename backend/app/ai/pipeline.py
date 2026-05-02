@@ -1,12 +1,14 @@
 from preprocess import preprocess
 from embedding import compute_embeddings
 from clustering import cluster_products
-from currency import convert_to_try
+from currency import convert_to_try, preload_currencies
 from market import analyze_tr_market
 from pricing import calculate_cost, calculate_sale_price
 from ranking import get_top3
 from ranking import get_top3_with_market
 from description import generate_description, generate_description_cached
+
+all_currencies = []
 
 def process(products, usd_try=32):
     products = preprocess(products)
@@ -18,13 +20,15 @@ def process(products, usd_try=32):
         print([p["title"] for p in c])
 
     results = []
+    all_currencies = [p["currency"] for p in products]
+    preload_currencies(all_currencies)
 
     for cluster in clusters:
         global_prices = []
         tr_prices = []
 
         for p in cluster:
-            p["price_try"] = convert_to_try(p["price"], p["currency"], usd_try)
+            p["price_try"] = convert_to_try(p["price"], p["currency"])
 
             if p["region"] == "global":
                 global_prices.append(p["price_try"])
@@ -59,5 +63,5 @@ def clean_product(p):
         "source": p["source"],
         "region": p["region"],
         "price": p["price"],
-        "price_try": p.get("price_try")
+        "price_try": round(p.get("price_try", 2), 2)
     }
