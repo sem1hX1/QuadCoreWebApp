@@ -1,4 +1,4 @@
-from .pipeline import process
+from app.ai.pipeline import process
 
 print("Running AI pipeline test...")
 products = [
