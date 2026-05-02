@@ -5,7 +5,7 @@ from .clustering import cluster_products
 from .market import analyze_market
 from .pricing import calculate_cost, calculate_sale_price
 from .ranking import get_top3
-from .description import generate_description_cached, generate_price_decision
+from .description import generate_description_cached, generate_price_decision, generate_description
 from .currency import convert_to_try
 
 def _resolve_price_try(price, currency, usd_try=1.0):
@@ -99,7 +99,7 @@ def process(products, usd_try=1.0):
             "ref_suggestion": ref_suggestion,
             "top3": [clean_product(x) for x in sorted(analysis_products, key=lambda x: x["price"])[:6]],
             "market_refs": [clean_product(x) for x in tr_products],
-            "description": generate_description_cached(cluster[0]),
+            "description": f"{generate_description(cluster[0])}",
         })
 
     return results
