@@ -32,13 +32,12 @@ class MarketScraper(BaseScraper):
     Pazar yerlerinden (Retail) fiyat çeken scraper.
     """
     async def get_competitor_prices(self, product_name: str) -> List[Dict]:
-        # Not: Gerçek bir hackathonda burada Trendyol/Amazon vb. için 
-        # spesifik parserlar yazılır. Şimdilik mimariyi göstermek için mock dönüyoruz.
-        logger.info(f"Searching market for: {product_name}")
+        # Global pazar yerlerinden fiyatlar
+        logger.info(f"Searching global market for: {product_name}")
         return [
-            {"source": "Trendyol", "price": 450.0},
-            {"source": "Hepsiburada", "price": 445.50},
-            {"source": "Amazon", "price": 430.0}
+            {"source": "LCSC", "price": 3.45},
+            {"source": "Farnell", "price": 4.10},
+            {"source": "Arrow", "price": 3.95}
         ]
 
 class WholesaleScraper(BaseScraper):

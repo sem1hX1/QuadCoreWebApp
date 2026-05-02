@@ -6,17 +6,23 @@ const SUPPLIER_COLORS = {
   DigiKey: '#e53935',
   Mouser: '#1e88e5',
   LCSC: '#2e7d32',
-  AliExpress: '#ff6d00',
-  Trendyol: '#f57c00',
-  Hepsiburada: '#ff8f00',
-  Amazon: '#ffa000',
+  Farnell: '#ff6600',
+  Arrow: '#007bc4',
 };
 
-function transformToCards(analysisResponse) {
-  const { results, best_deal, suggested_price } = analysisResponse;
-  const aiHint = `En iyi teklif: ${best_deal.source} ($${best_deal.price.toFixed(2)}), Önerilen: $${suggested_price.toFixed(2)}`;
+function transformToCards(aiAnalysisList) {
+  if (!aiAnalysisList || aiAnalysisList.length === 0) return [];
+  
+  // İlk analiz sonucunu baz alıyoruz (veya hepsini birleştirebiliriz)
+  const analysis = aiAnalysisList[0];
+  const { top3, market_refs, pricing, ref_suggestion } = analysis;
+  
+  // Tüm ürünleri (top3 + market_refs) tek bir listede birleştiriyoruz
+  const allResults = [...top3, ...market_refs];
+  
+  const aiHint = `AI Önerisi: $${pricing.price} (Kar Marjı: %${(pricing.margin * 100).toFixed(1)})`;
 
-  return results.map((item, index) => ({
+  return allResults.map((item, index) => ({
     id: index + 1,
     name: item.title,
     supplier: item.source,
@@ -25,7 +31,10 @@ function transformToCards(analysisResponse) {
     stock: item.region === 'TR' ? 'TR Pazar' : 'Global Stok',
     status: item.region === 'TR' ? 'TR' : 'Global',
     ai: aiHint,
-    category: item.brand || 'Elektronik',
+    category: 'Elektronik',
+    // Ek veriler (detay paneli için)
+    description: analysis.description,
+    ref_suggestion: analysis.ref_suggestion
   }));
 }
 

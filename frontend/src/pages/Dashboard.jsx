@@ -7,9 +7,9 @@ import { useLocation, useNavigate } from 'react-router-dom';
 
 const mockComponents = [
   { id: 1, name: 'ESP32-WROOM-32D', supplier: 'Digi-Key', supplierColor: '#e53935', price: 3.85, stock: 38, status: 'Stok', ai: 'Mouser ($1.75, Stok Teslim)', category: 'WiFi+BT MCU' },
-  { id: 2, name: 'ESP32-WROOM-32U', supplier: 'AliExpress', supplierColor: '#ff6d00', price: 4.15, stock: '8Bin+', status: 'Özellikler', ai: 'AliExpress ($1.40, 15Bin+ Stok)', category: 'WiFi+BT MCU' },
+  { id: 2, name: 'ESP32-WROOM-32U', supplier: 'Mouser', supplierColor: '#1e88e5', price: 4.15, stock: '8Bin+', status: 'Özellikler', ai: 'Digi-Key ($1.40, 15Bin+ Stok)', category: 'WiFi+BT MCU' },
   { id: 3, name: 'ESP32-WROOM-32', supplier: 'Digi-Key', supplierColor: '#e53935', price: 3.85, stock: 28, status: 'Özellikler', ai: 'Mouser ($1.75, Stok Teslim)', category: 'WiFi+BT MCU' },
-  { id: 4, name: 'ESP-WROOM-02', supplier: 'AliExpress', supplierColor: '#ff6d00', price: 2.15, stock: '8Bin+', status: 'Özellikler', ai: 'AliExpress ($1.50, Stock Shipping)', category: 'WiFi MCU' },
+  { id: 4, name: 'ESP-WROOM-02', supplier: 'LCSC', supplierColor: '#ff6d00', price: 2.15, stock: '8Bin+', status: 'Özellikler', ai: 'Digi-Key ($1.50, Stock Shipping)', category: 'WiFi MCU' },
   { id: 5, name: 'ESP32-S3-WROOM-1', supplier: 'Digi-Key', supplierColor: '#e53935', price: 4.25, stock: '2K', status: 'Özellikler', ai: 'LCSC ($1.90, Stock Shipping)', category: 'WiFi+BT MCU' },
   { id: 6, name: 'ESP32-C3-WROOM-02', supplier: 'Mouser', supplierColor: '#1e88e5', price: 1.75, stock: 24, status: 'Özellikler', ai: 'LCSC ($1.20, Stock Shipping)', category: 'RISC-V MCU' },
 ];
@@ -20,10 +20,10 @@ const trendData = [
 ];
 
 const priceComparison = [
-  { supplier: 'AliExpress', price: '$3.85', bold: true },
-  { supplier: 'Digi-Key', price: '$4.20' },
+  { supplier: 'Digi-Key', price: '$3.85', bold: true },
   { supplier: 'Mouser', price: '$4.15' },
   { supplier: 'LCSC', price: '$3.95' },
+  { supplier: 'Farnell', price: '$4.10' },
 ];
 
 const SupplierBadge = ({ name, color }) => (
@@ -122,7 +122,7 @@ const DetailPanel = ({ comp }) => (
         <div style={{ fontSize: '0.9rem', fontWeight: '600', color: 'var(--text-main)', marginBottom: '4px' }}>{comp.name}</div>
         <div style={{ fontSize: '0.75rem', color: 'var(--text-muted)', marginBottom: '8px', lineHeight: '1.4' }}>Kategori: {comp.category}<br/>Paket: SMD/QFN-32<br/>Çalışma Voltajı: 3.0V - 3.6V</div>
         <div style={{ background: 'rgba(2, 132, 199, 0.08)', borderRadius: '4px', padding: '6px 8px', fontSize: '0.75rem', color: 'var(--accent)', lineHeight: '1.4', border: '1px solid rgba(2, 132, 199, 0.1)' }}>
-          ✦ Yapay Zeka Önerisi: En uygun fiyat ve lojistik kombinasyonu AliExpress'te tespit edildi. (Güvenilirlik: %94)
+          ✦ Yapay Zeka Önerisi: En uygun fiyat ve lojistik kombinasyonu Mouser'da tespit edildi. (Güvenilirlik: %94)
         </div>
       </div>
     </div>
@@ -138,6 +138,7 @@ const DetailPanel = ({ comp }) => (
         ))}
       </div>
     </div>
+
 
     <div>
       <h4 style={{ fontSize: '0.8rem', color: 'var(--text-muted)', fontWeight: '600', letterSpacing: '0.5px', marginBottom: '12px', textTransform: 'uppercase' }}>Fiyat Trendi (6 Ay)</h4>
@@ -264,7 +265,7 @@ const LandingView = ({ onSearch }) => {
           </div>
           <div style={{ display: 'flex', flexDirection: 'column', gap: '15px' }}>
             {[
-              { q: 'Hangi tedarikçileri destekliyorsunuz?', a: 'Mouser, DigiKey, Farnell, Arrow, AliExpress ve LCSC dahil olmak üzere 50\'den fazla global distribütörü canlı destekliyoruz.' },
+              { q: 'Hangi tedarikçileri destekliyorsunuz?', a: 'Mouser, DigiKey, Farnell, Arrow ve LCSC dahil olmak üzere 50\'den fazla global distribütörü canlı destekliyoruz.' },
               { q: 'Fiyatlara gümrük vergileri dahil mi?', a: 'Yapay zeka analiz raporlarında, ülkenize özgü tahmini gümrük vergileri ve kargo masrafları hesaplamalara dahil edilmektedir.' },
               { q: 'Veriler ne sıklıkla güncelleniyor?', a: 'Tüm stok ve fiyat verileri anlık olarak API üzerinden çekilir, önbellek süresi maksimum 5 dakikadır.' }
             ].map((faq, i) => (

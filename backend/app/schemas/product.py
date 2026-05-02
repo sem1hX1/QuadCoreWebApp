@@ -25,12 +25,28 @@ class ProductSchema(ProductBase):
     class Config:
         from_attributes = True
 
-class AnalysisResponse(BaseModel):
-    product_id: int
-    results: List[MarketProduct]
-    suggested_price: float
-    best_deal: MarketProduct
-    created_at: datetime
+class PricingInfo(BaseModel):
+    status: str
+    price: float
+    margin: float
 
-    class Config:
-        from_attributes = True
+class AIProductInfo(BaseModel):
+    title: str
+    source: str
+    region: str
+    price: float
+    price_try: float
+
+class AIAnalysisResult(BaseModel):
+    product: str
+    cost: float
+    pricing: PricingInfo
+    ref_suggestion: str
+    top3: List[AIProductInfo]
+    market_refs: List[AIProductInfo]
+    description: str
+
+class AnalysisResponse(BaseModel):
+    # Bu şema artık bir liste içerebilir veya direkt liste dönebiliriz
+    # FastAPI'de List[AIAnalysisResult] kullanacağız
+    pass

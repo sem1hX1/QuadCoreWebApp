@@ -9,7 +9,7 @@ from ..services.trade_service import TradeService
 router = APIRouter(prefix="/products", tags=["Products & Analysis"])
 
 
-@router.get("/search", response_model=schemas.AnalysisResponse)
+@router.get("/search", response_model=List[schemas.AIAnalysisResult])
 async def search_and_analyze(q: str, db: Session = Depends(get_db)):
     """Ürün adına göre arama yapar ve AI analizi çalıştırır."""
     product = db.query(db_models.Product).filter(db_models.Product.name == q).first()
@@ -30,7 +30,7 @@ async def create_new_product(product: schemas.ProductCreate, db: Session = Depen
     return await service.create_product(product)
 
 
-@router.post("/{product_id}/analyze", response_model=schemas.AnalysisResponse)
+@router.post("/{product_id}/analyze", response_model=List[schemas.AIAnalysisResult])
 async def perform_analysis(product_id: int, db: Session = Depends(get_db)):
     service = TradeService(db)
     analysis_data = await service.run_full_analysis(product_id)
