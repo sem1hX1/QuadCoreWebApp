@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Search, MoreHorizontal, ChevronRight, TrendingUp, TrendingDown, Package, Truck, AlertTriangle, PlayCircle, HelpCircle, ArrowRight } from 'lucide-react';
+import { Search, MoreHorizontal, ChevronRight, TrendingUp, TrendingDown, Package, Truck, AlertTriangle, PlayCircle, HelpCircle, ArrowRight, ExternalLink } from 'lucide-react';
 import { AreaChart, Area, XAxis, YAxis, Tooltip, ResponsiveContainer, CartesianGrid } from 'recharts';
 import { motion, AnimatePresence } from 'framer-motion';
 import { searchComponents, analyzeComponent } from '../services/api';
@@ -79,6 +79,27 @@ const ComponentCard = ({ comp, index, isSelected, onClick }) => (
           </div>
         </div>
 
+        {comp.url && (
+          <a 
+            href={comp.url} 
+            target="_blank" 
+            rel="noopener noreferrer"
+            onClick={(e) => e.stopPropagation()}
+            style={{
+              display: 'inline-flex',
+              alignItems: 'center',
+              gap: '4px',
+              fontSize: '0.7rem',
+              color: 'var(--accent)',
+              textDecoration: 'none',
+              marginBottom: '8px',
+              fontWeight: '600'
+            }}
+          >
+            <ExternalLink size={12} /> Sitede Gör
+          </a>
+        )}
+
         <div style={{
           background: 'rgba(2, 132, 199, 0.08)',
           border: '1px solid rgba(2, 132, 199, 0.15)',
@@ -121,6 +142,27 @@ const DetailPanel = ({ comp }) => (
       <div style={{ flex: 1 }}>
         <div style={{ fontSize: '0.9rem', fontWeight: '600', color: 'var(--text-main)', marginBottom: '4px' }}>{comp.name}</div>
         <div style={{ fontSize: '0.75rem', color: 'var(--text-muted)', marginBottom: '8px', lineHeight: '1.4' }}>Kategori: {comp.category}<br/>Paket: SMD/QFN-32<br/>Çalışma Voltajı: 3.0V - 3.6V</div>
+        
+        {comp.url && (
+          <a 
+            href={comp.url} 
+            target="_blank" 
+            rel="noopener noreferrer"
+            style={{
+              display: 'inline-flex',
+              alignItems: 'center',
+              gap: '4px',
+              fontSize: '0.75rem',
+              color: 'var(--accent)',
+              textDecoration: 'none',
+              marginBottom: '10px',
+              fontWeight: '600'
+            }}
+          >
+            <ExternalLink size={14} /> Kaynak Sayfaya Git
+          </a>
+        )}
+
         <div style={{ background: 'rgba(2, 132, 199, 0.08)', borderRadius: '4px', padding: '6px 8px', fontSize: '0.75rem', color: 'var(--accent)', lineHeight: '1.4', border: '1px solid rgba(2, 132, 199, 0.1)' }}>
           ✦ Yapay Zeka Önerisi: En uygun fiyat ve lojistik kombinasyonu Mouser'da tespit edildi. (Güvenilirlik: %94)
         </div>

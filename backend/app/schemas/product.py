@@ -9,7 +9,8 @@ class MarketProduct(BaseModel):
     price: float = Field(..., description="Fiyat")
     currency: str = Field(..., description="Para birimi (USD, TRY vb.)")
     region: str = Field(..., description="Bölge (global, TR vb.)")
-    source: str = Field(..., description="Veri kaynağı (Mouser, Trendyol vb.)")
+    source: str = Field(..., description="Veri kaynağı (Mouser, DigiKey vb.)")
+    url: Optional[str] = Field(None, description="Ürün kaynak adresi")
 
 class ProductBase(BaseModel):
     name: str = Field(..., description="Ürünün aranan adı veya parça numarası")
@@ -36,6 +37,7 @@ class AIProductInfo(BaseModel):
     region: str
     price: float
     price_try: float
+    url: Optional[str] = None
 
 class AIAnalysisResult(BaseModel):
     product: str

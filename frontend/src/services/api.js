@@ -32,6 +32,7 @@ function transformToCards(aiAnalysisList) {
     status: item.region === 'TR' ? 'TR' : 'Global',
     ai: aiHint,
     category: 'Elektronik',
+    url: item.url,
     // Ek veriler (detay paneli için)
     description: analysis.description,
     ref_suggestion: analysis.ref_suggestion

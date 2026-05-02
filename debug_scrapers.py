@@ -1,32 +1,28 @@
 import asyncio
-from backend.app.scraper.clients import DigiKeyClient, MouserClient, LCSCClient
+from backend.app.scraper.clients import master_scraper
 import logging
 
-# Logları sessize alalım ki sadece sonuçlar görünsün
-logging.getLogger('backend.app.scraper.clients').setLevel(logging.ERROR)
-logging.getLogger('httpx').setLevel(logging.ERROR)
+# Logları sessize alalım
+logging.basicConfig(level=logging.INFO)
 
 async def test_scrapers():
-    part = "ESP32"
+    part = "STM32F103C8T6" 
     
-    print(f"\n🔍 {part} İçin Canlı Piyasa Taraması Başlatılıyor...")
+    print(f"\n🔍 {part} İçin Master Scraper (FindChips-Based) Taraması Başlatılıyor...")
     print("="*50)
 
-    clients = [DigiKeyClient(), MouserClient(), LCSCClient()]
+    results = await master_scraper.search(part)
+
+    if not results:
+        print("⚠️ HİÇBİR VERİ ÇEKİLEMEDİ!")
+    else:
+        for i, r in enumerate(results, 1):
+            print(f"[{i}] KAYNAK: {r['source']:<15} | ÜRÜN: {r['title']:<25} | FİYAT: ${r['price']:>5.2f}")
+
+        print("="*50)
+        best = min(results, key=lambda x: x['price'])
+        print(f"🏆 EN İYİ TEKLİF: {best['source']} - ${best['price']} ({best['title']})")
     
-    tasks = [c.search_product(part) for c in clients]
-    results = await asyncio.gather(*tasks)
-
-    all_results = []
-    for res_list in results:
-        all_results.extend(res_list)
-
-    for i, r in enumerate(all_results, 1):
-        print(f"[{i}] KAYNAK: {r['source']:<8} | ÜRÜN: {r['title']:<25} | FİYAT: ${r['price']:>5.2f} | BÖLGE: {r['region']}")
-
-    print("="*50)
-    best = min(all_results, key=lambda x: x['price'])
-    print(f"🏆 EN İYİ TEKLİF: {best['source']} - ${best['price']} ({best['title']})")
     print("="*50)
 
 if __name__ == "__main__":
