@@ -327,6 +327,18 @@ const Navbar = ({ onLogout }) => {
             </div>
           </div>
 
+          {/* Return to Site */}
+          <a
+            href="/"
+            title="Siteye Dön"
+            style={{ color: '#9099b8', background: 'none', border: '1.5px solid #dde3f4', padding: '7px 12px', borderRadius: '8px', cursor: 'pointer', display: 'flex', alignItems: 'center', gap: '6px', textDecoration: 'none', fontSize: '13px', fontWeight: '600', transition: 'all 0.2s ease' }}
+            onMouseEnter={e => { e.currentTarget.style.color = '#4361ee'; e.currentTarget.style.borderColor = '#4361ee'; e.currentTarget.style.backgroundColor = '#eef1ff'; }}
+            onMouseLeave={e => { e.currentTarget.style.color = '#9099b8'; e.currentTarget.style.borderColor = '#dde3f4'; e.currentTarget.style.backgroundColor = 'transparent'; }}
+          >
+            <Plug size={17} />
+            Siteye Dön
+          </a>
+
           {/* Logout */}
           <button
             onClick={onLogout}

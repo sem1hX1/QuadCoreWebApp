@@ -116,7 +116,26 @@ export const replyMessage = async (id, replyText) => {
 };
 
 // ── FAQ ─────────────────────────────────────────────────────────────────────
-export const getFAQs = async () => ({ success: true, data: storage.get(KEYS.FAQS, []) });
+const DEFAULT_FAQS = [
+  { id: 'def_1', question: 'Hangi tedarikçileri destekliyorsunuz?', answer: 'Mouser, DigiKey, Farnell, Arrow, AliExpress ve LCSC dahil olmak üzere 50\'den fazla global distribütörü canlı destekliyoruz.' },
+  { id: 'def_2', question: 'Fiyatlara gümrük vergileri dahil mi?', answer: 'Yapay zeka analiz raporlarında, ülkenize özgü tahmini gümrük vergileri ve kargo masrafları hesaplamalara dahil edilmektedir.' },
+  { id: 'def_3', question: 'Kendi şirket verilerimi ekleyebilir miyim?', answer: 'Premium sürümde, kendi tedarikçilerinizi, API anahtarlarınızı ve şirket içi stok durumunuzu sisteme entegre edebilirsiniz.' },
+  { id: 'def_4', question: 'Yapay zeka analizi tam olarak ne yapıyor?', answer: 'Aynı komponentin farklı distribütörlerdeki fiyat değişim grafiğini çıkarır, teslimat sürelerini ve risk skorunu analiz ederek size en optimum satın alma rotasını önerir.' }
+];
+
+export const getFAQs = async () => {
+  let faqs = storage.get(KEYS.FAQS, []);
+  const isSeeded = storage.get('qc_admin_faqs_seeded', false);
+
+  if (!isSeeded) {
+    // Mevcut (kullanıcının eklediği) soruları koruyarak varsayılanları başa ekle
+    faqs = [...DEFAULT_FAQS, ...faqs];
+    storage.set(KEYS.FAQS, faqs);
+    storage.set('qc_admin_faqs_seeded', true);
+  }
+
+  return { success: true, data: faqs };
+};
 
 export const addFAQ = async (question, answer) => {
   const faqs  = storage.get(KEYS.FAQS, []);
