@@ -1,8 +1,7 @@
 import React from 'react';
 import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
-import { Search, LayoutDashboard, Settings, Cpu } from 'lucide-react';
+import { LayoutDashboard, Cpu } from 'lucide-react';
 import Dashboard from './pages/Dashboard';
-import AdminPanel from './pages/AdminPanel';
 
 function App() {
   return (
@@ -31,17 +30,12 @@ function App() {
               <LayoutDashboard size={20} />
               <span>Dashboard</span>
             </Link>
-            <Link to="/admin" className="nav-link">
-              <Settings size={20} />
-              <span>Admin</span>
-            </Link>
           </div>
         </nav>
 
         <main style={{ padding: '0 20px 40px 20px', maxWidth: '1400px', margin: '0 auto' }}>
           <Routes>
             <Route path="/" element={<Dashboard />} />
-            <Route path="/admin" element={<AdminPanel />} />
           </Routes>
         </main>
       </div>
