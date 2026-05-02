@@ -3,7 +3,7 @@ import logging
 from sqlalchemy.orm import Session
 from ..db import models
 from ..schemas import product as schemas
-from ..scraper.clients import DigiKeyClient, MouserClient, LCSCClient
+from ..scraper.clients import master_scraper
 
 logger = logging.getLogger(__name__)
 
@@ -20,9 +20,6 @@ USD_TRY_RATE = 38.0
 class TradeService:
     def __init__(self, db: Session):
         self.db = db
-        self.digikey = DigiKeyClient()
-        self.mouser = MouserClient()
-        self.lcsc = LCSCClient()
 
     async def create_product(self, product_in: schemas.ProductCreate):
         db_product = models.Product(**product_in.model_dump())
@@ -35,16 +32,8 @@ class TradeService:
         product = self.db.query(models.Product).filter(models.Product.id == product_id).first()
         if not product: return None
 
-        # Paralel veri toplama
-        results = await asyncio.gather(
-            self.digikey.search_product(product.name),
-            self.mouser.search_product(product.name),
-            self.lcsc.search_product(product.name),
-        )
-
-        all_market_products = []
-        for r in results:
-            all_market_products.extend(r)
+        # Tek bir Master Scraper ile tüm global veriyi "bi türlü" çekiyoruz
+        all_market_products = await master_scraper.search(product.name)
 
         if not all_market_products: return None
 
@@ -59,7 +48,7 @@ class TradeService:
                 logger.warning(f"AI pipeline execution failed: {e}")
 
         # Fallback Output
-        best_deal = min([p for p in all_market_products if p["region"] == "global"], key=lambda x: x["price"])
+        best_deal = min([p for p in all_market_products], key=lambda x: x["price"])
         
         def clean(p):
             return {
@@ -75,8 +64,8 @@ class TradeService:
             "product": product.name,
             "cost": round(best_deal["price"] * 1.15, 2),
             "pricing": {"status": "ok", "price": round(best_deal["price"] * 1.4, 2), "margin": 0.25},
-            "ref_suggestion": f"json\\n{{\\n  \\\"price\\\": {round(best_deal['price'] * 1.4, 2)},\\n  \\\"reason\\\": \\\"Global maliyetler ve Türkiye pazar ortalaması gözetilerek optimize edildi.\\\"\\n}}\\n",
-            "top3": [clean(p) for p in sorted([p for p in all_market_products if p["region"] == "global"], key=lambda x: x["price"])[:3]],
+            "ref_suggestion": f"json\\n{{\\n  \\\"price\\\": {round(best_deal['price'] * 1.4, 2)},\\n  \\\"reason\\\": \\\"Master Scraper ile toplanan global piyasa verileri analiz edildi.\\\"\\n}}\\n",
+            "top3": [clean(p) for p in sorted(all_market_products, key=lambda x: x["price"])[:3]],
             "market_refs": [],
-            "description": f"{product.name}: 8-bit AVR mimarisine sahip, düşük güç tüketimli ve yüksek performanslı mikrodenetleyici. Global distribütör stokları analiz edilmiştir."
+            "description": f"{product.name}: Master Scraper teknolojisi ile tüm global distribütörler taranmış ve en güncel veriler derlenmiştir."
         }]

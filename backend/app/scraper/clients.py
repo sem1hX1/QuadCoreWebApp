@@ -1,74 +1,87 @@
 import json
 import logging
 import re
-import random
+import asyncio
+import httpx
 from typing import Any, Dict, List, Optional
-
 from bs4 import BeautifulSoup
-try:
-    from curl_cffi.requests import AsyncSession
-    _CURL_AVAILABLE = True
-except ImportError:
-    _CURL_AVAILABLE = False
 from dotenv import load_dotenv
 
 load_dotenv()
 logger = logging.getLogger(__name__)
 
-_IMPERSONATE = "chrome124"
-_TIMEOUT = 15
+_TIMEOUT = 30
 
 def _parse_price(text: str) -> float:
+    if not text: return 0.0
     clean = re.sub(r"[^\d,.]", "", text.strip())
     if not clean: return 0.0
-    dot_pos = clean.rfind(".")
-    comma_pos = clean.rfind(",")
-    if dot_pos > comma_pos:
-        clean = clean.replace(",", "")
-    elif comma_pos > dot_pos:
-        clean = clean.replace(".", "").replace(",", ".")
-    try: return float(clean)
+    try:
+        if "," in clean and "." in clean:
+            if clean.rfind(",") > clean.rfind("."): clean = clean.replace(".", "").replace(",", ".")
+            else: clean = clean.replace(",", "")
+        elif "," in clean: clean = clean.replace(",", ".")
+        return float(clean)
     except: return 0.0
 
+class MasterScraper:
+    """FindChips Üzerinden Global Veriyi 'Bi Türlü' Çeken Master Scraper"""
+    def __init__(self):
+        self.headers = {"User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36"}
+
+    async def search(self, part_number: str) -> List[Dict]:
+        url = f"https://www.findchips.com/search/{part_number}"
+        logger.info(f"Master Scraper searching FindChips: {part_number}")
+        results = []
+        try:
+            async with httpx.AsyncClient(headers=self.headers, follow_redirects=True) as client:
+                resp = await client.get(url, timeout=_TIMEOUT)
+                if resp.status_code == 200:
+                    soup = BeautifulSoup(resp.text, 'html.parser')
+                    dist_blocks = soup.find_all(class_='distributor-results')
+                    
+                    for block in dist_blocks:
+                        dist_title = block.find(class_='distributor-title')
+                        if not dist_title: continue
+                        # İsmi sadeleştir
+                        raw_name = dist_title.text.strip().split(' ')[0].split('\n')[0]
+                        name = re.sub(r'[^a-zA-Z0-9]', '', raw_name)
+                        
+                        rows = block.find_all('tr')
+                        for row in rows:
+                            cells = row.find_all('td')
+                            price_val = 0.0
+                            part_name = ""
+                            
+                            for cell in cells:
+                                text = cell.text.strip()
+                                # Fiyat tespiti
+                                if '$' in text or (re.search(r'\d+[.,]\d+', text) and len(text) < 15):
+                                    p = _parse_price(text)
+                                    if p > 0: price_val = p
+                                # Parça adı tespiti
+                                if part_number.upper() in text.upper() and cell.find('a'):
+                                    # Başlığı temizle
+                                    clean_title = text.replace("Buy Now", "").replace("Part Details", "").replace("\n", " ").strip()
+                                    part_name = clean_title
+                            
+                            if price_val > 0 and part_name:
+                                results.append({
+                                    "title": part_name, "brand": name, "price": price_val,
+                                    "currency": "USD", "region": "global", "source": name, "url": url
+                                })
+                                break
+        except Exception as e:
+            logger.error(f"Scrape error: {e}")
+        return results
+
+master_scraper = MasterScraper()
+
 class DigiKeyClient:
-    async def search_product(self, part_number: str) -> List[Dict]:
-        logger.info(f"DigiKey searching: {part_number}")
-        base_url = f"https://www.digikey.com/en/products/result?keywords={part_number}"
-        if _CURL_AVAILABLE:
-            try:
-                async with AsyncSession(impersonate=_IMPERSONATE) as session:
-                    resp = await session.get(base_url, timeout=_TIMEOUT)
-                    if resp.status_code == 200:
-                        # (Scraping mantığı geliştirilebilir)
-                        pass
-            except: pass
-        
-        # Smart Fallback for Competition
-        base = 1.25 + random.uniform(0, 0.45)
-        return [
-            {"title": f"{part_number}-PU", "brand": "Microchip", "price": round(base, 2), "currency": "USD", "region": "global", "source": "Digikey", "url": base_url},
-            {"title": f"{part_number}-AU", "brand": "Microchip", "price": round(base * 0.92, 2), "currency": "USD", "region": "global", "source": "Digikey", "url": base_url}
-        ]
-
+    async def search_product(self, p): return []
 class MouserClient:
-    async def search_product(self, part_number: str) -> List[Dict]:
-        logger.info(f"Mouser searching: {part_number}")
-        base_url = f"https://www.mouser.com/c/?q={part_number}"
-        if _CURL_AVAILABLE:
-            try:
-                async with AsyncSession(impersonate=_IMPERSONATE) as session:
-                    resp = await session.get(base_url, timeout=_TIMEOUT)
-                    if resp.status_code == 200:
-                        # (Scraping mantığı geliştirilebilir)
-                        pass
-            except: pass
-            
-        base = 1.18 + random.uniform(0, 0.5)
-        return [{"title": f"{part_number} Series", "brand": "Mouser", "price": round(base, 2), "currency": "USD", "region": "global", "source": "Mouser", "url": base_url}]
-
+    async def search_product(self, p): return []
 class LCSCClient:
-    async def search_product(self, part_number: str) -> List[Dict]:
-        logger.info(f"LCSC searching: {part_number}")
-        base_url = f"https://www.lcsc.com/search?q={part_number}"
-        base = 0.82 + random.uniform(0, 0.25)
-        return [{"title": f"{part_number} LCSC", "brand": "LCSC", "price": round(base, 2), "currency": "USD", "region": "global", "source": "LCSC", "url": base_url}]
+    async def search_product(self, p): return []
+class FarnellClient:
+    async def search_product(self, p): return []
