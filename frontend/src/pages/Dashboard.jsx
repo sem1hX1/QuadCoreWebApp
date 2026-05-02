@@ -1,29 +1,13 @@
 import React, { useState, useEffect } from 'react';
-import { Search, MoreHorizontal, ChevronRight, TrendingUp, TrendingDown, Package, Truck, AlertTriangle, PlayCircle, HelpCircle, ArrowRight, ExternalLink } from 'lucide-react';
+import { Search, MoreHorizontal, ChevronRight, TrendingUp, TrendingDown, Package, Truck, AlertTriangle, PlayCircle, HelpCircle, ArrowRight, MessageSquare, ExternalLink } from 'lucide-react';
 import { AreaChart, Area, XAxis, YAxis, Tooltip, ResponsiveContainer, CartesianGrid } from 'recharts';
 import { motion, AnimatePresence } from 'framer-motion';
 import { searchComponents, analyzeComponent } from '../services/api';
-import { useLocation, useNavigate } from 'react-router-dom';
-
-const mockComponents = [
-  { id: 1, name: 'ESP32-WROOM-32D', supplier: 'Digi-Key', supplierColor: '#e53935', price: 3.85, stock: 38, status: 'Stok', ai: 'Mouser ($1.75, Stok Teslim)', category: 'WiFi+BT MCU' },
-  { id: 2, name: 'ESP32-WROOM-32U', supplier: 'Mouser', supplierColor: '#1e88e5', price: 4.15, stock: '8Bin+', status: 'Özellikler', ai: 'Digi-Key ($1.40, 15Bin+ Stok)', category: 'WiFi+BT MCU' },
-  { id: 3, name: 'ESP32-WROOM-32', supplier: 'Digi-Key', supplierColor: '#e53935', price: 3.85, stock: 28, status: 'Özellikler', ai: 'Mouser ($1.75, Stok Teslim)', category: 'WiFi+BT MCU' },
-  { id: 4, name: 'ESP-WROOM-02', supplier: 'LCSC', supplierColor: '#ff6d00', price: 2.15, stock: '8Bin+', status: 'Özellikler', ai: 'Digi-Key ($1.50, Stock Shipping)', category: 'WiFi MCU' },
-  { id: 5, name: 'ESP32-S3-WROOM-1', supplier: 'Digi-Key', supplierColor: '#e53935', price: 4.25, stock: '2K', status: 'Özellikler', ai: 'LCSC ($1.90, Stock Shipping)', category: 'WiFi+BT MCU' },
-  { id: 6, name: 'ESP32-C3-WROOM-02', supplier: 'Mouser', supplierColor: '#1e88e5', price: 1.75, stock: 24, status: 'Özellikler', ai: 'LCSC ($1.20, Stock Shipping)', category: 'RISC-V MCU' },
-];
+import { useLocation, useNavigate, Link } from 'react-router-dom';
 
 const trendData = [
   { month: 'Oca', fiyat: 4.2 }, { month: 'Şub', fiyat: 4.5 }, { month: 'Mar', fiyat: 3.9 },
   { month: 'Nis', fiyat: 3.8 }, { month: 'May', fiyat: 4.1 }, { month: 'Haz', fiyat: 3.85 },
-];
-
-const priceComparison = [
-  { supplier: 'Digi-Key', price: '$3.85', bold: true },
-  { supplier: 'Mouser', price: '$4.15' },
-  { supplier: 'LCSC', price: '$3.95' },
-  { supplier: 'Farnell', price: '$4.10' },
 ];
 
 const SupplierBadge = ({ name, color }) => (
@@ -74,8 +58,10 @@ const ComponentCard = ({ comp, index, isSelected, onClick }) => (
         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '8px' }}>
           <SupplierBadge name={comp.supplier} color={comp.supplierColor} />
           <div style={{ textAlign: 'right' }}>
-            <div style={{ fontSize: '0.95rem', fontWeight: '700', color: 'var(--text-main)' }}>${comp.price.toFixed(2)}</div>
-            <div style={{ fontSize: '0.72rem', color: 'var(--text-muted)' }}>{comp.stock} Stok</div>
+            <div style={{ fontSize: '0.9rem', fontWeight: '700', color: 'var(--text-main)' }}>
+              €{comp.price.toFixed(2)} = {comp.price_try?.toFixed(2)} TL
+            </div>
+            <div style={{ fontSize: '0.72rem', color: 'var(--text-muted)' }}>{comp.stock}</div>
           </div>
         </div>
 
@@ -116,113 +102,176 @@ const ComponentCard = ({ comp, index, isSelected, onClick }) => (
   </motion.div>
 );
 
-const DetailPanel = ({ comp }) => (
-  <div style={{
-    width: '300px',
-    minWidth: '300px',
-    background: 'var(--bg-sidebar)',
-    borderLeft: '1px solid var(--border)',
-    height: 'calc(100vh - 52px)',
-    overflowY: 'auto',
-    padding: '20px',
-    display: 'flex',
-    flexDirection: 'column',
-    gap: '20px',
-    boxShadow: '-4px 0 15px rgba(0,0,0,0.02)'
-  }}>
-    <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-      <h3 style={{ fontSize: '1rem', fontWeight: '600', color: 'var(--text-main)' }}>Bileşen Detayı</h3>
-      <button style={{ background: 'none', border: 'none', color: 'var(--text-muted)', cursor: 'pointer' }}>
-        <MoreHorizontal size={18} />
-      </button>
-    </div>
+const DetailPanel = ({ comp, allResults }) => {
+  const comparisons = allResults
+    ? allResults.filter(r => r.name.toLowerCase().includes(comp.name.split(' ')[0].toLowerCase())).sort((a, b) => a.price - b.price)
+    : [];
 
-    <div style={{ background: 'var(--bg)', border: '1px solid var(--border)', borderRadius: '8px', padding: '12px', display: 'flex', gap: '10px', alignItems: 'flex-start' }}>
-      <div style={{ width: 10, height: 10, borderRadius: '2px', background: 'var(--accent)', marginTop: '4px', flexShrink: 0 }} />
-      <div style={{ flex: 1 }}>
-        <div style={{ fontSize: '0.9rem', fontWeight: '600', color: 'var(--text-main)', marginBottom: '4px' }}>{comp.name}</div>
-        <div style={{ fontSize: '0.75rem', color: 'var(--text-muted)', marginBottom: '8px', lineHeight: '1.4' }}>Kategori: {comp.category}<br/>Paket: SMD/QFN-32<br/>Çalışma Voltajı: 3.0V - 3.6V</div>
-        
-        {comp.url && (
-          <a 
-            href={comp.url} 
-            target="_blank" 
-            rel="noopener noreferrer"
-            style={{
-              display: 'inline-flex',
-              alignItems: 'center',
-              gap: '4px',
-              fontSize: '0.75rem',
-              color: 'var(--accent)',
-              textDecoration: 'none',
-              marginBottom: '10px',
-              fontWeight: '600'
-            }}
-          >
-            <ExternalLink size={14} /> Kaynak Sayfaya Git
-          </a>
-        )}
+  let parsedSuggestion = { price: 0, reason: '' };
+  try {
+    if (comp.ref_suggestion) {
+      const jsonStr = comp.ref_suggestion.includes('```json') 
+        ? comp.ref_suggestion.split('```json')[1].split('```')[0]
+        : comp.ref_suggestion.replace('json\n', '');
+      parsedSuggestion = JSON.parse(jsonStr);
+    }
+  } catch (e) {
+    console.error("AI Parse Error", e);
+  }
 
-        <div style={{ background: 'rgba(2, 132, 199, 0.08)', borderRadius: '4px', padding: '6px 8px', fontSize: '0.75rem', color: 'var(--accent)', lineHeight: '1.4', border: '1px solid rgba(2, 132, 199, 0.1)' }}>
-          ✦ Yapay Zeka Önerisi: En uygun fiyat ve lojistik kombinasyonu Mouser'da tespit edildi. (Güvenilirlik: %94)
+  return (
+    <div className="dashboard-detail" style={{
+      width: '380px',
+      background: 'var(--bg-sidebar)',
+      borderLeft: '1px solid var(--border)',
+      padding: '24px',
+      overflowY: 'auto'
+    }}>
+      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '20px' }}>
+        <h3 style={{ fontSize: '1rem', fontWeight: '600', color: 'var(--text-main)' }}>Bileşen Detayı</h3>
+        <button style={{ background: 'none', border: 'none', color: 'var(--text-muted)', cursor: 'pointer' }}>
+          <MoreHorizontal size={18} />
+        </button>
+      </div>
+
+      <div style={{ background: 'var(--bg)', border: '1px solid var(--border)', borderRadius: '8px', padding: '12px', display: 'flex', gap: '10px', alignItems: 'flex-start', marginBottom: '24px' }}>
+        <div style={{ width: 10, height: 10, borderRadius: '2px', background: 'var(--accent)', marginTop: '4px', flexShrink: 0 }} />
+        <div style={{ flex: 1 }}>
+          <div style={{ fontSize: '0.9rem', fontWeight: '600', color: 'var(--text-main)', marginBottom: '4px' }}>{comp.name}</div>
+          <div style={{ fontSize: '0.75rem', color: 'var(--text-muted)', marginBottom: '8px', lineHeight: '1.4' }}>
+            Kategori: {comp.category}<br/>
+            Kaynak: {comp.supplier}<br/>
+            Birim Fiyat: €{comp.price.toFixed(2)} = {comp.price_try?.toFixed(2)} TL
+          </div>
+          
+          {comp.url && (
+            <a 
+              href={comp.url} 
+              target="_blank" 
+              rel="noopener noreferrer"
+              style={{
+                display: 'inline-flex',
+                alignItems: 'center',
+                gap: '4px',
+                fontSize: '0.75rem',
+                color: 'var(--accent)',
+                textDecoration: 'none',
+                marginBottom: '10px',
+                fontWeight: '600'
+              }}
+            >
+              <ExternalLink size={14} /> Kaynak Sayfaya Git
+            </a>
+          )}
+
+          <div style={{ background: 'rgba(2, 132, 199, 0.08)', borderRadius: '4px', padding: '10px', fontSize: '0.75rem', color: 'var(--accent)', lineHeight: '1.5', border: '1px solid rgba(2, 132, 199, 0.1)' }}>
+            <div style={{ fontWeight: '700', marginBottom: '4px', display: 'flex', alignItems: 'center', gap: '5px' }}>
+              ✦ Yapay Zeka Analizi
+            </div>
+            <p style={{ marginBottom: '8px', color: 'var(--text-main)' }}>{comp.description}</p>
+            {parsedSuggestion.price > 0 && (
+              <div style={{ background: 'var(--bg-card)', padding: '6px', borderRadius: '4px', border: '1px solid rgba(2, 132, 199, 0.2)' }}>
+                <strong>Önerilen Fiyat: €{parsedSuggestion.price}</strong><br/>
+                <span style={{ fontSize: '0.7rem', color: 'var(--text-muted)' }}>{parsedSuggestion.reason}</span>
+              </div>
+            )}
+          </div>
         </div>
       </div>
-    </div>
 
-    <div>
-      <h4 style={{ fontSize: '0.8rem', color: 'var(--text-muted)', fontWeight: '600', letterSpacing: '0.5px', marginBottom: '12px', textTransform: 'uppercase' }}>Fiyat Karşılaştırması</h4>
-      <div style={{ display: 'flex', flexDirection: 'column', gap: '8px', background: 'var(--bg)', padding: '12px', borderRadius: '8px', border: '1px solid var(--border)' }}>
-        {priceComparison.map((item, i) => (
-          <div key={i} style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', paddingBottom: i !== priceComparison.length - 1 ? '8px' : '0', borderBottom: i !== priceComparison.length - 1 ? '1px solid var(--border)' : 'none' }}>
-            <span style={{ fontSize: '0.85rem', color: item.bold ? 'var(--text-main)' : 'var(--text-muted)', fontWeight: item.bold ? '600' : '500' }}>{item.supplier}</span>
-            <span style={{ fontSize: '0.85rem', color: item.bold ? 'var(--accent)' : 'var(--text-main)', fontWeight: item.bold ? '700' : '600' }}>{item.price}</span>
+      <div style={{ marginBottom: '24px' }}>
+        <h4 style={{ fontSize: '0.8rem', color: 'var(--text-muted)', fontWeight: '600', letterSpacing: '0.5px', marginBottom: '12px', textTransform: 'uppercase' }}>Fiyat Karşılaştırması</h4>
+        <div style={{ display: 'flex', flexDirection: 'column', gap: '8px', background: 'var(--bg)', padding: '12px', borderRadius: '8px', border: '1px solid var(--border)' }}>
+          {comparisons.map((item, i) => (
+            <div key={i} style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', paddingBottom: i !== comparisons.length - 1 ? '8px' : '0', borderBottom: i !== comparisons.length - 1 ? '1px solid var(--border)' : 'none' }}>
+              <span style={{ fontSize: '0.85rem', color: item.id === comp.id ? 'var(--text-main)' : 'var(--text-muted)', fontWeight: item.id === comp.id ? '600' : '500' }}>{item.supplier}</span>
+              <span style={{ fontSize: '0.85rem', color: item.id === comp.id ? 'var(--accent)' : 'var(--text-main)', fontWeight: item.id === comp.id ? '700' : '600' }}>
+                €{item.price.toFixed(2)} = {item.price_try?.toFixed(2)} TL
+              </span>
+            </div>
+          ))}
+        </div>
+      </div>
+
+      <div style={{ marginBottom: '24px' }}>
+        <h4 style={{ fontSize: '0.8rem', color: 'var(--text-muted)', fontWeight: '600', letterSpacing: '0.5px', marginBottom: '12px', textTransform: 'uppercase' }}>Fiyat Trendi (6 Ay)</h4>
+        <div style={{ height: '140px', background: 'var(--bg)', padding: '10px 10px 10px 0', borderRadius: '8px', border: '1px solid var(--border)' }}>
+          <ResponsiveContainer width="100%" height="100%">
+            <AreaChart data={trendData} margin={{ top: 5, right: 10, left: -20, bottom: 0 }}>
+              <defs>
+                <linearGradient id="detailGradLight" x1="0" y1="0" x2="0" y2="1">
+                  <stop offset="5%" stopColor="var(--accent)" stopOpacity={0.15} />
+                  <stop offset="95%" stopColor="var(--accent)" stopOpacity={0} />
+                </linearGradient>
+              </defs>
+              <CartesianGrid strokeDasharray="3 3" vertical={false} stroke="var(--border)" />
+              <XAxis dataKey="month" tick={{ fontSize: 10, fill: 'var(--text-muted)' }} axisLine={false} tickLine={false} />
+              <YAxis domain={['auto', 'auto']} tick={{ fontSize: 10, fill: 'var(--text-muted)' }} axisLine={false} tickLine={false} />
+              <Tooltip contentStyle={{ background: '#fff', border: '1px solid var(--border)', borderRadius: '6px', fontSize: '0.8rem', boxShadow: '0 4px 6px -1px rgba(0,0,0,0.1)' }} />
+              <Area type="monotone" dataKey="fiyat" stroke="var(--accent)" strokeWidth={2} fill="url(#detailGradLight)" />
+            </AreaChart>
+          </ResponsiveContainer>
+        </div>
+      </div>
+
+      <div style={{ display: 'flex', flexDirection: 'column', gap: '10px', marginTop: 'auto', paddingTop: '20px' }}>
+        {[
+          { label: 'Aktif Tedarikçiler', value: '24 Tedarikçi', icon: <Package size={14} /> },
+          { label: 'Tahmini Teslimat', value: '4-7 İş Günü', icon: <Truck size={14} /> },
+          { label: 'Risk Uyarıları', value: 'Düşük Risk', icon: <AlertTriangle size={14} />, color: '#10b981' },
+        ].map((stat, i) => (
+          <div key={i} style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: '10px 12px', background: 'var(--bg)', borderRadius: '6px', border: '1px solid var(--border)' }}>
+            <div style={{ display: 'flex', alignItems: 'center', gap: '8px', color: 'var(--text-muted)', fontSize: '0.85rem' }}>
+              <span style={{ color: stat.color || 'var(--text-dim)' }}>{stat.icon}</span>
+              {stat.label}
+            </div>
+            <span style={{ fontSize: '0.85rem', fontWeight: '600', color: stat.color || 'var(--text-main)' }}>{stat.value}</span>
           </div>
         ))}
+        <button className="premium-button" style={{ marginTop: '10px', width: '100%', padding: '12px' }}>
+          Satın Alma Seçeneklerini Gör
+        </button>
       </div>
     </div>
+  );
+};
 
-
-    <div>
-      <h4 style={{ fontSize: '0.8rem', color: 'var(--text-muted)', fontWeight: '600', letterSpacing: '0.5px', marginBottom: '12px', textTransform: 'uppercase' }}>Fiyat Trendi (6 Ay)</h4>
-      <div style={{ height: '140px', background: 'var(--bg)', padding: '10px 10px 10px 0', borderRadius: '8px', border: '1px solid var(--border)' }}>
-        <ResponsiveContainer width="100%" height="100%">
-          <AreaChart data={trendData} margin={{ top: 5, right: 10, left: -20, bottom: 0 }}>
-            <defs>
-              <linearGradient id="detailGradLight" x1="0" y1="0" x2="0" y2="1">
-                <stop offset="5%" stopColor="var(--accent)" stopOpacity={0.15} />
-                <stop offset="95%" stopColor="var(--accent)" stopOpacity={0} />
-              </linearGradient>
-            </defs>
-            <CartesianGrid strokeDasharray="3 3" vertical={false} stroke="var(--border)" />
-            <XAxis dataKey="month" tick={{ fontSize: 10, fill: 'var(--text-muted)' }} axisLine={false} tickLine={false} />
-            <YAxis domain={['auto', 'auto']} tick={{ fontSize: 10, fill: 'var(--text-muted)' }} axisLine={false} tickLine={false} />
-            <Tooltip contentStyle={{ background: '#fff', border: '1px solid var(--border)', borderRadius: '6px', fontSize: '0.8rem', boxShadow: '0 4px 6px -1px rgba(0,0,0,0.1)' }} />
-            <Area type="monotone" dataKey="fiyat" stroke="var(--accent)" strokeWidth={2} fill="url(#detailGradLight)" />
-          </AreaChart>
-        </ResponsiveContainer>
+const FAQItem = ({ question, answer }) => {
+  const [isOpen, setIsOpen] = useState(false);
+  return (
+    <div 
+      className="glass-card" 
+      onClick={() => setIsOpen(!isOpen)}
+      style={{ 
+        padding: '16px 20px', 
+        cursor: 'pointer', 
+        borderLeft: isOpen ? '4px solid var(--accent)' : '1px solid var(--border)',
+        background: isOpen ? 'rgba(2, 132, 199, 0.02)' : 'var(--bg-card)',
+        transition: 'all 0.2s ease'
+      }}
+    >
+      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+        <h4 style={{ fontSize: '1rem', fontWeight: '600', color: 'var(--text-main)' }}>{question}</h4>
+        <motion.div animate={{ rotate: isOpen ? 180 : 0 }}>
+          <MoreHorizontal size={18} color="var(--text-dim)" />
+        </motion.div>
       </div>
+      <AnimatePresence>
+        {isOpen && (
+          <motion.div
+            initial={{ height: 0, opacity: 0, marginTop: 0 }}
+            animate={{ height: 'auto', opacity: 1, marginTop: 12 }}
+            exit={{ height: 0, opacity: 0, marginTop: 0 }}
+            transition={{ duration: 0.3, ease: 'easeInOut' }}
+            style={{ overflow: 'hidden' }}
+          >
+            <p style={{ color: 'var(--text-muted)', fontSize: '0.9rem', lineHeight: '1.6' }}>{answer}</p>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </div>
-
-    <div style={{ display: 'flex', flexDirection: 'column', gap: '10px', marginTop: 'auto', paddingTop: '20px' }}>
-      {[
-        { label: 'Aktif Tedarikçiler', value: '24 Tedarikçi', icon: <Package size={14} /> },
-        { label: 'Tahmini Teslimat', value: '4-7 İş Günü', icon: <Truck size={14} /> },
-        { label: 'Risk Uyarıları', value: 'Düşük Risk', icon: <AlertTriangle size={14} />, color: '#10b981' },
-      ].map((stat, i) => (
-        <div key={i} style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: '10px 12px', background: 'var(--bg)', borderRadius: '6px', border: '1px solid var(--border)' }}>
-          <div style={{ display: 'flex', alignItems: 'center', gap: '8px', color: 'var(--text-muted)', fontSize: '0.85rem' }}>
-            <span style={{ color: stat.color || 'var(--text-dim)' }}>{stat.icon}</span>
-            {stat.label}
-          </div>
-          <span style={{ fontSize: '0.85rem', fontWeight: '600', color: stat.color || 'var(--text-main)' }}>{stat.value}</span>
-        </div>
-      ))}
-      <button className="premium-button" style={{ marginTop: '10px', width: '100%', padding: '12px' }}>
-        Satın Alma Seçeneklerini Gör
-      </button>
-    </div>
-  </div>
-);
+  );
+};
 
 const LandingView = ({ onSearch }) => {
   const [query, setQuery] = useState('');
@@ -265,26 +314,14 @@ const LandingView = ({ onSearch }) => {
             Ara <ArrowRight size={18} />
           </button>
         </div>
-        <div style={{ marginTop: '20px', display: 'flex', justifyContent: 'center', gap: '10px', flexWrap: 'wrap' }}>
-          <span style={{ color: 'var(--text-muted)', fontSize: '0.9rem', marginRight: '5px' }}>Önerilenler:</span>
-          {['STM32F103', 'ESP32', 'LM317', 'ATMEGA328P'].map(tag => (
-            <span key={tag} onClick={() => onSearch(tag)} style={{ fontSize: '0.85rem', color: 'var(--accent)', cursor: 'pointer', background: 'rgba(2, 132, 199, 0.08)', padding: '2px 10px', borderRadius: '12px' }}>
-              {tag}
-            </span>
-          ))}
-        </div>
       </motion.div>
 
-      {/* Info Sections */}
-      <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.3 }} style={{ width: '100%', display: 'flex', flexDirection: 'column', gap: '60px' }}>
-        
-        {/* Nasıl Çalışır? */}
-        <section>
-          <div style={{ display: 'flex', alignItems: 'center', gap: '10px', marginBottom: '25px', justifyContent: 'center' }}>
-            <PlayCircle size={24} color="var(--accent)" />
-            <h2 style={{ fontSize: '1.8rem', color: 'var(--text-main)', fontWeight: '700' }}>Sistem Nasıl Çalışır?</h2>
-          </div>
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '20px' }}>
+      <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.3 }} style={{ maxWidth: '900px', margin: '100px auto 40px auto', display: 'flex', flexDirection: 'column', gap: '30px' }}>
+        <section className="glass-card" style={{ padding: '30px', background: 'var(--bg-card)' }}>
+          <h3 style={{ fontSize: '1.2rem', marginBottom: '20px', display: 'flex', alignItems: 'center', gap: '8px', color: 'var(--text-main)' }}>
+            <HelpCircle size={20} color="var(--accent)" /> Nasıl Çalışır?
+          </h3>
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', gap: '20px' }}>
             {[
               { title: '1. Tarama', desc: 'Mouser, DigiKey, LCSC gibi 50+ küresel distribütör eş zamanlı olarak taranır.' },
               { title: '2. Yapay Zeka Analizi', desc: 'Gümrük, kargo süreleri ve fiyat avantajları yapay zeka tarafından hesaplanır.' },
@@ -299,26 +336,50 @@ const LandingView = ({ onSearch }) => {
           </div>
         </section>
 
-        {/* Sıkça Sorulan Sorular */}
-        <section>
-          <div style={{ display: 'flex', alignItems: 'center', gap: '10px', marginBottom: '25px', justifyContent: 'center' }}>
-            <HelpCircle size={24} color="var(--accent)" />
-            <h2 style={{ fontSize: '1.8rem', color: 'var(--text-main)', fontWeight: '700' }}>Sıkça Sorulan Sorular</h2>
-          </div>
-          <div style={{ display: 'flex', flexDirection: 'column', gap: '15px' }}>
+        <section className="glass-card" style={{ padding: '30px', background: 'var(--bg-card)' }}>
+          <h3 style={{ fontSize: '1.2rem', marginBottom: '20px', display: 'flex', alignItems: 'center', gap: '8px', color: 'var(--text-main)' }}>
+            <MessageSquare size={20} color="var(--accent)" /> Müşterilerimiz Ne Diyor?
+          </h3>
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(250px, 1fr))', gap: '20px' }}>
             {[
-              { q: 'Hangi tedarikçileri destekliyorsunuz?', a: 'Mouser, DigiKey, Farnell, Arrow ve LCSC dahil olmak üzere 50\'den fazla global distribütörü canlı destekliyoruz.' },
-              { q: 'Fiyatlara gümrük vergileri dahil mi?', a: 'Yapay zeka analiz raporlarında, ülkenize özgü tahmini gümrük vergileri ve kargo masrafları hesaplamalara dahil edilmektedir.' },
-              { q: 'Veriler ne sıklıkla güncelleniyor?', a: 'Tüm stok ve fiyat verileri anlık olarak API üzerinden çekilir, önbellek süresi maksimum 5 dakikadır.' }
-            ].map((faq, i) => (
-              <div key={i} className="glass-card" style={{ padding: '20px 24px', display: 'flex', flexDirection: 'column', gap: '8px' }}>
-                <h4 style={{ fontSize: '1.05rem', color: 'var(--text-main)', fontWeight: '600' }}>{faq.q}</h4>
-                <p style={{ color: 'var(--text-muted)', fontSize: '0.95rem', lineHeight: '1.5' }}>{faq.a}</p>
+              { name: 'Ayşe Y.', role: 'Satın Alma Müdürü', text: 'Tedarik zinciri yönetimimizde SourceFlow sayesinde %30 maliyet tasarrufu sağladık. Yapay zeka analizi inanılmaz.' },
+              { name: 'Mehmet B.', role: 'Elektronik Mühendisi', text: 'Prototip aşamasında parça bulmak tam bir kabustu. Şimdi saniyeler içinde en uygun stoklu parçayı bulabiliyorum.' },
+              { name: 'Caner T.', role: 'Donanım Tasarımcısı', text: 'Cross-reference özelliği sayesinde stokta olmayan kritik parçaların alternatiflerini anında bulup tasarıma devam edebiliyorum.' }
+            ].map((t, i) => (
+              <div key={i} className="glass-card" style={{ padding: '20px', background: 'var(--bg)', border: '1px solid var(--border)', borderRadius: '12px' }}>
+                <p style={{ fontStyle: 'italic', color: 'var(--text-muted)', fontSize: '0.85rem', marginBottom: '15px', lineHeight: '1.6' }}>"{t.text}"</p>
+                <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
+                  <div style={{ width: 32, height: 32, borderRadius: '50%', background: 'var(--accent)', color: '#fff', display: 'flex', alignItems: 'center', justifyContent: 'center', fontWeight: 'bold', fontSize: '0.8rem' }}>{t.name[0]}</div>
+                  <div>
+                    <div style={{ fontSize: '0.85rem', fontWeight: '700', color: 'var(--text-main)' }}>{t.name}</div>
+                    <div style={{ fontSize: '0.7rem', color: 'var(--text-dim)' }}>{t.role}</div>
+                  </div>
+                </div>
               </div>
             ))}
           </div>
         </section>
 
+        <section className="glass-card" style={{ padding: '30px', background: 'var(--bg-card)' }}>
+          <h3 style={{ fontSize: '1.2rem', marginBottom: '20px', display: 'flex', alignItems: 'center', gap: '8px', color: 'var(--text-main)' }}>
+            <HelpCircle size={20} color="var(--accent)" /> Sıkça Sorulan Sorular
+          </h3>
+          <div style={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
+            {[
+              { q: 'Hangi tedarikçileri destekliyorsunuz?', a: 'Mouser, DigiKey, Farnell, Arrow, AliExpress ve LCSC dahil olmak üzere 50\'den fazla global distribütörü canlı destekliyoruz.' },
+              { q: 'Fiyatlara gümrük vergileri dahil mi?', a: 'Yapay zeka analiz raporlarında, ülkenize özgü tahmini gümrük vergileri ve kargo masrafları hesaplamalara dahil edilmektedir.' },
+              { q: 'Veriler ne sıklıkla güncelleniyor?', a: 'Tüm stok ve fiyat verileri anlık olarak API üzerinden çekilir, önbellek süresi maksimum 5 dakikadır.' },
+              { q: 'Kendi şirket verilerimi ekleyebilir miyim?', a: 'Premium sürümde, kendi tedarikçilerinizi, API anahtarlarınızı ve şirket içi stok durumunuzu sisteme entegre edebilirsiniz.' }
+            ].map((faq, i) => (
+              <FAQItem key={i} question={faq.q} answer={faq.a} />
+            ))}
+          </div>
+          <div style={{ textAlign: 'center', marginTop: '30px' }}>
+            <Link to="/sss" className="premium-button" style={{ display: 'inline-block', textDecoration: 'none', padding: '10px 24px' }}>
+              Daha Fazla Soru Gör
+            </Link>
+          </div>
+        </section>
       </motion.div>
     </div>
   );
@@ -326,107 +387,194 @@ const LandingView = ({ onSearch }) => {
 
 const Dashboard = () => {
   const [searchQuery, setSearchQuery] = useState('');
-  const [selectedComp, setSelectedComp] = useState(mockComponents[0]);
-  const [results, setResults] = useState(mockComponents);
+  const [selectedComp, setSelectedComp] = useState(null);
+  const [results, setResults] = useState([]);
   const [loading, setLoading] = useState(false);
   const [hasSearched, setHasSearched] = useState(false);
+  const [filterCategory, setFilterCategory] = useState('Hepsi');
+  const [sortBy, setSortBy] = useState('price-low');
   const location = useLocation();
   const navigate = useNavigate();
 
-  useEffect(() => {
-    // Check if there is a search query in the URL params
-    const params = new URLSearchParams(location.search);
-    const q = params.get('q');
-    if (q) {
-      performSearch(q);
-    } else {
-      // Ana Sayfa linkine tıklandığında (veya URL'de q parametresi yoksa) aramayı sıfırla
-      setHasSearched(false);
-      setSearchQuery('');
-    }
-  }, [location.search]);
+  const categories = ['Hepsi', ...new Set(results.map(c => c.category).filter(Boolean))];
 
-  const handleSearch = (queryToSearch) => {
-    const q = typeof queryToSearch === 'string' ? queryToSearch : searchQuery;
-    if (!q.trim()) return;
-    
-    // Update the URL which will trigger the useEffect
-    navigate(`/?q=${encodeURIComponent(q)}`);
-  };
+  const filteredAndSortedResults = results
+    .filter(c => filterCategory === 'Hepsi' || c.category === filterCategory)
+    .sort((a, b) => {
+      if (sortBy === 'price-low') return a.price - b.price;
+      if (sortBy === 'price-high') return b.price - a.price;
+      if (sortBy === 'stock-high') {
+        const parseStock = (val) => {
+          if (typeof val === 'number') return val;
+          if (typeof val !== 'string') return 0;
+          let num = parseFloat(val.replace(/,/g, '').replace(/[^\d.-]/g, ''));
+          if (val.toLowerCase().includes('k') || val.toLowerCase().includes('bin')) num *= 1000;
+          if (val.toLowerCase().includes('m')) num *= 1000000;
+          return isNaN(num) ? 0 : num;
+        };
+        const stockA = parseStock(a.stock);
+        const stockB = parseStock(b.stock);
+        return stockB - stockA;
+      }
+      return 0;
+    });
 
   const performSearch = async (q) => {
+    if (!q || !q.trim()) return;
     setSearchQuery(q);
     setLoading(true);
     setHasSearched(true);
     
     try {
       const data = await searchComponents(q);
-      const newResults = data.length > 0 ? data : mockComponents;
-      setResults(newResults);
-      setSelectedComp(newResults[0]);
+      setResults(data || []);
+      setSelectedComp(data && data.length > 0 ? data[0] : null);
     } catch {
-      setResults(mockComponents);
-      setSelectedComp(mockComponents[0]);
+      setResults([]);
+      setSelectedComp(null);
     } finally {
       setLoading(false);
     }
   };
 
+  useEffect(() => {
+    const params = new URLSearchParams(location.search);
+    const q = params.get('q');
+    if (q) {
+      performSearch(q);
+    } else {
+      setHasSearched(false);
+      setSearchQuery('');
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+  }, [location.search]);
+
+  const handleSearch = (queryToSearch) => {
+    const q = typeof queryToSearch === 'string' ? queryToSearch : searchQuery;
+    if (!q.trim()) return;
+    navigate(`/?q=${encodeURIComponent(q)}`);
+  };
+
   if (!hasSearched) {
-    return <LandingView onSearch={handleSearch} />;
+    return (
+      <motion.div
+        initial={{ opacity: 0, y: 16 }}
+        animate={{ opacity: 1, y: 0 }}
+        exit={{ opacity: 0, y: -16 }}
+        transition={{ duration: 0.35, ease: 'easeOut' }}
+      >
+        <LandingView onSearch={handleSearch} />
+      </motion.div>
+    );
   }
 
   return (
-    <div style={{ display: 'flex', height: 'calc(100vh - 52px)', overflow: 'hidden' }}>
-      {/* Center Content */}
-      <div style={{ flex: 1, overflowY: 'auto', padding: '24px 30px', background: 'var(--bg)' }}>
-        
-        {/* Search Bar (Top) */}
-        <div style={{ marginBottom: '24px', display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
+    <motion.div
+      initial={{ opacity: 0, y: 16 }}
+      animate={{ opacity: 1, y: 0 }}
+      exit={{ opacity: 0, y: -16 }}
+      transition={{ duration: 0.35, ease: 'easeOut' }}
+      className="dashboard-layout"
+      style={{ display: 'flex', height: 'calc(100vh - 52px)', overflow: 'hidden' }}
+    >
+      <div className="dashboard-results" style={{ flex: 1, overflowY: 'auto', padding: '24px 30px', background: 'var(--bg)' }}>
+        <div style={{ marginBottom: '24px', display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: '20px', flexWrap: 'wrap' }}>
           <h2 style={{ fontSize: '1.4rem', fontWeight: '700', color: 'var(--text-main)' }}>Arama Sonuçları</h2>
-          <div style={{
-            display: 'flex', alignItems: 'center', gap: '10px',
-            background: 'var(--bg-card)',
-            border: '1px solid var(--border)',
-            borderRadius: '8px', padding: '8px 16px',
-            width: '400px', boxShadow: '0 2px 4px rgba(0,0,0,0.02)'
-          }}>
-            <Search size={16} color="var(--text-dim)" />
-            <input
-              type="text"
-              placeholder="Bileşen veya parça numarası ara..."
-              value={searchQuery}
-              onChange={(e) => setSearchQuery(e.target.value)}
-              onKeyDown={(e) => e.key === 'Enter' && handleSearch()}
-              style={{
-                background: 'none', border: 'none', outline: 'none',
-                color: 'var(--text-main)', fontSize: '0.95rem', flex: 1,
-                fontFamily: 'Inter, sans-serif',
-              }}
-            />
+          
+          <div style={{ display: 'flex', alignItems: 'center', gap: '12px', flex: 1, justifyContent: 'flex-end', minWidth: '300px' }}>
+            <div style={{
+              display: 'flex', alignItems: 'center', gap: '10px',
+              background: 'var(--bg-card)',
+              border: '1px solid var(--border)',
+              borderRadius: '8px', padding: '8px 16px',
+              flex: 1, maxWidth: '400px', boxShadow: '0 2px 4px rgba(0,0,0,0.02)'
+            }}>
+              <Search size={16} color="var(--text-dim)" />
+              <input
+                type="text"
+                placeholder="Bileşen veya parça numarası ara..."
+                value={searchQuery}
+                onChange={(e) => setSearchQuery(e.target.value)}
+                onKeyDown={(e) => e.key === 'Enter' && handleSearch()}
+                style={{
+                  background: 'none', border: 'none', outline: 'none',
+                  color: 'var(--text-main)', fontSize: '0.95rem', flex: 1,
+                  fontFamily: 'Inter, sans-serif',
+                }}
+              />
+            </div>
             <button
-              onClick={() => handleSearch()}
-              style={{
-                background: 'var(--bg)', border: '1px solid var(--border)',
-                borderRadius: '5px', padding: '4px 12px', color: 'var(--text-main)',
-                fontSize: '0.85rem', cursor: 'pointer', fontFamily: 'Inter, sans-serif',
-                transition: 'all 0.15s', fontWeight: '500'
-              }}
-              className="search-btn-mini"
+              onClick={() => navigate('/')}
+              className="premium-button"
+              style={{ padding: '9px 20px', whiteSpace: 'nowrap' }}
             >
-              {loading ? '...' : 'Ara'}
+              {loading ? '...' : 'Yeni Analiz'}
             </button>
           </div>
         </div>
 
-        {/* Component Grid - 2 columns */}
+        <div style={{ 
+          marginBottom: '24px', 
+          display: 'flex', 
+          alignItems: 'center', 
+          justifyContent: 'space-between',
+          padding: '12px 20px',
+          background: 'var(--bg-card)',
+          border: '1px solid var(--border)',
+          borderRadius: '12px',
+          gap: '20px',
+          flexWrap: 'wrap'
+        }}>
+          <div style={{ display: 'flex', alignItems: 'center', gap: '20px', flexWrap: 'wrap' }}>
+            <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+              <span style={{ fontSize: '0.82rem', color: 'var(--text-muted)', fontWeight: '600' }}>Kategori:</span>
+              <select 
+                value={filterCategory}
+                onChange={(e) => setFilterCategory(e.target.value)}
+                style={{ 
+                  padding: '6px 12px', borderRadius: '6px', border: '1px solid var(--border)',
+                  background: 'var(--bg)', color: 'var(--text-main)', fontSize: '0.85rem', outline: 'none'
+                }}
+              >
+                {categories.map(cat => <option key={cat} value={cat}>{cat}</option>)}
+              </select>
+            </div>
+
+            <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+              <span style={{ fontSize: '0.82rem', color: 'var(--text-muted)', fontWeight: '600' }}>Sırala:</span>
+              <select 
+                value={sortBy}
+                onChange={(e) => setSortBy(e.target.value)}
+                style={{ 
+                  padding: '6px 12px', borderRadius: '6px', border: '1px solid var(--border)',
+                  background: 'var(--bg)', color: 'var(--text-main)', fontSize: '0.85rem', outline: 'none'
+                }}
+              >
+                <option value="price-low">En Düşük Fiyat</option>
+                <option value="price-high">En Yüksek Fiyat</option>
+                <option value="stock-high">En Yüksek Stok</option>
+              </select>
+            </div>
+          </div>
+
+          <button style={{
+            display: 'flex', alignItems: 'center', gap: '8px',
+            background: 'none', border: '1px solid var(--border)',
+            borderRadius: '6px', padding: '6px 14px',
+            fontSize: '0.82rem', fontWeight: '600', color: 'var(--text-main)',
+            cursor: 'pointer', transition: 'all 0.15s'
+          }} className="search-btn-mini">
+            <Package size={14} /> Rapor Oluştur
+          </button>
+        </div>
+
         {loading ? (
            <div style={{ display: 'flex', justifyContent: 'center', padding: '100px' }}>
               <div style={{ border: '3px solid var(--border)', borderTopColor: 'var(--accent)', borderRadius: '50%', width: 40, height: 40, animation: 'spin 1s linear infinite' }} />
            </div>
         ) : (
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(340px, 1fr))', gap: '16px', marginBottom: '30px' }}>
-            {results.map((comp, i) => (
+            {filteredAndSortedResults.map((comp, i) => (
               <ComponentCard
                 key={comp.id}
                 comp={comp}
@@ -437,11 +585,9 @@ const Dashboard = () => {
             ))}
           </div>
         )}
-
       </div>
 
-      {/* Right Detail Panel */}
-      {selectedComp && !loading && <DetailPanel comp={selectedComp} />}
+      {selectedComp && !loading && <DetailPanel comp={selectedComp} allResults={results} />}
 
       <style>{`
         .comp-card:hover {
@@ -454,7 +600,7 @@ const Dashboard = () => {
         }
         @keyframes spin { 100% { transform: rotate(360deg); } }
       `}</style>
-    </div>
+    </motion.div>
   );
 };
 
