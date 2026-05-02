@@ -1,45 +1,77 @@
 import axios from 'axios';
 
-// Backend ekibinin sunucu adresi (burayı onlara göre güncelleyebilirsin)
-const API_URL = 'http://localhost:5000/api';
+// FastAPI Backend adresi
+const API_URL = 'http://localhost:8000';
+// Mock/Ayarlar Servisi (Express) adresi
+const SETTINGS_URL = 'http://localhost:5000/api';
 
-// Frontend geliştirme sırasında backend hazır değilse mock verileri kullan
-const USE_MOCK = true; 
+// Gerçek backend bağlantısı için false yapıldı
+const USE_MOCK = false; 
 
-const mockResults = [
-  { id: 101, name: 'STM32F103C8T6', supplier: 'Mouser', supplierColor: '#1e88e5', price: 4.50, stock: '1.2K', status: 'Stok', ai: 'LCSC ($3.80, 7-12 Gün)', category: 'ARM MCU' },
-  { id: 102, name: 'STM32F103RET6', supplier: 'Digi-Key', supplierColor: '#e53935', price: 6.20, stock: 450, status: 'Az Stok', ai: 'Mouser ($6.00, Stok Teslim)', category: 'ARM MCU' },
-  { id: 103, name: 'ESP32-WROOM-32D', supplier: 'LCSC', supplierColor: '#ff6d00', price: 3.20, stock: '5K+', status: 'Stok', ai: 'LCSC ($3.20, En Uygun)', category: 'WiFi+BT MCU' },
-  { id: 104, name: 'LM317T', supplier: 'Mouser', supplierColor: '#1e88e5', price: 0.45, stock: '10K+', status: 'Stok', ai: 'AliExpress ($0.15, Yavaş Teslimat)', category: 'Regülatör' },
-  { id: 105, name: 'ATMEGA328P-PU', supplier: 'Digi-Key', supplierColor: '#e53935', price: 2.10, stock: 800, status: 'Stok', ai: 'Mouser ($2.00, Hızlı Teslimat)', category: '8-bit MCU' }
-];
-
+/**
+ * Ürün arama fonksiyonu.
+ * FastAPI tarafında /products endpoint'ini kullanarak veritabanındaki ürünleri listeler.
+ * Eğer ürün yoksa yeni bir ürün oluşturulup arama yapılabilir.
+ */
 export const searchComponents = async (query) => {
   if (USE_MOCK) {
     await new Promise(r => setTimeout(r, 800));
-    return mockResults.filter(c => c.name.toLowerCase().includes(query.toLowerCase()));
+    return [];
   }
-  const response = await axios.get(`${API_URL}/search?q=${query}`);
-  return response.data;
+  
+  try {
+    // Önce mevcut ürünleri getir
+    const response = await axios.get(`${API_URL}/products/`);
+    const results = response.data;
+    
+    // Query'e göre filtrele
+    const filtered = results.filter(c => c.name.toLowerCase().includes(query.toLowerCase()));
+    
+    // Eğer veritabanında bu isimde bir ürün yoksa ve kullanıcı bir şey arıyorsa, 
+    // otomatik olarak yeni bir ürün kaydı oluşturup onu döndürebiliriz (veya boş döneriz)
+    if (filtered.length === 0 && query.length > 2) {
+      const createRes = await axios.post(`${API_URL}/products/`, { name: query });
+      return [createRes.data];
+    }
+    
+    return filtered;
+  } catch (error) {
+    console.error("Search error:", error);
+    return [];
+  }
 };
 
+/**
+ * Ürün analizi fonksiyonu.
+ * FastAPI /products/{id}/analyze endpoint'ini kullanır.
+ */
 export const analyzeComponent = async (componentData) => {
   if (USE_MOCK) {
     await new Promise(r => setTimeout(r, 1500));
+    return {};
+  }
+
+  try {
+    const response = await axios.post(`${API_URL}/products/${componentData.id}/analyze`);
+    const data = response.data;
+
+    // Frontend'in beklediği formata dönüştür
     return {
-      recommendation: componentData.sources[0],
-      summary: "AI Analizi: Stok ve fiyat dengesi açısından en uygun seçenek Mouser.",
+      recommendation: data.best_deal,
+      summary: `AI Analizi: ${componentData.name} için önerilen satış fiyatı ${data.suggested_price} ${data.best_deal.currency}.`,
       charts: {
-        priceData: componentData.sources.map(s => ({ name: s.site, fiyat: s.price }))
+        priceData: data.results.map(r => ({ name: r.source, fiyat: r.price }))
       }
     };
+  } catch (error) {
+    console.error("Analysis error:", error);
+    throw error;
   }
-  const response = await axios.post(`${API_URL}/analyze`, { componentData });
+};
+
+// Ayarlar servisi Express mock sunucusundan devam ediyor
+export const getSettings = async () => {
+  const response = await axios.get(`${SETTINGS_URL}/settings`);
   return response.data;
 };
 
-// Admin panelini yapacak arkadaş için ayarlar servisleri
-export const getSettings = async () => {
-  const response = await axios.get(`${API_URL}/settings`);
-  return response.data;
-};
