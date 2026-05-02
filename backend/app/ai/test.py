@@ -33,9 +33,17 @@ products = [
         "currency": "TRY",
         "region": "TR",
         "source": "Trendyol"
+    },
+    {
+        "title": "ATMEGA328 DIP28 AVR",
+        "brand": "Microchip",
+        "price": 195,
+        "currency": "TRY",
+        "region": "TR",
+        "source": "Hepsiburada"
     }
 ]
 
-results = process(products)
+results = process(products, market_region="TR")
 
 print(results)
