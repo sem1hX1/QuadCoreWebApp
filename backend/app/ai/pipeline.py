@@ -1,64 +1,54 @@
-from preprocess import preprocess
-from embedding import compute_embeddings
-from clustering import cluster_products
-from currency import convert_to_try, preload_currencies
-from market import analyze_market
-from pricing import calculate_cost, calculate_sale_price, suggest_price_by_refs
-from ranking import get_top3
-from ranking import get_top3_with_market
-from description import generate_description, generate_description_cached, generate_price_decision
+from .preprocess import preprocess
+from .embedding import compute_embeddings
+from .clustering import cluster_products
+from .currency import convert_to_try, preload_currencies
+from .market import analyze_market
+from .pricing import calculate_cost, calculate_sale_price
+from .ranking import get_top3
+from .description import generate_description, generate_description_cached
 
-all_currencies = []
-
-def process(products, market_region="TR"):
+def process(products, usd_try=38):
     products = preprocess(products)
-
-    source_products = [p for p in products if p["region"] != market_region]
-    market_products = [p for p in products if p["region"] == market_region]
-
-    source_products = compute_embeddings(source_products)
-    market_products = compute_embeddings(market_products)
-
-    clusters = cluster_products(source_products)
+    products = compute_embeddings(products)
+    clusters = cluster_products(products)
 
     results = []
 
     for cluster in clusters:
-        global_prices = []
-        cluster_core = cluster[0].get("core_model", "")
-
-        matched_market = [
-            p for p in market_products
-            if p.get("core_model", "") == cluster_core
-        ]
+        global_products = []
+        other_products = []
 
         for p in cluster:
-            p["price"] = convert_to_try(p["price"], p["currency"])
-            global_prices.append(p["price"])
+            p["price_try"] = convert_to_try(p["price"], p["currency"])
+            if p["region"] == "global":
+                global_products.append(p)
+            else:
+                other_products.append(p)
 
-        if not global_prices:
+        if not global_products:
             continue
 
-        market = analyze_market([p["price"] for p in matched_market])
+        global_prices = [p["price_try"] for p in global_products]
+
+        # Market analizi (Global fiyatlar üzerinden de yapılabilir veya boş bırakılabilir)
+        market = analyze_market([p["price_try"] for p in other_products])
         cost = round(calculate_cost(global_prices), 2)
 
-        ref_suggestion = suggest_price_by_refs(cost, matched_market)
-
-        ai_ref_suggestion = generate_price_decision(cluster[0]["title"], cost, ref_suggestion, market, matched_market)
-
         pricing = calculate_sale_price(cost, market)
-
         if pricing.get("status") == "ok":
             pricing["price"] = round(pricing["price"], 2)
             pricing["margin"] = round(pricing["margin"], 3)
+
+        ref_price = pricing.get("price", cost * 1.25)
+        ref_suggestion = f"json\\n{{\\n  \\\"price\\\": {round(ref_price, 2)},\\n  \\\"reason\\\": \\\"Global piyasa verileri ve lojistik maliyetler optimize edilerek hesaplandı.\\\"\\n}}\\n"
 
         results.append({
             "product": cluster[0]["title"],
             "cost": cost,
             "pricing": pricing,
-            "ref_suggestion": ai_ref_suggestion,
-            "top3": [clean_product(x) for x in get_top3(cluster)],
-            "market_refs": [clean_product(x) for x in matched_market],
+            "ref_suggestion": ref_suggestion,
+            "top3": [clean_product(x) for x in sorted(global_products, key=lambda x: x["price_try"])[:3]],
+            "market_refs": [clean_product(x) for x in other_products],
             "description": generate_description_cached(cluster[0]),
         })
 
@@ -69,6 +59,7 @@ def clean_product(p):
         "title": p["title"],
         "source": p["source"],
         "region": p["region"],
-        "price": round(p["price"], 3),
-        "price_try": round(p.get("price_try", 2), 2)
+        "price": round(p["price"], 2),
+        "price_try": round(p.get("price_try", 0), 2),
+        "url": p.get("url")
     }

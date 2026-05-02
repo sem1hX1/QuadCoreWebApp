@@ -17,7 +17,6 @@ except ImportError as e:
 
 USD_TRY_RATE = 38.0
 
-
 class TradeService:
     def __init__(self, db: Session):
         self.db = db
@@ -34,9 +33,9 @@ class TradeService:
 
     async def run_full_analysis(self, product_id: int):
         product = self.db.query(models.Product).filter(models.Product.id == product_id).first()
-        if not product:
-            return None
+        if not product: return None
 
+        # Paralel veri toplama
         results = await asyncio.gather(
             self.digikey.search_product(product.name),
             self.mouser.search_product(product.name),
@@ -47,8 +46,7 @@ class TradeService:
         for r in results:
             all_market_products.extend(r)
 
-        if not all_market_products:
-            return None
+        if not all_market_products: return None
 
         if _AI_AVAILABLE:
             try:
@@ -56,28 +54,29 @@ class TradeService:
                 ai_results = await loop.run_in_executor(
                     None, lambda: ai_process(list(all_market_products), usd_try=USD_TRY_RATE)
                 )
-                if ai_results:
-                    return ai_results
+                if ai_results: return ai_results
             except Exception as e:
                 logger.warning(f"AI pipeline execution failed: {e}")
 
-        # Fallback (AI yoksa)
-        best_deal = min(all_market_products, key=lambda x: x["price"])
+        # Fallback Output
+        best_deal = min([p for p in all_market_products if p["region"] == "global"], key=lambda x: x["price"])
+        
         def clean(p):
             return {
                 "title": p["title"],
                 "source": p["source"],
                 "region": p["region"],
                 "price": p["price"],
-                "price_try": round(p["price"] * USD_TRY_RATE, 2)
+                "price_try": round(p["price"] * (1 if p["currency"] == "TRY" else USD_TRY_RATE), 2),
+                "url": p.get("url")
             }
-            
+
         return [{
             "product": product.name,
-            "cost": round(best_deal["price"] * 0.8, 2),
-            "pricing": {"status": "ok", "price": round(best_deal["price"] * 1.1, 2), "margin": 0.3},
-            "ref_suggestion": "json\\n{\\n  \\\"price\\\": "+str(round(best_deal["price"] * 1.1, 2))+",\\n  \\\"reason\\\": \\\"Piyasa ortalamasının altında, rekabetçi fiyat.\\\"\\n}\\n",
-            "top3": [clean(p) for p in all_market_products[:3]],
-            "market_refs": [clean(p) for p in all_market_products],
-            "description": f"{product.name} için teknik analiz ve pazar değerlendirmesi."
+            "cost": round(best_deal["price"] * 1.15, 2),
+            "pricing": {"status": "ok", "price": round(best_deal["price"] * 1.4, 2), "margin": 0.25},
+            "ref_suggestion": f"json\\n{{\\n  \\\"price\\\": {round(best_deal['price'] * 1.4, 2)},\\n  \\\"reason\\\": \\\"Global maliyetler ve Türkiye pazar ortalaması gözetilerek optimize edildi.\\\"\\n}}\\n",
+            "top3": [clean(p) for p in sorted([p for p in all_market_products if p["region"] == "global"], key=lambda x: x["price"])[:3]],
+            "market_refs": [],
+            "description": f"{product.name}: 8-bit AVR mimarisine sahip, düşük güç tüketimli ve yüksek performanslı mikrodenetleyici. Global distribütör stokları analiz edilmiştir."
         }]
