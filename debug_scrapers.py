@@ -6,7 +6,7 @@ import logging
 logging.basicConfig(level=logging.INFO)
 
 async def test_scrapers():
-    part = "STM32F103C8T6" 
+    part = "XC7Z020-1CLG400C" 
     
     print(f"\n🔍 {part} İçin Master Scraper (FindChips-Based) Taraması Başlatılıyor...")
     print("="*50)
@@ -17,11 +17,11 @@ async def test_scrapers():
         print("⚠️ HİÇBİR VERİ ÇEKİLEMEDİ!")
     else:
         for i, r in enumerate(results, 1):
-            print(f"[{i}] KAYNAK: {r['source']:<15} | ÜRÜN: {r['title']:<25} | FİYAT: ${r['price']:>5.2f}")
+            print(f"[{i}] KAYNAK: {r['source']:<15} | ÜRÜN: {r['title']:<25} | FİYAT: €{r['price']:>5.2f}")
 
         print("="*50)
         best = min(results, key=lambda x: x['price'])
-        print(f"🏆 EN İYİ TEKLİF: {best['source']} - ${best['price']} ({best['title']})")
+        print(f"🏆 EN İYİ TEKLİF: {best['source']} - €{best['price']} ({best['title']})")
     
     print("="*50)
 

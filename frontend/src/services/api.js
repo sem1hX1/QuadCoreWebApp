@@ -20,7 +20,7 @@ function transformToCards(aiAnalysisList) {
   // Tüm ürünleri (top3 + market_refs) tek bir listede birleştiriyoruz
   const allResults = [...top3, ...market_refs];
   
-  const aiHint = `AI Önerisi: $${pricing.price} (Kar Marjı: %${(pricing.margin * 100).toFixed(1)})`;
+  const aiHint = `AI Önerisi: €${pricing.price} (Kar Marjı: %${(pricing.margin * 100).toFixed(1)})`;
 
   return allResults.map((item, index) => ({
     id: index + 1,

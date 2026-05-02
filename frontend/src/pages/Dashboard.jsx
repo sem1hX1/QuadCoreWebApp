@@ -6,12 +6,12 @@ import { searchComponents, analyzeComponent } from '../services/api';
 import { useLocation, useNavigate } from 'react-router-dom';
 
 const mockComponents = [
-  { id: 1, name: 'ESP32-WROOM-32D', supplier: 'Digi-Key', supplierColor: '#e53935', price: 3.85, stock: 38, status: 'Stok', ai: 'Mouser ($1.75, Stok Teslim)', category: 'WiFi+BT MCU' },
-  { id: 2, name: 'ESP32-WROOM-32U', supplier: 'Mouser', supplierColor: '#1e88e5', price: 4.15, stock: '8Bin+', status: 'Özellikler', ai: 'Digi-Key ($1.40, 15Bin+ Stok)', category: 'WiFi+BT MCU' },
-  { id: 3, name: 'ESP32-WROOM-32', supplier: 'Digi-Key', supplierColor: '#e53935', price: 3.85, stock: 28, status: 'Özellikler', ai: 'Mouser ($1.75, Stok Teslim)', category: 'WiFi+BT MCU' },
-  { id: 4, name: 'ESP-WROOM-02', supplier: 'LCSC', supplierColor: '#ff6d00', price: 2.15, stock: '8Bin+', status: 'Özellikler', ai: 'Digi-Key ($1.50, Stock Shipping)', category: 'WiFi MCU' },
-  { id: 5, name: 'ESP32-S3-WROOM-1', supplier: 'Digi-Key', supplierColor: '#e53935', price: 4.25, stock: '2K', status: 'Özellikler', ai: 'LCSC ($1.90, Stock Shipping)', category: 'WiFi+BT MCU' },
-  { id: 6, name: 'ESP32-C3-WROOM-02', supplier: 'Mouser', supplierColor: '#1e88e5', price: 1.75, stock: 24, status: 'Özellikler', ai: 'LCSC ($1.20, Stock Shipping)', category: 'RISC-V MCU' },
+  { id: 1, name: 'ESP32-WROOM-32D', supplier: 'Digi-Key', supplierColor: '#e53935', price: 3.85, stock: 38, status: 'Stok', ai: 'Mouser (€1.75, Stok Teslim)', category: 'WiFi+BT MCU' },
+  { id: 2, name: 'ESP32-WROOM-32U', supplier: 'Mouser', supplierColor: '#1e88e5', price: 4.15, stock: '8Bin+', status: 'Özellikler', ai: 'Digi-Key (€1.40, 15Bin+ Stok)', category: 'WiFi+BT MCU' },
+  { id: 3, name: 'ESP32-WROOM-32', supplier: 'Digi-Key', supplierColor: '#e53935', price: 3.85, stock: 28, status: 'Özellikler', ai: 'Mouser (€1.75, Stok Teslim)', category: 'WiFi+BT MCU' },
+  { id: 4, name: 'ESP-WROOM-02', supplier: 'LCSC', supplierColor: '#ff6d00', price: 2.15, stock: '8Bin+', status: 'Özellikler', ai: 'Digi-Key (€1.50, Stock Shipping)', category: 'WiFi MCU' },
+  { id: 5, name: 'ESP32-S3-WROOM-1', supplier: 'Digi-Key', supplierColor: '#e53935', price: 4.25, stock: '2K', status: 'Özellikler', ai: 'LCSC (€1.90, Stock Shipping)', category: 'WiFi+BT MCU' },
+  { id: 6, name: 'ESP32-C3-WROOM-02', supplier: 'Mouser', supplierColor: '#1e88e5', price: 1.75, stock: 24, status: 'Özellikler', ai: 'LCSC (€1.20, Stock Shipping)', category: 'RISC-V MCU' },
 ];
 
 const trendData = [
@@ -20,10 +20,10 @@ const trendData = [
 ];
 
 const priceComparison = [
-  { supplier: 'Digi-Key', price: '$3.85', bold: true },
-  { supplier: 'Mouser', price: '$4.15' },
-  { supplier: 'LCSC', price: '$3.95' },
-  { supplier: 'Farnell', price: '$4.10' },
+  { supplier: 'Digi-Key', price: '€3.85', bold: true },
+  { supplier: 'Mouser', price: '€4.15' },
+  { supplier: 'LCSC', price: '€3.95' },
+  { supplier: 'Farnell', price: '€4.10' },
 ];
 
 const SupplierBadge = ({ name, color }) => (
@@ -43,7 +43,7 @@ const ComponentCard = ({ comp, index, isSelected, onClick }) => (
     onClick={onClick}
     style={{
       background: isSelected ? 'var(--bg-sidebar)' : 'var(--bg-card)',
-      border: `1px solid ${isSelected ? 'var(--accent)' : 'var(--border)'}`,
+      border: `1px solid �{isSelected ? 'var(--accent)' : 'var(--border)'}`,
       boxShadow: isSelected ? '0 0 0 1px var(--accent), 0 4px 6px -1px rgba(0, 0, 0, 0.05)' : '0 1px 3px rgba(0,0,0,0.05)',
       borderRadius: '10px',
       padding: '14px',
@@ -74,7 +74,7 @@ const ComponentCard = ({ comp, index, isSelected, onClick }) => (
         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '8px' }}>
           <SupplierBadge name={comp.supplier} color={comp.supplierColor} />
           <div style={{ textAlign: 'right' }}>
-            <div style={{ fontSize: '0.95rem', fontWeight: '700', color: 'var(--text-main)' }}>${comp.price.toFixed(2)}</div>
+            <div style={{ fontSize: '0.95rem', fontWeight: '700', color: 'var(--text-main)' }}>€{comp.price.toFixed(2)}</div>
             <div style={{ fontSize: '0.72rem', color: 'var(--text-muted)' }}>{comp.stock} Stok</div>
           </div>
         </div>
@@ -351,7 +351,7 @@ const Dashboard = () => {
     if (!q.trim()) return;
     
     // Update the URL which will trigger the useEffect
-    navigate(`/?q=${encodeURIComponent(q)}`);
+    navigate(`/?q=�{encodeURIComponent(q)}`);
   };
 
   const performSearch = async (q) => {
@@ -459,3 +459,4 @@ const Dashboard = () => {
 };
 
 export default Dashboard;
+
