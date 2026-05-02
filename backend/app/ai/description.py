@@ -24,7 +24,7 @@ def generate_description(product):
 
         prompt = f"{product['title']} için kısa, teknik ve Türkçe bir açıklama yaz."
         response = client.models.generate_content(
-            model="gemini-2.5-flash",
+            model="gemini-3.1-flash-lite-preview",
             contents=prompt,
         )
         return response.text
@@ -65,7 +65,7 @@ Kurallar:
 """
 
         response = client.models.generate_content(
-            model="gemini-2.5-flash",
+            model="gemini-3.1-flash-lite-preview",
             contents=prompt,
         )
         return response.text

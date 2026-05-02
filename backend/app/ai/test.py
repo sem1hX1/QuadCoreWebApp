@@ -19,6 +19,14 @@ products = [
         "source": "Digikey"
     },
     {
+        "title": "ESP32-Wroom-32e",
+        "brand": "Espressive Systems",
+        "price": 1.4,
+        "currency": "USD",
+        "region": "global",
+        "source": "Digikey"
+    },
+    {
         "title": "ATmega328",
         "brand": "Microchip",
         "price": 1.6,

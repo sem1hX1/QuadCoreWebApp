@@ -1,4 +1,4 @@
-from .embedding import similarity
+from embedding import similarity
 
 def is_same_product(p1, p2):
 
