@@ -4,27 +4,31 @@ from .clustering import cluster_products
 from .market import analyze_market
 from .pricing import calculate_cost, calculate_sale_price
 from .ranking import get_top3
-from .description import generate_description, generate_description_cached
+from .description import generate_description_cached
 
 def process(products, usd_try=1.0):
     """
-    AI Pipeline: Fiyatları Euro bazında direkt kabul eder, 
-    hiçbir kur çevrimi (oynama) yapmaz.
+    AI Pipeline: Siteden gelen ham fiyatları olduğu gibi işler.
+    Global ürünler kendi para birimiyle, TR ürünleri TRY ile ayrı değerlendirilir.
     """
     products = preprocess(products)
     products = compute_embeddings(products)
     clusters = cluster_products(products)
 
     results = []
-    
-    for cluster in clusters:
-        global_products = cluster
-        if not global_products: continue
 
-        # Tüm fiyatlar direkt Euro olarak kabul ediliyor
-        prices = [p["price"] for p in global_products]
-        
-        # Maliyet ve pazar analizi
+    for cluster in clusters:
+        # TR ve global ürünleri ayır — fiyatlar farklı para biriminde
+        global_products = [p for p in cluster if p.get("region") != "TR"]
+        tr_products = [p for p in cluster if p.get("region") == "TR"]
+
+        # Fiyat analizi için aynı para birimindeki ürünleri kullan
+        analysis_products = global_products if global_products else cluster
+        if not analysis_products:
+            continue
+
+        prices = [p["price"] for p in analysis_products]
+
         cost = round(calculate_cost(prices), 2)
         market = analyze_market(prices)
 
@@ -32,18 +36,17 @@ def process(products, usd_try=1.0):
         if pricing.get("status") == "ok":
             pricing["price"] = round(pricing["price"], 2)
             pricing["margin"] = round(pricing["margin"], 3)
-        
-        # Euro bazlı öneri
+
         ref_price = pricing.get("price", cost * 1.25)
-        ref_suggestion = f"json\\n{{\\n  \\\"price\\\": {round(ref_price, 2)},\\n  \\\"reason\\\": \\\"Avrupa distribütörlerinden çekilen saf Euro fiyatları baz alınmıştır.\\\"\\n}}\\n"
+        ref_suggestion = f"json\\n{{\\n  \\\"price\\\": {round(ref_price, 2)},\\n  \\\"reason\\\": \\\"Distribütörlerden çekilen saf fiyatlar baz alınmıştır.\\\"\\n}}\\n"
 
         results.append({
             "product": cluster[0]["title"],
             "cost": cost,
             "pricing": pricing,
             "ref_suggestion": ref_suggestion,
-            "top3": [clean_product(x) for x in sorted(global_products, key=lambda x: x["price"])[:6]],
-            "market_refs": [],
+            "top3": [clean_product(x) for x in sorted(analysis_products, key=lambda x: x["price"])[:6]],
+            "market_refs": [clean_product(x) for x in tr_products],
             "description": generate_description_cached(cluster[0]),
         })
 
@@ -55,6 +58,6 @@ def clean_product(p):
         "source": p["source"],
         "region": p["region"],
         "price": round(p["price"], 2),
-        "price_try": round(p["price"], 2), # Şemayı bozmamak için Euro değerini buraya da yazıyoruz
+        "price_try": round(p["price"], 2),  # ham değeri olduğu gibi taşıyoruz
         "url": p.get("url")
     }

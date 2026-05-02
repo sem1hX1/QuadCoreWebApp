@@ -31,7 +31,7 @@ def generate_description(product):
 
     except Exception as e:
         print("Gemini error:", e)
-        return f"{product['brand']} üretimi {product['title']} elektronik projelerde kullanılabilir."
+        return f"{product.get('brand', '')} {product.get('title', '')} elektronik projelerde kullanılabilir.".strip()
     
 
 def generate_price_decision(product_title, cost, ref_suggestion, market, market_refs):

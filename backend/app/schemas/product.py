@@ -28,8 +28,8 @@ class ProductSchema(ProductBase):
 
 class PricingInfo(BaseModel):
     status: str
-    price: float
-    margin: float
+    price: Optional[float] = None
+    margin: Optional[float] = None
 
 class AIProductInfo(BaseModel):
     title: str
