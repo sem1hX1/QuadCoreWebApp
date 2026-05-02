@@ -1,11 +1,32 @@
 import asyncio
+import json
 import logging
 from sqlalchemy.orm import Session
 from ..db import models
+from ..ai.description import generate_price_decision
 from ..schemas import product as schemas
 from ..scraper.clients import master_scraper
 
 logger = logging.getLogger(__name__)
+
+
+def _normalize_ref_suggestion(raw_value, fallback_price, fallback_reason):
+    if raw_value:
+        try:
+            text = raw_value.strip()
+            if text.startswith("```json"):
+                text = text.split("```json", 1)[1].split("```", 1)[0].strip()
+            elif text.startswith("```"):
+                text = text.split("```", 1)[1].split("```", 1)[0].strip()
+            parsed = json.loads(text)
+            return json.dumps(parsed, ensure_ascii=False)
+        except Exception:
+            pass
+
+    return json.dumps({
+        "price": round(fallback_price, 2),
+        "reason": fallback_reason,
+    }, ensure_ascii=False)
 
 try:
     from ..ai.pipeline import process as ai_process
@@ -52,6 +73,7 @@ class TradeService:
 
         analysis_prods = global_prods or all_market_products
         best_deal = min(analysis_prods, key=lambda x: x["price"])
+        ref_price = round(best_deal["price"] * 1.3, 2)
 
         def clean(p):
             return {
@@ -63,11 +85,32 @@ class TradeService:
                 "url": p.get("url")
             }
 
+        ref_suggestion1 = None
+        if _AI_AVAILABLE:
+            try:
+                loop = asyncio.get_running_loop()
+                ref_suggestion1 = await loop.run_in_executor(
+                    None,
+                    lambda: generate_price_decision(
+                        product.name,
+                        round(best_deal["price"] * 1.10, 2),
+                        {"candidates": [clean(p) for p in sorted(analysis_prods, key=lambda x: x["price"])[:6]]},
+                        {"min": min(p["price"] for p in analysis_prods), "avg": sum(p["price"] for p in analysis_prods) / len(analysis_prods), "max": max(p["price"] for p in analysis_prods)},
+                        tr_prods,
+                    )
+                )
+            except Exception as e:
+                logger.warning(f"AI price suggestion failed: {e}")
+
         return [{
             "product": product.name,
             "cost": round(best_deal["price"] * 1.10, 2),
-            "pricing": {"status": "ok", "price": round(best_deal["price"] * 1.3, 2), "margin": 0.2},
-            "ref_suggestion": f"json\\n{{\\n  \\\"price\\\": {round(best_deal['price'] * 1.3, 2)},\\n  \\\"reason\\\": \\\"Global fiyatları ve yerel pazar verileri analiz edilmiştir.\\\"\\n}}\\n",
+            "pricing": {"status": "ok", "price": ref_price, "margin": 0.2},
+            "ref_suggestion": _normalize_ref_suggestion(
+                ref_suggestion1,
+                ref_price,
+                "Global fiyatları ve yerel pazar verileri analiz edilmiştir."
+            ),
             "top3": [clean(p) for p in sorted(analysis_prods, key=lambda x: x["price"])[:6]],
             "market_refs": [clean(p) for p in tr_prods],
             "description": f"{product.name}: 5'ten fazla yerel ve global distribütör üzerinden analiz edilmiştir."

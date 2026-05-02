@@ -93,9 +93,28 @@ const ComponentCard = ({ comp, index, isSelected, onClick }) => (
           padding: '5px 8px',
           fontSize: '0.72rem',
           color: 'var(--accent)',
-          lineHeight: '1.3',
+          lineHeight: '1.4',
         }}>
-          ✦ Yapay Zeka En İyi Eşleşme: {comp.ai}
+          {comp.description && (
+            <div>
+              ├─ Açıklama: {comp.description.replace(/\n/g, ' ').trim().substring(0, 120)}
+            </div>
+          )}
+          {comp.ref_suggestion && (
+            <div style={{ marginTop: '4px' }}>
+              ├─ Öneri Fiyat (AI): {(() => {
+                try {
+                  const parsed = JSON.parse(comp.ref_suggestion);
+                  return `€${parsed.price} - ${parsed.reason}`;
+                } catch (e) {
+                  return comp.ref_suggestion.substring(0, 100);
+                }
+              })()}
+            </div>
+          )}
+          {!comp.description && !comp.ref_suggestion && (
+            <div>✦ Yapay Zeka En İyi Eşleşme: {comp.ai}</div>
+          )}
         </div>
       </div>
     </div>
@@ -110,10 +129,7 @@ const DetailPanel = ({ comp, allResults }) => {
   let parsedSuggestion = { price: 0, reason: '' };
   try {
     if (comp.ref_suggestion) {
-      const jsonStr = comp.ref_suggestion.includes('```json') 
-        ? comp.ref_suggestion.split('```json')[1].split('```')[0]
-        : comp.ref_suggestion.replace('json\n', '');
-      parsedSuggestion = JSON.parse(jsonStr);
+      parsedSuggestion = JSON.parse(comp.ref_suggestion);
     }
   } catch (e) {
     console.error("AI Parse Error", e);

@@ -1,10 +1,11 @@
+import json
 from .preprocess import preprocess
 from .embedding import compute_embeddings
 from .clustering import cluster_products
 from .market import analyze_market
 from .pricing import calculate_cost, calculate_sale_price
 from .ranking import get_top3
-from .description import generate_description_cached
+from .description import generate_description_cached, generate_price_decision
 from .currency import convert_to_try
 
 def _resolve_price_try(price, currency, usd_try=1.0):
@@ -23,6 +24,25 @@ def _resolve_price_try(price, currency, usd_try=1.0):
         if currency == "try":
             return round(price, 2)
         return round(price, 2)
+
+
+def _normalize_ref_suggestion(raw_value, fallback_price, fallback_reason):
+    if raw_value:
+        try:
+            text = raw_value.strip()
+            if text.startswith("```json"):
+                text = text.split("```json", 1)[1].split("```", 1)[0].strip()
+            elif text.startswith("```"):
+                text = text.split("```", 1)[1].split("```", 1)[0].strip()
+            parsed = json.loads(text)
+            return json.dumps(parsed, ensure_ascii=False)
+        except Exception:
+            pass
+
+    return json.dumps({
+        "price": round(fallback_price, 2),
+        "reason": fallback_reason,
+    }, ensure_ascii=False)
 
 
 def process(products, usd_try=1.0):
@@ -59,8 +79,19 @@ def process(products, usd_try=1.0):
             pricing["margin"] = round(pricing["margin"], 3)
 
         ref_price = pricing.get("price", cost * 1.25)
-        ref_suggestion = f"json\\n{{\\n  \\\"price\\\": {round(ref_price, 2)},\\n  \\\"reason\\\": \\\"Distribütörlerden çekilen saf fiyatlar baz alınmıştır.\\\"\\n}}\\n"
-
+        ref_suggestion1 = generate_price_decision(
+            cluster[0]["title"],
+            cost,
+            {"candidates": [clean_product(x) for x in analysis_products[:6]]},
+            market,
+            tr_products,
+        )
+        ref_suggestion = _normalize_ref_suggestion(
+            ref_suggestion1,
+            ref_price,
+            "Distribütörlerden çekilen saf fiyatlar baz alınmıştır.",
+        )
+        
         results.append({
             "product": cluster[0]["title"],
             "cost": cost,
