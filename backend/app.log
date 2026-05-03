@@ -3603,3 +3603,681 @@
 2026-05-03 09:06:23,108 [WARNING] app.ai.description: Model gemini-2.5-flash quota exhausted, cooling down for 1800s
 2026-05-03 09:06:23,109 [INFO] root: AFC is enabled with max remote calls: 10.
 2026-05-03 09:06:23,726 [WARNING] app.ai.description: gemini-2.5-flash-lite rate-limited, brief retry...
+2026-05-03 09:06:25,726 [INFO] root: AFC is enabled with max remote calls: 10.
+2026-05-03 09:06:26,449 [WARNING] app.ai.description: Model gemini-2.5-flash-lite quota exhausted, cooling down for 1800s
+2026-05-03 09:06:26,450 [WARNING] app.ai.description: Gemini price decision failed: 429 RESOURCE_EXHAUSTED. {'error': {'code': 429, 'message': 'You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://ai.google.dev/gemini-api/docs/rate-limits. To monitor your current usage, head to: https://ai.dev/rate-limit. \n* Quota exceeded for metric: generativelanguage.googleapis.com/generate_content_free_tier_requests, limit: 20, model: gemini-2.5-flash-lite\nPlease retry in 33.52881527s.', 'status': 'RESOURCE_EXHAUSTED', 'details': [{'@type': 'type.googleapis.com/google.rpc.Help', 'links': [{'description': 'Learn more about Gemini API quotas', 'url': 'https://ai.google.dev/gemini-api/docs/rate-limits'}]}, {'@type': 'type.googleapis.com/google.rpc.QuotaFailure', 'violations': [{'quotaMetric': 'generativelanguage.googleapis.com/generate_content_free_tier_requests', 'quotaId': 'GenerateRequestsPerDayPerProjectPerModel-FreeTier', 'quotaDimensions': {'location': 'global', 'model': 'gemini-2.5-flash-lite'}, 'quotaValue': '20'}]}, {'@type': 'type.googleapis.com/google.rpc.RetryInfo', 'retryDelay': '33s'}]}}
+2026-05-03 09:06:26,450 [INFO] root: AFC is enabled with max remote calls: 10.
+2026-05-03 09:06:27,362 [WARNING] app.ai.description: gemini-2.5-flash rate-limited, brief retry...
+2026-05-03 09:06:29,363 [INFO] root: AFC is enabled with max remote calls: 10.
+2026-05-03 09:06:30,244 [WARNING] app.ai.description: Model gemini-2.5-flash quota exhausted, cooling down for 1800s
+2026-05-03 09:06:30,245 [INFO] root: AFC is enabled with max remote calls: 10.
+2026-05-03 09:06:30,992 [WARNING] app.ai.description: gemini-2.5-flash-lite rate-limited, brief retry...
+2026-05-03 09:06:32,992 [INFO] root: AFC is enabled with max remote calls: 10.
+2026-05-03 09:06:33,627 [WARNING] app.ai.description: Model gemini-2.5-flash-lite quota exhausted, cooling down for 1800s
+2026-05-03 09:06:33,627 [WARNING] app.ai.description: Gemini description failed, using smart fallback: 429 RESOURCE_EXHAUSTED. {'error': {'code': 429, 'message': 'You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://ai.google.dev/gemini-api/docs/rate-limits. To monitor your current usage, head to: https://ai.dev/rate-limit. \n* Quota exceeded for metric: generativelanguage.googleapis.com/generate_content_free_tier_requests, limit: 20, model: gemini-2.5-flash-lite\nPlease retry in 26.352425372s.', 'status': 'RESOURCE_EXHAUSTED', 'details': [{'@type': 'type.googleapis.com/google.rpc.Help', 'links': [{'description': 'Learn more about Gemini API quotas', 'url': 'https://ai.google.dev/gemini-api/docs/rate-limits'}]}, {'@type': 'type.googleapis.com/google.rpc.QuotaFailure', 'violations': [{'quotaMetric': 'generativelanguage.googleapis.com/generate_content_free_tier_requests', 'quotaId': 'GenerateRequestsPerDayPerProjectPerModel-FreeTier', 'quotaDimensions': {'location': 'global', 'model': 'gemini-2.5-flash-lite'}, 'quotaValue': '20'}]}, {'@type': 'type.googleapis.com/google.rpc.RetryInfo', 'retryDelay': '26s'}]}}
+2026-05-03 09:06:33,628 [INFO] root: AFC is enabled with max remote calls: 10.
+2026-05-03 09:06:34,403 [WARNING] app.ai.description: gemini-2.5-flash rate-limited, brief retry...
+2026-05-03 09:06:36,404 [INFO] root: AFC is enabled with max remote calls: 10.
+2026-05-03 09:06:37,178 [WARNING] app.ai.description: Model gemini-2.5-flash quota exhausted, cooling down for 1800s
+2026-05-03 09:06:37,178 [INFO] root: AFC is enabled with max remote calls: 10.
+2026-05-03 09:06:37,964 [WARNING] app.ai.description: gemini-2.5-flash-lite rate-limited, brief retry...
+2026-05-03 09:06:39,964 [INFO] root: AFC is enabled with max remote calls: 10.
+2026-05-03 09:06:40,744 [WARNING] app.ai.description: Model gemini-2.5-flash-lite quota exhausted, cooling down for 1800s
+2026-05-03 09:06:40,744 [WARNING] app.ai.description: Gemini price decision failed: 429 RESOURCE_EXHAUSTED. {'error': {'code': 429, 'message': 'You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://ai.google.dev/gemini-api/docs/rate-limits. To monitor your current usage, head to: https://ai.dev/rate-limit. \n* Quota exceeded for metric: generativelanguage.googleapis.com/generate_content_free_tier_requests, limit: 20, model: gemini-2.5-flash-lite\nPlease retry in 19.249354927s.', 'status': 'RESOURCE_EXHAUSTED', 'details': [{'@type': 'type.googleapis.com/google.rpc.Help', 'links': [{'description': 'Learn more about Gemini API quotas', 'url': 'https://ai.google.dev/gemini-api/docs/rate-limits'}]}, {'@type': 'type.googleapis.com/google.rpc.QuotaFailure', 'violations': [{'quotaMetric': 'generativelanguage.googleapis.com/generate_content_free_tier_requests', 'quotaId': 'GenerateRequestsPerDayPerProjectPerModel-FreeTier', 'quotaDimensions': {'location': 'global', 'model': 'gemini-2.5-flash-lite'}, 'quotaValue': '20'}]}, {'@type': 'type.googleapis.com/google.rpc.RetryInfo', 'retryDelay': '19s'}]}}
+2026-05-03 09:06:40,744 [INFO] root: AFC is enabled with max remote calls: 10.
+2026-05-03 09:06:41,400 [WARNING] app.ai.description: gemini-2.5-flash rate-limited, brief retry...
+2026-05-03 09:06:43,401 [INFO] root: AFC is enabled with max remote calls: 10.
+2026-05-03 09:06:44,048 [WARNING] app.ai.description: Model gemini-2.5-flash quota exhausted, cooling down for 1800s
+2026-05-03 09:06:44,048 [INFO] root: AFC is enabled with max remote calls: 10.
+2026-05-03 09:06:44,675 [WARNING] app.ai.description: gemini-2.5-flash-lite rate-limited, brief retry...
+2026-05-03 09:06:46,675 [INFO] root: AFC is enabled with max remote calls: 10.
+2026-05-03 09:06:47,463 [WARNING] app.ai.description: Model gemini-2.5-flash-lite quota exhausted, cooling down for 1800s
+2026-05-03 09:06:47,463 [WARNING] app.ai.description: Gemini description failed, using smart fallback: 429 RESOURCE_EXHAUSTED. {'error': {'code': 429, 'message': 'You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://ai.google.dev/gemini-api/docs/rate-limits. To monitor your current usage, head to: https://ai.dev/rate-limit. \n* Quota exceeded for metric: generativelanguage.googleapis.com/generate_content_free_tier_requests, limit: 20, model: gemini-2.5-flash-lite\nPlease retry in 12.518743878s.', 'status': 'RESOURCE_EXHAUSTED', 'details': [{'@type': 'type.googleapis.com/google.rpc.Help', 'links': [{'description': 'Learn more about Gemini API quotas', 'url': 'https://ai.google.dev/gemini-api/docs/rate-limits'}]}, {'@type': 'type.googleapis.com/google.rpc.QuotaFailure', 'violations': [{'quotaMetric': 'generativelanguage.googleapis.com/generate_content_free_tier_requests', 'quotaId': 'GenerateRequestsPerDayPerProjectPerModel-FreeTier', 'quotaDimensions': {'location': 'global', 'model': 'gemini-2.5-flash-lite'}, 'quotaValue': '20'}]}, {'@type': 'type.googleapis.com/google.rpc.RetryInfo', 'retryDelay': '12s'}]}}
+2026-05-03 09:06:47,463 [INFO] root: AFC is enabled with max remote calls: 10.
+2026-05-03 09:06:48,091 [WARNING] app.ai.description: gemini-2.5-flash rate-limited, brief retry...
+2026-05-03 09:06:50,092 [INFO] root: AFC is enabled with max remote calls: 10.
+2026-05-03 09:06:50,887 [WARNING] app.ai.description: Model gemini-2.5-flash quota exhausted, cooling down for 1800s
+2026-05-03 09:06:50,888 [INFO] root: AFC is enabled with max remote calls: 10.
+2026-05-03 09:06:51,606 [WARNING] app.ai.description: gemini-2.5-flash-lite rate-limited, brief retry...
+2026-05-03 09:06:53,607 [INFO] root: AFC is enabled with max remote calls: 10.
+2026-05-03 09:06:54,606 [WARNING] app.ai.description: Model gemini-2.5-flash-lite quota exhausted, cooling down for 1800s
+2026-05-03 09:06:54,606 [WARNING] app.ai.description: Gemini price decision failed: 429 RESOURCE_EXHAUSTED. {'error': {'code': 429, 'message': 'You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://ai.google.dev/gemini-api/docs/rate-limits. To monitor your current usage, head to: https://ai.dev/rate-limit. \n* Quota exceeded for metric: generativelanguage.googleapis.com/generate_content_free_tier_requests, limit: 20, model: gemini-2.5-flash-lite\nPlease retry in 5.408780467s.', 'status': 'RESOURCE_EXHAUSTED', 'details': [{'@type': 'type.googleapis.com/google.rpc.Help', 'links': [{'description': 'Learn more about Gemini API quotas', 'url': 'https://ai.google.dev/gemini-api/docs/rate-limits'}]}, {'@type': 'type.googleapis.com/google.rpc.QuotaFailure', 'violations': [{'quotaMetric': 'generativelanguage.googleapis.com/generate_content_free_tier_requests', 'quotaId': 'GenerateRequestsPerDayPerProjectPerModel-FreeTier', 'quotaDimensions': {'location': 'global', 'model': 'gemini-2.5-flash-lite'}, 'quotaValue': '20'}]}, {'@type': 'type.googleapis.com/google.rpc.RetryInfo', 'retryDelay': '5s'}]}}
+2026-05-03 09:06:54,606 [INFO] root: AFC is enabled with max remote calls: 10.
+2026-05-03 09:06:55,363 [WARNING] app.ai.description: gemini-2.5-flash rate-limited, brief retry...
+2026-05-03 09:06:57,364 [INFO] root: AFC is enabled with max remote calls: 10.
+2026-05-03 09:06:58,294 [WARNING] app.ai.description: Model gemini-2.5-flash quota exhausted, cooling down for 1800s
+2026-05-03 09:06:58,294 [INFO] root: AFC is enabled with max remote calls: 10.
+2026-05-03 09:06:59,165 [WARNING] app.ai.description: gemini-2.5-flash-lite rate-limited, brief retry...
+2026-05-03 09:07:01,166 [INFO] root: AFC is enabled with max remote calls: 10.
+2026-05-03 09:07:02,058 [WARNING] app.ai.description: Model gemini-2.5-flash-lite quota exhausted, cooling down for 1800s
+2026-05-03 09:07:02,058 [WARNING] app.ai.description: Gemini description failed, using smart fallback: 429 RESOURCE_EXHAUSTED. {'error': {'code': 429, 'message': 'You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://ai.google.dev/gemini-api/docs/rate-limits. To monitor your current usage, head to: https://ai.dev/rate-limit. \n* Quota exceeded for metric: generativelanguage.googleapis.com/generate_content_free_tier_requests, limit: 20, model: gemini-2.5-flash-lite\nPlease retry in 57.918217334s.', 'status': 'RESOURCE_EXHAUSTED', 'details': [{'@type': 'type.googleapis.com/google.rpc.Help', 'links': [{'description': 'Learn more about Gemini API quotas', 'url': 'https://ai.google.dev/gemini-api/docs/rate-limits'}]}, {'@type': 'type.googleapis.com/google.rpc.QuotaFailure', 'violations': [{'quotaMetric': 'generativelanguage.googleapis.com/generate_content_free_tier_requests', 'quotaId': 'GenerateRequestsPerDayPerProjectPerModel-FreeTier', 'quotaDimensions': {'location': 'global', 'model': 'gemini-2.5-flash-lite'}, 'quotaValue': '20'}]}, {'@type': 'type.googleapis.com/google.rpc.RetryInfo', 'retryDelay': '57s'}]}}
+2026-05-03 09:07:02,059 [INFO] root: AFC is enabled with max remote calls: 10.
+2026-05-03 09:07:03,008 [WARNING] app.ai.description: gemini-2.5-flash rate-limited, brief retry...
+2026-05-03 09:07:05,009 [INFO] root: AFC is enabled with max remote calls: 10.
+2026-05-03 09:07:06,002 [WARNING] app.ai.description: Model gemini-2.5-flash quota exhausted, cooling down for 1800s
+2026-05-03 09:07:06,002 [INFO] root: AFC is enabled with max remote calls: 10.
+2026-05-03 09:07:06,941 [WARNING] app.ai.description: gemini-2.5-flash-lite rate-limited, brief retry...
+2026-05-03 09:07:08,942 [INFO] root: AFC is enabled with max remote calls: 10.
+2026-05-03 09:07:10,090 [WARNING] app.ai.description: Model gemini-2.5-flash-lite quota exhausted, cooling down for 1800s
+2026-05-03 09:07:10,090 [WARNING] app.ai.description: Gemini price decision failed: 429 RESOURCE_EXHAUSTED. {'error': {'code': 429, 'message': 'You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://ai.google.dev/gemini-api/docs/rate-limits. To monitor your current usage, head to: https://ai.dev/rate-limit. \n* Quota exceeded for metric: generativelanguage.googleapis.com/generate_content_free_tier_requests, limit: 20, model: gemini-2.5-flash-lite\nPlease retry in 49.887778255s.', 'status': 'RESOURCE_EXHAUSTED', 'details': [{'@type': 'type.googleapis.com/google.rpc.Help', 'links': [{'description': 'Learn more about Gemini API quotas', 'url': 'https://ai.google.dev/gemini-api/docs/rate-limits'}]}, {'@type': 'type.googleapis.com/google.rpc.QuotaFailure', 'violations': [{'quotaMetric': 'generativelanguage.googleapis.com/generate_content_free_tier_requests', 'quotaId': 'GenerateRequestsPerDayPerProjectPerModel-FreeTier', 'quotaDimensions': {'location': 'global', 'model': 'gemini-2.5-flash-lite'}, 'quotaValue': '20'}]}, {'@type': 'type.googleapis.com/google.rpc.RetryInfo', 'retryDelay': '49s'}]}}
+2026-05-03 09:07:10,090 [INFO] root: AFC is enabled with max remote calls: 10.
+2026-05-03 09:07:10,932 [WARNING] app.ai.description: gemini-2.5-flash rate-limited, brief retry...
+2026-05-03 09:07:12,933 [INFO] root: AFC is enabled with max remote calls: 10.
+2026-05-03 09:07:13,799 [WARNING] app.ai.description: Model gemini-2.5-flash quota exhausted, cooling down for 1800s
+2026-05-03 09:07:13,799 [INFO] root: AFC is enabled with max remote calls: 10.
+2026-05-03 09:07:14,647 [WARNING] app.ai.description: gemini-2.5-flash-lite rate-limited, brief retry...
+2026-05-03 09:07:16,647 [INFO] root: AFC is enabled with max remote calls: 10.
+2026-05-03 09:07:17,454 [WARNING] app.ai.description: Model gemini-2.5-flash-lite quota exhausted, cooling down for 1800s
+2026-05-03 09:07:17,455 [WARNING] app.ai.description: Gemini description failed, using smart fallback: 429 RESOURCE_EXHAUSTED. {'error': {'code': 429, 'message': 'You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://ai.google.dev/gemini-api/docs/rate-limits. To monitor your current usage, head to: https://ai.dev/rate-limit. \n* Quota exceeded for metric: generativelanguage.googleapis.com/generate_content_free_tier_requests, limit: 20, model: gemini-2.5-flash-lite\nPlease retry in 42.525511875s.', 'status': 'RESOURCE_EXHAUSTED', 'details': [{'@type': 'type.googleapis.com/google.rpc.Help', 'links': [{'description': 'Learn more about Gemini API quotas', 'url': 'https://ai.google.dev/gemini-api/docs/rate-limits'}]}, {'@type': 'type.googleapis.com/google.rpc.QuotaFailure', 'violations': [{'quotaMetric': 'generativelanguage.googleapis.com/generate_content_free_tier_requests', 'quotaId': 'GenerateRequestsPerDayPerProjectPerModel-FreeTier', 'quotaDimensions': {'model': 'gemini-2.5-flash-lite', 'location': 'global'}, 'quotaValue': '20'}]}, {'@type': 'type.googleapis.com/google.rpc.RetryInfo', 'retryDelay': '42s'}]}}
+2026-05-03 09:07:17,455 [INFO] root: AFC is enabled with max remote calls: 10.
+2026-05-03 09:07:18,254 [WARNING] app.ai.description: gemini-2.5-flash rate-limited, brief retry...
+2026-05-03 09:07:20,255 [INFO] root: AFC is enabled with max remote calls: 10.
+2026-05-03 09:07:21,045 [WARNING] app.ai.description: Model gemini-2.5-flash quota exhausted, cooling down for 1800s
+2026-05-03 09:07:21,045 [INFO] root: AFC is enabled with max remote calls: 10.
+2026-05-03 09:07:21,828 [WARNING] app.ai.description: gemini-2.5-flash-lite rate-limited, brief retry...
+2026-05-03 09:07:23,829 [INFO] root: AFC is enabled with max remote calls: 10.
+2026-05-03 09:07:24,646 [WARNING] app.ai.description: Model gemini-2.5-flash-lite quota exhausted, cooling down for 1800s
+2026-05-03 09:07:24,646 [WARNING] app.ai.description: Gemini price decision failed: 429 RESOURCE_EXHAUSTED. {'error': {'code': 429, 'message': 'You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://ai.google.dev/gemini-api/docs/rate-limits. To monitor your current usage, head to: https://ai.dev/rate-limit. \n* Quota exceeded for metric: generativelanguage.googleapis.com/generate_content_free_tier_requests, limit: 20, model: gemini-2.5-flash-lite\nPlease retry in 35.370300991s.', 'status': 'RESOURCE_EXHAUSTED', 'details': [{'@type': 'type.googleapis.com/google.rpc.Help', 'links': [{'description': 'Learn more about Gemini API quotas', 'url': 'https://ai.google.dev/gemini-api/docs/rate-limits'}]}, {'@type': 'type.googleapis.com/google.rpc.QuotaFailure', 'violations': [{'quotaMetric': 'generativelanguage.googleapis.com/generate_content_free_tier_requests', 'quotaId': 'GenerateRequestsPerDayPerProjectPerModel-FreeTier', 'quotaDimensions': {'location': 'global', 'model': 'gemini-2.5-flash-lite'}, 'quotaValue': '20'}]}, {'@type': 'type.googleapis.com/google.rpc.RetryInfo', 'retryDelay': '35s'}]}}
+2026-05-03 09:07:24,646 [INFO] root: AFC is enabled with max remote calls: 10.
+2026-05-03 09:07:25,652 [WARNING] app.ai.description: gemini-2.5-flash rate-limited, brief retry...
+2026-05-03 09:07:27,652 [INFO] root: AFC is enabled with max remote calls: 10.
+2026-05-03 09:07:28,527 [WARNING] app.ai.description: Model gemini-2.5-flash quota exhausted, cooling down for 1800s
+2026-05-03 09:07:28,527 [INFO] root: AFC is enabled with max remote calls: 10.
+2026-05-03 09:07:29,405 [WARNING] app.ai.description: gemini-2.5-flash-lite rate-limited, brief retry...
+2026-05-03 09:07:31,405 [INFO] root: AFC is enabled with max remote calls: 10.
+2026-05-03 09:07:32,245 [WARNING] app.ai.description: Model gemini-2.5-flash-lite quota exhausted, cooling down for 1800s
+2026-05-03 09:07:32,246 [WARNING] app.ai.description: Gemini description failed, using smart fallback: 429 RESOURCE_EXHAUSTED. {'error': {'code': 429, 'message': 'You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://ai.google.dev/gemini-api/docs/rate-limits. To monitor your current usage, head to: https://ai.dev/rate-limit. \n* Quota exceeded for metric: generativelanguage.googleapis.com/generate_content_free_tier_requests, limit: 20, model: gemini-2.5-flash-lite\nPlease retry in 27.763317232s.', 'status': 'RESOURCE_EXHAUSTED', 'details': [{'@type': 'type.googleapis.com/google.rpc.Help', 'links': [{'description': 'Learn more about Gemini API quotas', 'url': 'https://ai.google.dev/gemini-api/docs/rate-limits'}]}, {'@type': 'type.googleapis.com/google.rpc.QuotaFailure', 'violations': [{'quotaMetric': 'generativelanguage.googleapis.com/generate_content_free_tier_requests', 'quotaId': 'GenerateRequestsPerDayPerProjectPerModel-FreeTier', 'quotaDimensions': {'location': 'global', 'model': 'gemini-2.5-flash-lite'}, 'quotaValue': '20'}]}, {'@type': 'type.googleapis.com/google.rpc.RetryInfo', 'retryDelay': '27s'}]}}
+2026-05-03 09:07:32,246 [INFO] root: AFC is enabled with max remote calls: 10.
+2026-05-03 09:07:33,113 [WARNING] app.ai.description: gemini-2.5-flash rate-limited, brief retry...
+2026-05-03 09:07:35,114 [INFO] root: AFC is enabled with max remote calls: 10.
+2026-05-03 09:07:36,008 [WARNING] app.ai.description: Model gemini-2.5-flash quota exhausted, cooling down for 1800s
+2026-05-03 09:07:36,008 [INFO] root: AFC is enabled with max remote calls: 10.
+2026-05-03 09:07:36,766 [WARNING] app.ai.description: gemini-2.5-flash-lite rate-limited, brief retry...
+2026-05-03 09:07:38,767 [INFO] root: AFC is enabled with max remote calls: 10.
+2026-05-03 09:07:39,605 [WARNING] app.ai.description: Model gemini-2.5-flash-lite quota exhausted, cooling down for 1800s
+2026-05-03 09:07:39,606 [WARNING] app.ai.description: Gemini price decision failed: 429 RESOURCE_EXHAUSTED. {'error': {'code': 429, 'message': 'You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://ai.google.dev/gemini-api/docs/rate-limits. To monitor your current usage, head to: https://ai.dev/rate-limit. \n* Quota exceeded for metric: generativelanguage.googleapis.com/generate_content_free_tier_requests, limit: 20, model: gemini-2.5-flash-lite\nPlease retry in 20.373968668s.', 'status': 'RESOURCE_EXHAUSTED', 'details': [{'@type': 'type.googleapis.com/google.rpc.Help', 'links': [{'description': 'Learn more about Gemini API quotas', 'url': 'https://ai.google.dev/gemini-api/docs/rate-limits'}]}, {'@type': 'type.googleapis.com/google.rpc.QuotaFailure', 'violations': [{'quotaMetric': 'generativelanguage.googleapis.com/generate_content_free_tier_requests', 'quotaId': 'GenerateRequestsPerDayPerProjectPerModel-FreeTier', 'quotaDimensions': {'location': 'global', 'model': 'gemini-2.5-flash-lite'}, 'quotaValue': '20'}]}, {'@type': 'type.googleapis.com/google.rpc.RetryInfo', 'retryDelay': '20s'}]}}
+2026-05-03 09:07:39,606 [INFO] root: AFC is enabled with max remote calls: 10.
+2026-05-03 09:07:40,368 [WARNING] app.ai.description: gemini-2.5-flash rate-limited, brief retry...
+2026-05-03 09:07:42,368 [INFO] root: AFC is enabled with max remote calls: 10.
+2026-05-03 09:07:43,292 [WARNING] app.ai.description: Model gemini-2.5-flash quota exhausted, cooling down for 1800s
+2026-05-03 09:07:43,292 [INFO] root: AFC is enabled with max remote calls: 10.
+2026-05-03 09:07:44,072 [WARNING] app.ai.description: gemini-2.5-flash-lite rate-limited, brief retry...
+2026-05-03 09:07:46,072 [INFO] root: AFC is enabled with max remote calls: 10.
+2026-05-03 09:07:46,670 [WARNING] app.ai.description: Model gemini-2.5-flash-lite quota exhausted, cooling down for 1800s
+2026-05-03 09:07:46,671 [WARNING] app.ai.description: Gemini description failed, using smart fallback: 429 RESOURCE_EXHAUSTED. {'error': {'code': 429, 'message': 'You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://ai.google.dev/gemini-api/docs/rate-limits. To monitor your current usage, head to: https://ai.dev/rate-limit. \n* Quota exceeded for metric: generativelanguage.googleapis.com/generate_content_free_tier_requests, limit: 20, model: gemini-2.5-flash-lite\nPlease retry in 13.3094284s.', 'status': 'RESOURCE_EXHAUSTED', 'details': [{'@type': 'type.googleapis.com/google.rpc.Help', 'links': [{'description': 'Learn more about Gemini API quotas', 'url': 'https://ai.google.dev/gemini-api/docs/rate-limits'}]}, {'@type': 'type.googleapis.com/google.rpc.QuotaFailure', 'violations': [{'quotaMetric': 'generativelanguage.googleapis.com/generate_content_free_tier_requests', 'quotaId': 'GenerateRequestsPerDayPerProjectPerModel-FreeTier', 'quotaDimensions': {'location': 'global', 'model': 'gemini-2.5-flash-lite'}, 'quotaValue': '20'}]}, {'@type': 'type.googleapis.com/google.rpc.RetryInfo', 'retryDelay': '13s'}]}}
+2026-05-03 09:07:46,671 [INFO] root: AFC is enabled with max remote calls: 10.
+2026-05-03 09:07:47,485 [WARNING] app.ai.description: gemini-2.5-flash rate-limited, brief retry...
+2026-05-03 09:07:49,486 [INFO] root: AFC is enabled with max remote calls: 10.
+2026-05-03 09:07:50,752 [WARNING] app.ai.description: Model gemini-2.5-flash quota exhausted, cooling down for 1800s
+2026-05-03 09:07:50,752 [INFO] root: AFC is enabled with max remote calls: 10.
+2026-05-03 09:07:51,728 [WARNING] app.ai.description: gemini-2.5-flash-lite rate-limited, brief retry...
+2026-05-03 09:07:53,729 [INFO] root: AFC is enabled with max remote calls: 10.
+2026-05-03 09:07:54,480 [WARNING] app.ai.description: Model gemini-2.5-flash-lite quota exhausted, cooling down for 1800s
+2026-05-03 09:07:54,480 [WARNING] app.ai.description: Gemini price decision failed: 429 RESOURCE_EXHAUSTED. {'error': {'code': 429, 'message': 'You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://ai.google.dev/gemini-api/docs/rate-limits. To monitor your current usage, head to: https://ai.dev/rate-limit. \n* Quota exceeded for metric: generativelanguage.googleapis.com/generate_content_free_tier_requests, limit: 20, model: gemini-2.5-flash-lite\nPlease retry in 5.495412201s.', 'status': 'RESOURCE_EXHAUSTED', 'details': [{'@type': 'type.googleapis.com/google.rpc.Help', 'links': [{'description': 'Learn more about Gemini API quotas', 'url': 'https://ai.google.dev/gemini-api/docs/rate-limits'}]}, {'@type': 'type.googleapis.com/google.rpc.QuotaFailure', 'violations': [{'quotaMetric': 'generativelanguage.googleapis.com/generate_content_free_tier_requests', 'quotaId': 'GenerateRequestsPerDayPerProjectPerModel-FreeTier', 'quotaDimensions': {'location': 'global', 'model': 'gemini-2.5-flash-lite'}, 'quotaValue': '20'}]}, {'@type': 'type.googleapis.com/google.rpc.RetryInfo', 'retryDelay': '5s'}]}}
+2026-05-03 09:07:54,481 [INFO] root: AFC is enabled with max remote calls: 10.
+2026-05-03 09:07:55,615 [WARNING] app.ai.description: gemini-2.5-flash rate-limited, brief retry...
+2026-05-03 09:07:57,615 [INFO] root: AFC is enabled with max remote calls: 10.
+2026-05-03 09:07:58,402 [WARNING] app.ai.description: Model gemini-2.5-flash quota exhausted, cooling down for 1800s
+2026-05-03 09:07:58,402 [INFO] root: AFC is enabled with max remote calls: 10.
+2026-05-03 09:07:59,264 [WARNING] app.ai.description: gemini-2.5-flash-lite rate-limited, brief retry...
+2026-05-03 09:08:01,264 [INFO] root: AFC is enabled with max remote calls: 10.
+2026-05-03 09:08:02,217 [WARNING] app.ai.description: Model gemini-2.5-flash-lite quota exhausted, cooling down for 1800s
+2026-05-03 09:08:02,217 [WARNING] app.ai.description: Gemini description failed, using smart fallback: 429 RESOURCE_EXHAUSTED. {'error': {'code': 429, 'message': 'You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://ai.google.dev/gemini-api/docs/rate-limits. To monitor your current usage, head to: https://ai.dev/rate-limit. \n* Quota exceeded for metric: generativelanguage.googleapis.com/generate_content_free_tier_requests, limit: 20, model: gemini-2.5-flash-lite\nPlease retry in 57.759206878s.', 'status': 'RESOURCE_EXHAUSTED', 'details': [{'@type': 'type.googleapis.com/google.rpc.Help', 'links': [{'description': 'Learn more about Gemini API quotas', 'url': 'https://ai.google.dev/gemini-api/docs/rate-limits'}]}, {'@type': 'type.googleapis.com/google.rpc.QuotaFailure', 'violations': [{'quotaMetric': 'generativelanguage.googleapis.com/generate_content_free_tier_requests', 'quotaId': 'GenerateRequestsPerDayPerProjectPerModel-FreeTier', 'quotaDimensions': {'model': 'gemini-2.5-flash-lite', 'location': 'global'}, 'quotaValue': '20'}]}, {'@type': 'type.googleapis.com/google.rpc.RetryInfo', 'retryDelay': '57s'}]}}
+2026-05-03 09:08:02,218 [INFO] root: AFC is enabled with max remote calls: 10.
+2026-05-03 09:08:03,114 [WARNING] app.ai.description: gemini-2.5-flash rate-limited, brief retry...
+2026-05-03 09:08:05,115 [INFO] root: AFC is enabled with max remote calls: 10.
+2026-05-03 09:08:05,795 [WARNING] app.ai.description: Model gemini-2.5-flash quota exhausted, cooling down for 1800s
+2026-05-03 09:08:05,795 [INFO] root: AFC is enabled with max remote calls: 10.
+2026-05-03 09:08:06,605 [WARNING] app.ai.description: gemini-2.5-flash-lite rate-limited, brief retry...
+2026-05-03 09:08:08,606 [INFO] root: AFC is enabled with max remote calls: 10.
+2026-05-03 09:08:09,447 [WARNING] app.ai.description: Model gemini-2.5-flash-lite quota exhausted, cooling down for 1800s
+2026-05-03 09:08:09,447 [WARNING] app.ai.description: Gemini price decision failed: 429 RESOURCE_EXHAUSTED. {'error': {'code': 429, 'message': 'You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://ai.google.dev/gemini-api/docs/rate-limits. To monitor your current usage, head to: https://ai.dev/rate-limit. \n* Quota exceeded for metric: generativelanguage.googleapis.com/generate_content_free_tier_requests, limit: 20, model: gemini-2.5-flash-lite\nPlease retry in 50.569929965s.', 'status': 'RESOURCE_EXHAUSTED', 'details': [{'@type': 'type.googleapis.com/google.rpc.Help', 'links': [{'description': 'Learn more about Gemini API quotas', 'url': 'https://ai.google.dev/gemini-api/docs/rate-limits'}]}, {'@type': 'type.googleapis.com/google.rpc.QuotaFailure', 'violations': [{'quotaMetric': 'generativelanguage.googleapis.com/generate_content_free_tier_requests', 'quotaId': 'GenerateRequestsPerDayPerProjectPerModel-FreeTier', 'quotaDimensions': {'location': 'global', 'model': 'gemini-2.5-flash-lite'}, 'quotaValue': '20'}]}, {'@type': 'type.googleapis.com/google.rpc.RetryInfo', 'retryDelay': '50s'}]}}
+2026-05-03 09:08:09,447 [INFO] root: AFC is enabled with max remote calls: 10.
+2026-05-03 09:08:10,246 [WARNING] app.ai.description: gemini-2.5-flash rate-limited, brief retry...
+2026-05-03 09:08:12,246 [INFO] root: AFC is enabled with max remote calls: 10.
+2026-05-03 09:08:13,326 [WARNING] app.ai.description: Model gemini-2.5-flash quota exhausted, cooling down for 1800s
+2026-05-03 09:08:13,327 [INFO] root: AFC is enabled with max remote calls: 10.
+2026-05-03 09:08:14,084 [WARNING] app.ai.description: gemini-2.5-flash-lite rate-limited, brief retry...
+2026-05-03 09:08:16,084 [INFO] root: AFC is enabled with max remote calls: 10.
+2026-05-03 09:08:16,967 [WARNING] app.ai.description: Model gemini-2.5-flash-lite quota exhausted, cooling down for 1800s
+2026-05-03 09:08:16,967 [WARNING] app.ai.description: Gemini description failed, using smart fallback: 429 RESOURCE_EXHAUSTED. {'error': {'code': 429, 'message': 'You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://ai.google.dev/gemini-api/docs/rate-limits. To monitor your current usage, head to: https://ai.dev/rate-limit. \n* Quota exceeded for metric: generativelanguage.googleapis.com/generate_content_free_tier_requests, limit: 20, model: gemini-2.5-flash-lite\nPlease retry in 43.05770058s.', 'status': 'RESOURCE_EXHAUSTED', 'details': [{'@type': 'type.googleapis.com/google.rpc.Help', 'links': [{'description': 'Learn more about Gemini API quotas', 'url': 'https://ai.google.dev/gemini-api/docs/rate-limits'}]}, {'@type': 'type.googleapis.com/google.rpc.QuotaFailure', 'violations': [{'quotaMetric': 'generativelanguage.googleapis.com/generate_content_free_tier_requests', 'quotaId': 'GenerateRequestsPerDayPerProjectPerModel-FreeTier', 'quotaDimensions': {'location': 'global', 'model': 'gemini-2.5-flash-lite'}, 'quotaValue': '20'}]}, {'@type': 'type.googleapis.com/google.rpc.RetryInfo', 'retryDelay': '43s'}]}}
+2026-05-03 09:08:16,967 [INFO] root: AFC is enabled with max remote calls: 10.
+2026-05-03 09:08:17,773 [WARNING] app.ai.description: gemini-2.5-flash rate-limited, brief retry...
+2026-05-03 09:08:19,773 [INFO] root: AFC is enabled with max remote calls: 10.
+2026-05-03 09:08:20,627 [WARNING] app.ai.description: Model gemini-2.5-flash quota exhausted, cooling down for 1800s
+2026-05-03 09:08:20,627 [INFO] root: AFC is enabled with max remote calls: 10.
+2026-05-03 09:08:21,561 [WARNING] app.ai.description: gemini-2.5-flash-lite rate-limited, brief retry...
+2026-05-03 09:08:23,562 [INFO] root: AFC is enabled with max remote calls: 10.
+2026-05-03 09:08:24,400 [WARNING] app.ai.description: Model gemini-2.5-flash-lite quota exhausted, cooling down for 1800s
+2026-05-03 09:08:24,400 [WARNING] app.ai.description: Gemini price decision failed: 429 RESOURCE_EXHAUSTED. {'error': {'code': 429, 'message': 'You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://ai.google.dev/gemini-api/docs/rate-limits. To monitor your current usage, head to: https://ai.dev/rate-limit. \n* Quota exceeded for metric: generativelanguage.googleapis.com/generate_content_free_tier_requests, limit: 20, model: gemini-2.5-flash-lite\nPlease retry in 35.580658108s.', 'status': 'RESOURCE_EXHAUSTED', 'details': [{'@type': 'type.googleapis.com/google.rpc.Help', 'links': [{'description': 'Learn more about Gemini API quotas', 'url': 'https://ai.google.dev/gemini-api/docs/rate-limits'}]}, {'@type': 'type.googleapis.com/google.rpc.QuotaFailure', 'violations': [{'quotaMetric': 'generativelanguage.googleapis.com/generate_content_free_tier_requests', 'quotaId': 'GenerateRequestsPerDayPerProjectPerModel-FreeTier', 'quotaDimensions': {'location': 'global', 'model': 'gemini-2.5-flash-lite'}, 'quotaValue': '20'}]}, {'@type': 'type.googleapis.com/google.rpc.RetryInfo', 'retryDelay': '35s'}]}}
+2026-05-03 09:08:24,400 [INFO] root: AFC is enabled with max remote calls: 10.
+2026-05-03 09:08:25,336 [WARNING] app.ai.description: gemini-2.5-flash rate-limited, brief retry...
+2026-05-03 09:08:27,337 [INFO] root: AFC is enabled with max remote calls: 10.
+2026-05-03 09:08:28,368 [WARNING] app.ai.description: Model gemini-2.5-flash quota exhausted, cooling down for 1800s
+2026-05-03 09:08:28,369 [INFO] root: AFC is enabled with max remote calls: 10.
+2026-05-03 09:08:29,838 [WARNING] app.ai.description: gemini-2.5-flash-lite rate-limited, brief retry...
+2026-05-03 09:08:31,838 [INFO] root: AFC is enabled with max remote calls: 10.
+2026-05-03 09:08:32,772 [WARNING] app.ai.description: Model gemini-2.5-flash-lite quota exhausted, cooling down for 1800s
+2026-05-03 09:08:32,773 [WARNING] app.ai.description: Gemini description failed, using smart fallback: 429 RESOURCE_EXHAUSTED. {'error': {'code': 429, 'message': 'You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://ai.google.dev/gemini-api/docs/rate-limits. To monitor your current usage, head to: https://ai.dev/rate-limit. \n* Quota exceeded for metric: generativelanguage.googleapis.com/generate_content_free_tier_requests, limit: 20, model: gemini-2.5-flash-lite\nPlease retry in 27.205393519s.', 'status': 'RESOURCE_EXHAUSTED', 'details': [{'@type': 'type.googleapis.com/google.rpc.Help', 'links': [{'description': 'Learn more about Gemini API quotas', 'url': 'https://ai.google.dev/gemini-api/docs/rate-limits'}]}, {'@type': 'type.googleapis.com/google.rpc.QuotaFailure', 'violations': [{'quotaMetric': 'generativelanguage.googleapis.com/generate_content_free_tier_requests', 'quotaId': 'GenerateRequestsPerDayPerProjectPerModel-FreeTier', 'quotaDimensions': {'location': 'global', 'model': 'gemini-2.5-flash-lite'}, 'quotaValue': '20'}]}, {'@type': 'type.googleapis.com/google.rpc.RetryInfo', 'retryDelay': '27s'}]}}
+2026-05-03 09:08:32,773 [INFO] root: AFC is enabled with max remote calls: 10.
+2026-05-03 09:08:33,682 [WARNING] app.ai.description: gemini-2.5-flash rate-limited, brief retry...
+2026-05-03 09:08:35,683 [INFO] root: AFC is enabled with max remote calls: 10.
+2026-05-03 09:08:36,657 [WARNING] app.ai.description: Model gemini-2.5-flash quota exhausted, cooling down for 1800s
+2026-05-03 09:08:36,657 [INFO] root: AFC is enabled with max remote calls: 10.
+2026-05-03 09:08:37,513 [WARNING] app.ai.description: gemini-2.5-flash-lite rate-limited, brief retry...
+2026-05-03 09:08:39,514 [INFO] root: AFC is enabled with max remote calls: 10.
+2026-05-03 09:08:40,448 [WARNING] app.ai.description: Model gemini-2.5-flash-lite quota exhausted, cooling down for 1800s
+2026-05-03 09:08:40,448 [WARNING] app.ai.description: Gemini price decision failed: 429 RESOURCE_EXHAUSTED. {'error': {'code': 429, 'message': 'You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://ai.google.dev/gemini-api/docs/rate-limits. To monitor your current usage, head to: https://ai.dev/rate-limit. \n* Quota exceeded for metric: generativelanguage.googleapis.com/generate_content_free_tier_requests, limit: 20, model: gemini-2.5-flash-lite\nPlease retry in 19.566857105s.', 'status': 'RESOURCE_EXHAUSTED', 'details': [{'@type': 'type.googleapis.com/google.rpc.Help', 'links': [{'description': 'Learn more about Gemini API quotas', 'url': 'https://ai.google.dev/gemini-api/docs/rate-limits'}]}, {'@type': 'type.googleapis.com/google.rpc.QuotaFailure', 'violations': [{'quotaMetric': 'generativelanguage.googleapis.com/generate_content_free_tier_requests', 'quotaId': 'GenerateRequestsPerDayPerProjectPerModel-FreeTier', 'quotaDimensions': {'location': 'global', 'model': 'gemini-2.5-flash-lite'}, 'quotaValue': '20'}]}, {'@type': 'type.googleapis.com/google.rpc.RetryInfo', 'retryDelay': '19s'}]}}
+2026-05-03 09:08:40,448 [INFO] root: AFC is enabled with max remote calls: 10.
+2026-05-03 09:08:41,381 [WARNING] app.ai.description: gemini-2.5-flash rate-limited, brief retry...
+2026-05-03 09:08:43,382 [INFO] root: AFC is enabled with max remote calls: 10.
+2026-05-03 09:08:44,382 [WARNING] app.ai.description: Model gemini-2.5-flash quota exhausted, cooling down for 1800s
+2026-05-03 09:08:44,382 [INFO] root: AFC is enabled with max remote calls: 10.
+2026-05-03 09:08:45,297 [WARNING] app.ai.description: gemini-2.5-flash-lite rate-limited, brief retry...
+2026-05-03 09:08:47,298 [INFO] root: AFC is enabled with max remote calls: 10.
+2026-05-03 09:08:48,104 [WARNING] app.ai.description: Model gemini-2.5-flash-lite quota exhausted, cooling down for 1800s
+2026-05-03 09:08:48,104 [WARNING] app.ai.description: Gemini description failed, using smart fallback: 429 RESOURCE_EXHAUSTED. {'error': {'code': 429, 'message': 'You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://ai.google.dev/gemini-api/docs/rate-limits. To monitor your current usage, head to: https://ai.dev/rate-limit. \n* Quota exceeded for metric: generativelanguage.googleapis.com/generate_content_free_tier_requests, limit: 20, model: gemini-2.5-flash-lite\nPlease retry in 11.880551595s.', 'status': 'RESOURCE_EXHAUSTED', 'details': [{'@type': 'type.googleapis.com/google.rpc.Help', 'links': [{'description': 'Learn more about Gemini API quotas', 'url': 'https://ai.google.dev/gemini-api/docs/rate-limits'}]}, {'@type': 'type.googleapis.com/google.rpc.QuotaFailure', 'violations': [{'quotaMetric': 'generativelanguage.googleapis.com/generate_content_free_tier_requests', 'quotaId': 'GenerateRequestsPerDayPerProjectPerModel-FreeTier', 'quotaDimensions': {'location': 'global', 'model': 'gemini-2.5-flash-lite'}, 'quotaValue': '20'}]}, {'@type': 'type.googleapis.com/google.rpc.RetryInfo', 'retryDelay': '11s'}]}}
+2026-05-03 09:08:48,104 [INFO] root: AFC is enabled with max remote calls: 10.
+2026-05-03 09:08:48,968 [WARNING] app.ai.description: gemini-2.5-flash rate-limited, brief retry...
+2026-05-03 09:08:50,969 [INFO] root: AFC is enabled with max remote calls: 10.
+2026-05-03 09:08:51,968 [WARNING] app.ai.description: Model gemini-2.5-flash quota exhausted, cooling down for 1800s
+2026-05-03 09:08:51,968 [INFO] root: AFC is enabled with max remote calls: 10.
+2026-05-03 09:08:52,834 [WARNING] app.ai.description: gemini-2.5-flash-lite rate-limited, brief retry...
+2026-05-03 09:08:54,835 [INFO] root: AFC is enabled with max remote calls: 10.
+2026-05-03 09:08:55,848 [WARNING] app.ai.description: Model gemini-2.5-flash-lite quota exhausted, cooling down for 1800s
+2026-05-03 09:08:55,848 [WARNING] app.ai.description: Gemini price decision failed: 429 RESOURCE_EXHAUSTED. {'error': {'code': 429, 'message': 'You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://ai.google.dev/gemini-api/docs/rate-limits. To monitor your current usage, head to: https://ai.dev/rate-limit. \n* Quota exceeded for metric: generativelanguage.googleapis.com/generate_content_free_tier_requests, limit: 20, model: gemini-2.5-flash-lite\nPlease retry in 4.17648257s.', 'status': 'RESOURCE_EXHAUSTED', 'details': [{'@type': 'type.googleapis.com/google.rpc.Help', 'links': [{'description': 'Learn more about Gemini API quotas', 'url': 'https://ai.google.dev/gemini-api/docs/rate-limits'}]}, {'@type': 'type.googleapis.com/google.rpc.QuotaFailure', 'violations': [{'quotaMetric': 'generativelanguage.googleapis.com/generate_content_free_tier_requests', 'quotaId': 'GenerateRequestsPerDayPerProjectPerModel-FreeTier', 'quotaDimensions': {'location': 'global', 'model': 'gemini-2.5-flash-lite'}, 'quotaValue': '20'}]}, {'@type': 'type.googleapis.com/google.rpc.RetryInfo', 'retryDelay': '4s'}]}}
+2026-05-03 09:08:55,848 [INFO] root: AFC is enabled with max remote calls: 10.
+2026-05-03 09:08:56,679 [WARNING] app.ai.description: gemini-2.5-flash rate-limited, brief retry...
+2026-05-03 09:08:58,679 [INFO] root: AFC is enabled with max remote calls: 10.
+2026-05-03 09:08:59,531 [WARNING] app.ai.description: Model gemini-2.5-flash quota exhausted, cooling down for 1800s
+2026-05-03 09:08:59,531 [INFO] root: AFC is enabled with max remote calls: 10.
+2026-05-03 09:09:00,333 [WARNING] app.ai.description: gemini-2.5-flash-lite rate-limited, brief retry...
+2026-05-03 09:09:02,333 [INFO] root: AFC is enabled with max remote calls: 10.
+2026-05-03 09:09:03,208 [WARNING] app.ai.description: Model gemini-2.5-flash-lite quota exhausted, cooling down for 1800s
+2026-05-03 09:09:03,208 [WARNING] app.ai.description: Gemini description failed, using smart fallback: 429 RESOURCE_EXHAUSTED. {'error': {'code': 429, 'message': 'You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://ai.google.dev/gemini-api/docs/rate-limits. To monitor your current usage, head to: https://ai.dev/rate-limit. \n* Quota exceeded for metric: generativelanguage.googleapis.com/generate_content_free_tier_requests, limit: 20, model: gemini-2.5-flash-lite\nPlease retry in 56.798477222s.', 'status': 'RESOURCE_EXHAUSTED', 'details': [{'@type': 'type.googleapis.com/google.rpc.Help', 'links': [{'description': 'Learn more about Gemini API quotas', 'url': 'https://ai.google.dev/gemini-api/docs/rate-limits'}]}, {'@type': 'type.googleapis.com/google.rpc.QuotaFailure', 'violations': [{'quotaMetric': 'generativelanguage.googleapis.com/generate_content_free_tier_requests', 'quotaId': 'GenerateRequestsPerDayPerProjectPerModel-FreeTier', 'quotaDimensions': {'model': 'gemini-2.5-flash-lite', 'location': 'global'}, 'quotaValue': '20'}]}, {'@type': 'type.googleapis.com/google.rpc.RetryInfo', 'retryDelay': '56s'}]}}
+2026-05-03 09:09:03,209 [INFO] root: AFC is enabled with max remote calls: 10.
+2026-05-03 09:09:04,068 [WARNING] app.ai.description: gemini-2.5-flash rate-limited, brief retry...
+2026-05-03 09:09:06,068 [INFO] root: AFC is enabled with max remote calls: 10.
+2026-05-03 09:09:06,968 [WARNING] app.ai.description: Model gemini-2.5-flash quota exhausted, cooling down for 1800s
+2026-05-03 09:09:06,969 [INFO] root: AFC is enabled with max remote calls: 10.
+2026-05-03 09:09:07,765 [WARNING] app.ai.description: gemini-2.5-flash-lite rate-limited, brief retry...
+2026-05-03 09:09:09,766 [INFO] root: AFC is enabled with max remote calls: 10.
+2026-05-03 09:09:10,819 [WARNING] app.ai.description: Model gemini-2.5-flash-lite quota exhausted, cooling down for 1800s
+2026-05-03 09:09:10,819 [WARNING] app.ai.description: Gemini price decision failed: 429 RESOURCE_EXHAUSTED. {'error': {'code': 429, 'message': 'You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://ai.google.dev/gemini-api/docs/rate-limits. To monitor your current usage, head to: https://ai.dev/rate-limit. \n* Quota exceeded for metric: generativelanguage.googleapis.com/generate_content_free_tier_requests, limit: 20, model: gemini-2.5-flash-lite\nPlease retry in 49.336645159s.', 'status': 'RESOURCE_EXHAUSTED', 'details': [{'@type': 'type.googleapis.com/google.rpc.Help', 'links': [{'description': 'Learn more about Gemini API quotas', 'url': 'https://ai.google.dev/gemini-api/docs/rate-limits'}]}, {'@type': 'type.googleapis.com/google.rpc.QuotaFailure', 'violations': [{'quotaMetric': 'generativelanguage.googleapis.com/generate_content_free_tier_requests', 'quotaId': 'GenerateRequestsPerDayPerProjectPerModel-FreeTier', 'quotaDimensions': {'model': 'gemini-2.5-flash-lite', 'location': 'global'}, 'quotaValue': '20'}]}, {'@type': 'type.googleapis.com/google.rpc.RetryInfo', 'retryDelay': '49s'}]}}
+2026-05-03 09:09:10,819 [INFO] root: AFC is enabled with max remote calls: 10.
+2026-05-03 09:09:11,688 [WARNING] app.ai.description: gemini-2.5-flash rate-limited, brief retry...
+2026-05-03 09:09:13,688 [INFO] root: AFC is enabled with max remote calls: 10.
+2026-05-03 09:09:14,476 [WARNING] app.ai.description: Model gemini-2.5-flash quota exhausted, cooling down for 1800s
+2026-05-03 09:09:14,476 [INFO] root: AFC is enabled with max remote calls: 10.
+2026-05-03 09:09:15,268 [WARNING] app.ai.description: gemini-2.5-flash-lite rate-limited, brief retry...
+2026-05-03 09:09:17,269 [INFO] root: AFC is enabled with max remote calls: 10.
+2026-05-03 09:09:18,204 [WARNING] app.ai.description: Model gemini-2.5-flash-lite quota exhausted, cooling down for 1800s
+2026-05-03 09:09:18,204 [WARNING] app.ai.description: Gemini description failed, using smart fallback: 429 RESOURCE_EXHAUSTED. {'error': {'code': 429, 'message': 'You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://ai.google.dev/gemini-api/docs/rate-limits. To monitor your current usage, head to: https://ai.dev/rate-limit. \n* Quota exceeded for metric: generativelanguage.googleapis.com/generate_content_free_tier_requests, limit: 20, model: gemini-2.5-flash-lite\nPlease retry in 41.783984309s.', 'status': 'RESOURCE_EXHAUSTED', 'details': [{'@type': 'type.googleapis.com/google.rpc.Help', 'links': [{'description': 'Learn more about Gemini API quotas', 'url': 'https://ai.google.dev/gemini-api/docs/rate-limits'}]}, {'@type': 'type.googleapis.com/google.rpc.QuotaFailure', 'violations': [{'quotaMetric': 'generativelanguage.googleapis.com/generate_content_free_tier_requests', 'quotaId': 'GenerateRequestsPerDayPerProjectPerModel-FreeTier', 'quotaDimensions': {'model': 'gemini-2.5-flash-lite', 'location': 'global'}, 'quotaValue': '20'}]}, {'@type': 'type.googleapis.com/google.rpc.RetryInfo', 'retryDelay': '41s'}]}}
+2026-05-03 09:09:18,204 [INFO] root: AFC is enabled with max remote calls: 10.
+2026-05-03 09:09:18,868 [WARNING] app.ai.description: gemini-2.5-flash rate-limited, brief retry...
+2026-05-03 09:09:20,869 [INFO] root: AFC is enabled with max remote calls: 10.
+2026-05-03 09:09:21,666 [WARNING] app.ai.description: Model gemini-2.5-flash quota exhausted, cooling down for 1800s
+2026-05-03 09:09:21,667 [INFO] root: AFC is enabled with max remote calls: 10.
+2026-05-03 09:09:22,448 [WARNING] app.ai.description: gemini-2.5-flash-lite rate-limited, brief retry...
+2026-05-03 09:09:24,449 [INFO] root: AFC is enabled with max remote calls: 10.
+2026-05-03 09:09:25,229 [WARNING] app.ai.description: Model gemini-2.5-flash-lite quota exhausted, cooling down for 1800s
+2026-05-03 09:09:25,229 [WARNING] app.ai.description: Gemini price decision failed: 429 RESOURCE_EXHAUSTED. {'error': {'code': 429, 'message': 'You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://ai.google.dev/gemini-api/docs/rate-limits. To monitor your current usage, head to: https://ai.dev/rate-limit. \n* Quota exceeded for metric: generativelanguage.googleapis.com/generate_content_free_tier_requests, limit: 20, model: gemini-2.5-flash-lite\nPlease retry in 34.753937162s.', 'status': 'RESOURCE_EXHAUSTED', 'details': [{'@type': 'type.googleapis.com/google.rpc.Help', 'links': [{'description': 'Learn more about Gemini API quotas', 'url': 'https://ai.google.dev/gemini-api/docs/rate-limits'}]}, {'@type': 'type.googleapis.com/google.rpc.QuotaFailure', 'violations': [{'quotaMetric': 'generativelanguage.googleapis.com/generate_content_free_tier_requests', 'quotaId': 'GenerateRequestsPerDayPerProjectPerModel-FreeTier', 'quotaDimensions': {'location': 'global', 'model': 'gemini-2.5-flash-lite'}, 'quotaValue': '20'}]}, {'@type': 'type.googleapis.com/google.rpc.RetryInfo', 'retryDelay': '34s'}]}}
+2026-05-03 09:09:25,229 [INFO] root: AFC is enabled with max remote calls: 10.
+2026-05-03 09:09:26,056 [WARNING] app.ai.description: gemini-2.5-flash rate-limited, brief retry...
+2026-05-03 09:09:28,056 [INFO] root: AFC is enabled with max remote calls: 10.
+2026-05-03 09:09:28,724 [WARNING] app.ai.description: Model gemini-2.5-flash quota exhausted, cooling down for 1800s
+2026-05-03 09:09:28,725 [INFO] root: AFC is enabled with max remote calls: 10.
+2026-05-03 09:09:29,545 [WARNING] app.ai.description: gemini-2.5-flash-lite rate-limited, brief retry...
+2026-05-03 09:09:31,546 [INFO] root: AFC is enabled with max remote calls: 10.
+2026-05-03 09:09:32,370 [WARNING] app.ai.description: Model gemini-2.5-flash-lite quota exhausted, cooling down for 1800s
+2026-05-03 09:09:32,370 [WARNING] app.ai.description: Gemini description failed, using smart fallback: 429 RESOURCE_EXHAUSTED. {'error': {'code': 429, 'message': 'You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://ai.google.dev/gemini-api/docs/rate-limits. To monitor your current usage, head to: https://ai.dev/rate-limit. \n* Quota exceeded for metric: generativelanguage.googleapis.com/generate_content_free_tier_requests, limit: 20, model: gemini-2.5-flash-lite\nPlease retry in 27.616003046s.', 'status': 'RESOURCE_EXHAUSTED', 'details': [{'@type': 'type.googleapis.com/google.rpc.Help', 'links': [{'description': 'Learn more about Gemini API quotas', 'url': 'https://ai.google.dev/gemini-api/docs/rate-limits'}]}, {'@type': 'type.googleapis.com/google.rpc.QuotaFailure', 'violations': [{'quotaMetric': 'generativelanguage.googleapis.com/generate_content_free_tier_requests', 'quotaId': 'GenerateRequestsPerDayPerProjectPerModel-FreeTier', 'quotaDimensions': {'location': 'global', 'model': 'gemini-2.5-flash-lite'}, 'quotaValue': '20'}]}, {'@type': 'type.googleapis.com/google.rpc.RetryInfo', 'retryDelay': '27s'}]}}
+2026-05-03 09:09:32,370 [INFO] root: AFC is enabled with max remote calls: 10.
+2026-05-03 09:09:33,166 [WARNING] app.ai.description: gemini-2.5-flash rate-limited, brief retry...
+2026-05-03 09:09:35,166 [INFO] root: AFC is enabled with max remote calls: 10.
+2026-05-03 09:09:36,073 [WARNING] app.ai.description: Model gemini-2.5-flash quota exhausted, cooling down for 1800s
+2026-05-03 09:09:36,073 [INFO] root: AFC is enabled with max remote calls: 10.
+2026-05-03 09:09:36,817 [WARNING] app.ai.description: gemini-2.5-flash-lite rate-limited, brief retry...
+2026-05-03 09:09:38,818 [INFO] root: AFC is enabled with max remote calls: 10.
+2026-05-03 09:09:39,643 [WARNING] app.ai.description: Model gemini-2.5-flash-lite quota exhausted, cooling down for 1800s
+2026-05-03 09:09:39,644 [WARNING] app.ai.description: Gemini price decision failed: 429 RESOURCE_EXHAUSTED. {'error': {'code': 429, 'message': 'You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://ai.google.dev/gemini-api/docs/rate-limits. To monitor your current usage, head to: https://ai.dev/rate-limit. \n* Quota exceeded for metric: generativelanguage.googleapis.com/generate_content_free_tier_requests, limit: 20, model: gemini-2.5-flash-lite\nPlease retry in 20.345709859s.', 'status': 'RESOURCE_EXHAUSTED', 'details': [{'@type': 'type.googleapis.com/google.rpc.Help', 'links': [{'description': 'Learn more about Gemini API quotas', 'url': 'https://ai.google.dev/gemini-api/docs/rate-limits'}]}, {'@type': 'type.googleapis.com/google.rpc.QuotaFailure', 'violations': [{'quotaMetric': 'generativelanguage.googleapis.com/generate_content_free_tier_requests', 'quotaId': 'GenerateRequestsPerDayPerProjectPerModel-FreeTier', 'quotaDimensions': {'location': 'global', 'model': 'gemini-2.5-flash-lite'}, 'quotaValue': '20'}]}, {'@type': 'type.googleapis.com/google.rpc.RetryInfo', 'retryDelay': '20s'}]}}
+2026-05-03 09:09:39,644 [INFO] root: AFC is enabled with max remote calls: 10.
+2026-05-03 09:09:40,601 [WARNING] app.ai.description: gemini-2.5-flash rate-limited, brief retry...
+2026-05-03 09:09:42,602 [INFO] root: AFC is enabled with max remote calls: 10.
+2026-05-03 09:09:43,492 [WARNING] app.ai.description: Model gemini-2.5-flash quota exhausted, cooling down for 1800s
+2026-05-03 09:09:43,492 [INFO] root: AFC is enabled with max remote calls: 10.
+2026-05-03 09:09:44,270 [WARNING] app.ai.description: gemini-2.5-flash-lite rate-limited, brief retry...
+2026-05-03 09:09:46,271 [INFO] root: AFC is enabled with max remote calls: 10.
+2026-05-03 09:09:48,632 [WARNING] app.ai.description: Model gemini-2.5-flash-lite quota exhausted, cooling down for 1800s
+2026-05-03 09:09:48,633 [WARNING] app.ai.description: Gemini description failed, using smart fallback: 429 RESOURCE_EXHAUSTED. {'error': {'code': 429, 'message': 'You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://ai.google.dev/gemini-api/docs/rate-limits. To monitor your current usage, head to: https://ai.dev/rate-limit. \n* Quota exceeded for metric: generativelanguage.googleapis.com/generate_content_free_tier_requests, limit: 20, model: gemini-2.5-flash-lite\nPlease retry in 11.347072512s.', 'status': 'RESOURCE_EXHAUSTED', 'details': [{'@type': 'type.googleapis.com/google.rpc.Help', 'links': [{'description': 'Learn more about Gemini API quotas', 'url': 'https://ai.google.dev/gemini-api/docs/rate-limits'}]}, {'@type': 'type.googleapis.com/google.rpc.QuotaFailure', 'violations': [{'quotaMetric': 'generativelanguage.googleapis.com/generate_content_free_tier_requests', 'quotaId': 'GenerateRequestsPerDayPerProjectPerModel-FreeTier', 'quotaDimensions': {'model': 'gemini-2.5-flash-lite', 'location': 'global'}, 'quotaValue': '20'}]}, {'@type': 'type.googleapis.com/google.rpc.RetryInfo', 'retryDelay': '11s'}]}}
+2026-05-03 09:09:48,633 [INFO] root: AFC is enabled with max remote calls: 10.
+2026-05-03 09:09:49,648 [WARNING] app.ai.description: gemini-2.5-flash rate-limited, brief retry...
+2026-05-03 09:09:51,649 [INFO] root: AFC is enabled with max remote calls: 10.
+2026-05-03 09:09:52,489 [WARNING] app.ai.description: Model gemini-2.5-flash quota exhausted, cooling down for 1800s
+2026-05-03 09:09:52,490 [INFO] root: AFC is enabled with max remote calls: 10.
+2026-05-03 09:09:53,347 [WARNING] app.ai.description: gemini-2.5-flash-lite rate-limited, brief retry...
+2026-05-03 09:09:55,347 [INFO] root: AFC is enabled with max remote calls: 10.
+2026-05-03 09:09:56,359 [WARNING] app.ai.description: Model gemini-2.5-flash-lite quota exhausted, cooling down for 1800s
+2026-05-03 09:09:56,359 [WARNING] app.ai.description: Gemini price decision failed: 429 RESOURCE_EXHAUSTED. {'error': {'code': 429, 'message': 'You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://ai.google.dev/gemini-api/docs/rate-limits. To monitor your current usage, head to: https://ai.dev/rate-limit. \n* Quota exceeded for metric: generativelanguage.googleapis.com/generate_content_free_tier_requests, limit: 20, model: gemini-2.5-flash-lite\nPlease retry in 3.625244616s.', 'status': 'RESOURCE_EXHAUSTED', 'details': [{'@type': 'type.googleapis.com/google.rpc.Help', 'links': [{'description': 'Learn more about Gemini API quotas', 'url': 'https://ai.google.dev/gemini-api/docs/rate-limits'}]}, {'@type': 'type.googleapis.com/google.rpc.QuotaFailure', 'violations': [{'quotaMetric': 'generativelanguage.googleapis.com/generate_content_free_tier_requests', 'quotaId': 'GenerateRequestsPerDayPerProjectPerModel-FreeTier', 'quotaDimensions': {'location': 'global', 'model': 'gemini-2.5-flash-lite'}, 'quotaValue': '20'}]}, {'@type': 'type.googleapis.com/google.rpc.RetryInfo', 'retryDelay': '3s'}]}}
+2026-05-03 09:09:56,359 [INFO] root: AFC is enabled with max remote calls: 10.
+2026-05-03 09:09:57,208 [WARNING] app.ai.description: gemini-2.5-flash rate-limited, brief retry...
+2026-05-03 09:09:59,209 [INFO] root: AFC is enabled with max remote calls: 10.
+2026-05-03 09:10:00,074 [WARNING] app.ai.description: Model gemini-2.5-flash quota exhausted, cooling down for 1800s
+2026-05-03 09:10:00,075 [INFO] root: AFC is enabled with max remote calls: 10.
+2026-05-03 09:10:01,005 [WARNING] app.ai.description: gemini-2.5-flash-lite rate-limited, brief retry...
+2026-05-03 09:10:03,005 [INFO] root: AFC is enabled with max remote calls: 10.
+2026-05-03 09:10:03,702 [WARNING] app.ai.description: Model gemini-2.5-flash-lite quota exhausted, cooling down for 1800s
+2026-05-03 09:10:03,703 [WARNING] app.ai.description: Gemini description failed, using smart fallback: 429 RESOURCE_EXHAUSTED. {'error': {'code': 429, 'message': 'You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://ai.google.dev/gemini-api/docs/rate-limits. To monitor your current usage, head to: https://ai.dev/rate-limit. \n* Quota exceeded for metric: generativelanguage.googleapis.com/generate_content_free_tier_requests, limit: 20, model: gemini-2.5-flash-lite\nPlease retry in 56.279321186s.', 'status': 'RESOURCE_EXHAUSTED', 'details': [{'@type': 'type.googleapis.com/google.rpc.Help', 'links': [{'description': 'Learn more about Gemini API quotas', 'url': 'https://ai.google.dev/gemini-api/docs/rate-limits'}]}, {'@type': 'type.googleapis.com/google.rpc.QuotaFailure', 'violations': [{'quotaMetric': 'generativelanguage.googleapis.com/generate_content_free_tier_requests', 'quotaId': 'GenerateRequestsPerDayPerProjectPerModel-FreeTier', 'quotaDimensions': {'location': 'global', 'model': 'gemini-2.5-flash-lite'}, 'quotaValue': '20'}]}, {'@type': 'type.googleapis.com/google.rpc.RetryInfo', 'retryDelay': '56s'}]}}
+2026-05-03 09:10:03,703 [INFO] root: AFC is enabled with max remote calls: 10.
+2026-05-03 09:10:04,550 [WARNING] app.ai.description: gemini-2.5-flash rate-limited, brief retry...
+2026-05-03 09:10:06,550 [INFO] root: AFC is enabled with max remote calls: 10.
+2026-05-03 09:10:07,219 [WARNING] app.ai.description: Model gemini-2.5-flash quota exhausted, cooling down for 1800s
+2026-05-03 09:10:07,219 [INFO] root: AFC is enabled with max remote calls: 10.
+2026-05-03 09:10:08,063 [WARNING] app.ai.description: gemini-2.5-flash-lite rate-limited, brief retry...
+2026-05-03 09:10:10,064 [INFO] root: AFC is enabled with max remote calls: 10.
+2026-05-03 09:10:10,931 [WARNING] app.ai.description: Model gemini-2.5-flash-lite quota exhausted, cooling down for 1800s
+2026-05-03 09:10:10,931 [WARNING] app.ai.description: Gemini price decision failed: 429 RESOURCE_EXHAUSTED. {'error': {'code': 429, 'message': 'You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://ai.google.dev/gemini-api/docs/rate-limits. To monitor your current usage, head to: https://ai.dev/rate-limit. \n* Quota exceeded for metric: generativelanguage.googleapis.com/generate_content_free_tier_requests, limit: 20, model: gemini-2.5-flash-lite\nPlease retry in 49.051520559s.', 'status': 'RESOURCE_EXHAUSTED', 'details': [{'@type': 'type.googleapis.com/google.rpc.Help', 'links': [{'description': 'Learn more about Gemini API quotas', 'url': 'https://ai.google.dev/gemini-api/docs/rate-limits'}]}, {'@type': 'type.googleapis.com/google.rpc.QuotaFailure', 'violations': [{'quotaMetric': 'generativelanguage.googleapis.com/generate_content_free_tier_requests', 'quotaId': 'GenerateRequestsPerDayPerProjectPerModel-FreeTier', 'quotaDimensions': {'location': 'global', 'model': 'gemini-2.5-flash-lite'}, 'quotaValue': '20'}]}, {'@type': 'type.googleapis.com/google.rpc.RetryInfo', 'retryDelay': '49s'}]}}
+2026-05-03 09:10:10,931 [INFO] root: AFC is enabled with max remote calls: 10.
+2026-05-03 09:10:11,811 [WARNING] app.ai.description: gemini-2.5-flash rate-limited, brief retry...
+2026-05-03 09:10:13,811 [INFO] root: AFC is enabled with max remote calls: 10.
+2026-05-03 09:10:14,689 [WARNING] app.ai.description: Model gemini-2.5-flash quota exhausted, cooling down for 1800s
+2026-05-03 09:10:14,689 [INFO] root: AFC is enabled with max remote calls: 10.
+2026-05-03 09:10:15,450 [WARNING] app.ai.description: gemini-2.5-flash-lite rate-limited, brief retry...
+2026-05-03 09:10:17,450 [INFO] root: AFC is enabled with max remote calls: 10.
+2026-05-03 09:10:18,312 [WARNING] app.ai.description: Model gemini-2.5-flash-lite quota exhausted, cooling down for 1800s
+2026-05-03 09:10:18,313 [WARNING] app.ai.description: Gemini description failed, using smart fallback: 429 RESOURCE_EXHAUSTED. {'error': {'code': 429, 'message': 'You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://ai.google.dev/gemini-api/docs/rate-limits. To monitor your current usage, head to: https://ai.dev/rate-limit. \n* Quota exceeded for metric: generativelanguage.googleapis.com/generate_content_free_tier_requests, limit: 20, model: gemini-2.5-flash-lite\nPlease retry in 41.680511465s.', 'status': 'RESOURCE_EXHAUSTED', 'details': [{'@type': 'type.googleapis.com/google.rpc.Help', 'links': [{'description': 'Learn more about Gemini API quotas', 'url': 'https://ai.google.dev/gemini-api/docs/rate-limits'}]}, {'@type': 'type.googleapis.com/google.rpc.QuotaFailure', 'violations': [{'quotaMetric': 'generativelanguage.googleapis.com/generate_content_free_tier_requests', 'quotaId': 'GenerateRequestsPerDayPerProjectPerModel-FreeTier', 'quotaDimensions': {'location': 'global', 'model': 'gemini-2.5-flash-lite'}, 'quotaValue': '20'}]}, {'@type': 'type.googleapis.com/google.rpc.RetryInfo', 'retryDelay': '41s'}]}}
+2026-05-03 09:10:18,313 [INFO] root: AFC is enabled with max remote calls: 10.
+2026-05-03 09:10:19,071 [WARNING] app.ai.description: gemini-2.5-flash rate-limited, brief retry...
+2026-05-03 09:10:21,071 [INFO] root: AFC is enabled with max remote calls: 10.
+2026-05-03 09:10:22,011 [WARNING] app.ai.description: Model gemini-2.5-flash quota exhausted, cooling down for 1800s
+2026-05-03 09:10:22,011 [INFO] root: AFC is enabled with max remote calls: 10.
+2026-05-03 09:10:22,897 [WARNING] app.ai.description: gemini-2.5-flash-lite rate-limited, brief retry...
+2026-05-03 09:10:24,898 [INFO] root: AFC is enabled with max remote calls: 10.
+2026-05-03 09:10:25,758 [WARNING] app.ai.description: Model gemini-2.5-flash-lite quota exhausted, cooling down for 1800s
+2026-05-03 09:10:25,758 [WARNING] app.ai.description: Gemini price decision failed: 429 RESOURCE_EXHAUSTED. {'error': {'code': 429, 'message': 'You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://ai.google.dev/gemini-api/docs/rate-limits. To monitor your current usage, head to: https://ai.dev/rate-limit. \n* Quota exceeded for metric: generativelanguage.googleapis.com/generate_content_free_tier_requests, limit: 20, model: gemini-2.5-flash-lite\nPlease retry in 34.23184791s.', 'status': 'RESOURCE_EXHAUSTED', 'details': [{'@type': 'type.googleapis.com/google.rpc.Help', 'links': [{'description': 'Learn more about Gemini API quotas', 'url': 'https://ai.google.dev/gemini-api/docs/rate-limits'}]}, {'@type': 'type.googleapis.com/google.rpc.QuotaFailure', 'violations': [{'quotaMetric': 'generativelanguage.googleapis.com/generate_content_free_tier_requests', 'quotaId': 'GenerateRequestsPerDayPerProjectPerModel-FreeTier', 'quotaDimensions': {'location': 'global', 'model': 'gemini-2.5-flash-lite'}, 'quotaValue': '20'}]}, {'@type': 'type.googleapis.com/google.rpc.RetryInfo', 'retryDelay': '34s'}]}}
+2026-05-03 09:10:25,759 [INFO] root: AFC is enabled with max remote calls: 10.
+2026-05-03 09:10:26,502 [WARNING] app.ai.description: gemini-2.5-flash rate-limited, brief retry...
+2026-05-03 09:10:28,503 [INFO] root: AFC is enabled with max remote calls: 10.
+2026-05-03 09:10:29,419 [WARNING] app.ai.description: Model gemini-2.5-flash quota exhausted, cooling down for 1800s
+2026-05-03 09:10:29,419 [INFO] root: AFC is enabled with max remote calls: 10.
+2026-05-03 09:10:30,291 [WARNING] app.ai.description: gemini-2.5-flash-lite rate-limited, brief retry...
+2026-05-03 09:10:32,292 [INFO] root: AFC is enabled with max remote calls: 10.
+2026-05-03 09:10:33,223 [WARNING] app.ai.description: Model gemini-2.5-flash-lite quota exhausted, cooling down for 1800s
+2026-05-03 09:10:33,223 [WARNING] app.ai.description: Gemini description failed, using smart fallback: 429 RESOURCE_EXHAUSTED. {'error': {'code': 429, 'message': 'You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://ai.google.dev/gemini-api/docs/rate-limits. To monitor your current usage, head to: https://ai.dev/rate-limit. \n* Quota exceeded for metric: generativelanguage.googleapis.com/generate_content_free_tier_requests, limit: 20, model: gemini-2.5-flash-lite\nPlease retry in 26.793522934s.', 'status': 'RESOURCE_EXHAUSTED', 'details': [{'@type': 'type.googleapis.com/google.rpc.Help', 'links': [{'description': 'Learn more about Gemini API quotas', 'url': 'https://ai.google.dev/gemini-api/docs/rate-limits'}]}, {'@type': 'type.googleapis.com/google.rpc.QuotaFailure', 'violations': [{'quotaMetric': 'generativelanguage.googleapis.com/generate_content_free_tier_requests', 'quotaId': 'GenerateRequestsPerDayPerProjectPerModel-FreeTier', 'quotaDimensions': {'location': 'global', 'model': 'gemini-2.5-flash-lite'}, 'quotaValue': '20'}]}, {'@type': 'type.googleapis.com/google.rpc.RetryInfo', 'retryDelay': '26s'}]}}
+2026-05-03 09:10:33,224 [INFO] root: AFC is enabled with max remote calls: 10.
+2026-05-03 09:10:34,179 [WARNING] app.ai.description: gemini-2.5-flash rate-limited, brief retry...
+2026-05-03 09:10:36,179 [INFO] root: AFC is enabled with max remote calls: 10.
+2026-05-03 09:10:37,104 [WARNING] app.ai.description: Model gemini-2.5-flash quota exhausted, cooling down for 1800s
+2026-05-03 09:10:37,104 [INFO] root: AFC is enabled with max remote calls: 10.
+2026-05-03 09:10:38,012 [WARNING] app.ai.description: gemini-2.5-flash-lite rate-limited, brief retry...
+2026-05-03 09:10:40,013 [INFO] root: AFC is enabled with max remote calls: 10.
+2026-05-03 09:10:40,872 [WARNING] app.ai.description: Model gemini-2.5-flash-lite quota exhausted, cooling down for 1800s
+2026-05-03 09:10:40,872 [WARNING] app.ai.description: Gemini price decision failed: 429 RESOURCE_EXHAUSTED. {'error': {'code': 429, 'message': 'You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://ai.google.dev/gemini-api/docs/rate-limits. To monitor your current usage, head to: https://ai.dev/rate-limit. \n* Quota exceeded for metric: generativelanguage.googleapis.com/generate_content_free_tier_requests, limit: 20, model: gemini-2.5-flash-lite\nPlease retry in 19.111166327s.', 'status': 'RESOURCE_EXHAUSTED', 'details': [{'@type': 'type.googleapis.com/google.rpc.Help', 'links': [{'description': 'Learn more about Gemini API quotas', 'url': 'https://ai.google.dev/gemini-api/docs/rate-limits'}]}, {'@type': 'type.googleapis.com/google.rpc.QuotaFailure', 'violations': [{'quotaMetric': 'generativelanguage.googleapis.com/generate_content_free_tier_requests', 'quotaId': 'GenerateRequestsPerDayPerProjectPerModel-FreeTier', 'quotaDimensions': {'location': 'global', 'model': 'gemini-2.5-flash-lite'}, 'quotaValue': '20'}]}, {'@type': 'type.googleapis.com/google.rpc.RetryInfo', 'retryDelay': '19s'}]}}
+2026-05-03 09:10:40,872 [INFO] root: AFC is enabled with max remote calls: 10.
+2026-05-03 09:10:41,762 [WARNING] app.ai.description: gemini-2.5-flash rate-limited, brief retry...
+2026-05-03 09:10:43,763 [INFO] root: AFC is enabled with max remote calls: 10.
+2026-05-03 09:10:44,520 [WARNING] app.ai.description: Model gemini-2.5-flash quota exhausted, cooling down for 1800s
+2026-05-03 09:10:44,521 [INFO] root: AFC is enabled with max remote calls: 10.
+2026-05-03 09:10:45,440 [WARNING] app.ai.description: gemini-2.5-flash-lite rate-limited, brief retry...
+2026-05-03 09:10:47,441 [INFO] root: AFC is enabled with max remote calls: 10.
+2026-05-03 09:10:48,429 [WARNING] app.ai.description: Model gemini-2.5-flash-lite quota exhausted, cooling down for 1800s
+2026-05-03 09:10:48,430 [WARNING] app.ai.description: Gemini description failed, using smart fallback: 429 RESOURCE_EXHAUSTED. {'error': {'code': 429, 'message': 'You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://ai.google.dev/gemini-api/docs/rate-limits. To monitor your current usage, head to: https://ai.dev/rate-limit. \n* Quota exceeded for metric: generativelanguage.googleapis.com/generate_content_free_tier_requests, limit: 20, model: gemini-2.5-flash-lite\nPlease retry in 11.56210743s.', 'status': 'RESOURCE_EXHAUSTED', 'details': [{'@type': 'type.googleapis.com/google.rpc.Help', 'links': [{'description': 'Learn more about Gemini API quotas', 'url': 'https://ai.google.dev/gemini-api/docs/rate-limits'}]}, {'@type': 'type.googleapis.com/google.rpc.QuotaFailure', 'violations': [{'quotaMetric': 'generativelanguage.googleapis.com/generate_content_free_tier_requests', 'quotaId': 'GenerateRequestsPerDayPerProjectPerModel-FreeTier', 'quotaDimensions': {'location': 'global', 'model': 'gemini-2.5-flash-lite'}, 'quotaValue': '20'}]}, {'@type': 'type.googleapis.com/google.rpc.RetryInfo', 'retryDelay': '11s'}]}}
+2026-05-03 09:10:48,430 [INFO] root: AFC is enabled with max remote calls: 10.
+2026-05-03 09:10:49,400 [WARNING] app.ai.description: gemini-2.5-flash rate-limited, brief retry...
+2026-05-03 09:10:51,401 [INFO] root: AFC is enabled with max remote calls: 10.
+2026-05-03 09:10:52,347 [WARNING] app.ai.description: Model gemini-2.5-flash quota exhausted, cooling down for 1800s
+2026-05-03 09:10:52,348 [INFO] root: AFC is enabled with max remote calls: 10.
+2026-05-03 09:10:53,241 [WARNING] app.ai.description: gemini-2.5-flash-lite rate-limited, brief retry...
+2026-05-03 09:10:55,241 [INFO] root: AFC is enabled with max remote calls: 10.
+2026-05-03 09:10:56,118 [WARNING] app.ai.description: Model gemini-2.5-flash-lite quota exhausted, cooling down for 1800s
+2026-05-03 09:10:56,119 [WARNING] app.ai.description: Gemini price decision failed: 429 RESOURCE_EXHAUSTED. {'error': {'code': 429, 'message': 'You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://ai.google.dev/gemini-api/docs/rate-limits. To monitor your current usage, head to: https://ai.dev/rate-limit. \n* Quota exceeded for metric: generativelanguage.googleapis.com/generate_content_free_tier_requests, limit: 20, model: gemini-2.5-flash-lite\nPlease retry in 3.863079053s.', 'status': 'RESOURCE_EXHAUSTED', 'details': [{'@type': 'type.googleapis.com/google.rpc.Help', 'links': [{'description': 'Learn more about Gemini API quotas', 'url': 'https://ai.google.dev/gemini-api/docs/rate-limits'}]}, {'@type': 'type.googleapis.com/google.rpc.QuotaFailure', 'violations': [{'quotaMetric': 'generativelanguage.googleapis.com/generate_content_free_tier_requests', 'quotaId': 'GenerateRequestsPerDayPerProjectPerModel-FreeTier', 'quotaDimensions': {'model': 'gemini-2.5-flash-lite', 'location': 'global'}, 'quotaValue': '20'}]}, {'@type': 'type.googleapis.com/google.rpc.RetryInfo', 'retryDelay': '3s'}]}}
+2026-05-03 09:10:56,119 [INFO] root: AFC is enabled with max remote calls: 10.
+2026-05-03 09:10:57,078 [WARNING] app.ai.description: gemini-2.5-flash rate-limited, brief retry...
+2026-05-03 09:10:59,079 [INFO] root: AFC is enabled with max remote calls: 10.
+2026-05-03 09:11:00,002 [WARNING] app.ai.description: Model gemini-2.5-flash quota exhausted, cooling down for 1800s
+2026-05-03 09:11:00,002 [INFO] root: AFC is enabled with max remote calls: 10.
+2026-05-03 09:11:00,903 [WARNING] app.ai.description: gemini-2.5-flash-lite rate-limited, brief retry...
+2026-05-03 09:11:02,903 [INFO] root: AFC is enabled with max remote calls: 10.
+2026-05-03 09:11:03,814 [WARNING] app.ai.description: Model gemini-2.5-flash-lite quota exhausted, cooling down for 1800s
+2026-05-03 09:11:03,815 [WARNING] app.ai.description: Gemini description failed, using smart fallback: 429 RESOURCE_EXHAUSTED. {'error': {'code': 429, 'message': 'You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://ai.google.dev/gemini-api/docs/rate-limits. To monitor your current usage, head to: https://ai.dev/rate-limit. \n* Quota exceeded for metric: generativelanguage.googleapis.com/generate_content_free_tier_requests, limit: 20, model: gemini-2.5-flash-lite\nPlease retry in 56.169266216s.', 'status': 'RESOURCE_EXHAUSTED', 'details': [{'@type': 'type.googleapis.com/google.rpc.Help', 'links': [{'description': 'Learn more about Gemini API quotas', 'url': 'https://ai.google.dev/gemini-api/docs/rate-limits'}]}, {'@type': 'type.googleapis.com/google.rpc.QuotaFailure', 'violations': [{'quotaMetric': 'generativelanguage.googleapis.com/generate_content_free_tier_requests', 'quotaId': 'GenerateRequestsPerDayPerProjectPerModel-FreeTier', 'quotaDimensions': {'location': 'global', 'model': 'gemini-2.5-flash-lite'}, 'quotaValue': '20'}]}, {'@type': 'type.googleapis.com/google.rpc.RetryInfo', 'retryDelay': '56s'}]}}
+2026-05-03 09:11:03,815 [INFO] root: AFC is enabled with max remote calls: 10.
+2026-05-03 09:11:04,759 [WARNING] app.ai.description: gemini-2.5-flash rate-limited, brief retry...
+2026-05-03 09:11:06,760 [INFO] root: AFC is enabled with max remote calls: 10.
+2026-05-03 09:11:07,720 [WARNING] app.ai.description: Model gemini-2.5-flash quota exhausted, cooling down for 1800s
+2026-05-03 09:11:07,720 [INFO] root: AFC is enabled with max remote calls: 10.
+2026-05-03 09:11:08,625 [WARNING] app.ai.description: gemini-2.5-flash-lite rate-limited, brief retry...
+2026-05-03 09:11:10,625 [INFO] root: AFC is enabled with max remote calls: 10.
+2026-05-03 09:11:11,401 [WARNING] app.ai.description: Model gemini-2.5-flash-lite quota exhausted, cooling down for 1800s
+2026-05-03 09:11:11,401 [WARNING] app.ai.description: Gemini price decision failed: 429 RESOURCE_EXHAUSTED. {'error': {'code': 429, 'message': 'You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://ai.google.dev/gemini-api/docs/rate-limits. To monitor your current usage, head to: https://ai.dev/rate-limit. \n* Quota exceeded for metric: generativelanguage.googleapis.com/generate_content_free_tier_requests, limit: 20, model: gemini-2.5-flash-lite\nPlease retry in 48.585881301s.', 'status': 'RESOURCE_EXHAUSTED', 'details': [{'@type': 'type.googleapis.com/google.rpc.Help', 'links': [{'description': 'Learn more about Gemini API quotas', 'url': 'https://ai.google.dev/gemini-api/docs/rate-limits'}]}, {'@type': 'type.googleapis.com/google.rpc.QuotaFailure', 'violations': [{'quotaMetric': 'generativelanguage.googleapis.com/generate_content_free_tier_requests', 'quotaId': 'GenerateRequestsPerDayPerProjectPerModel-FreeTier', 'quotaDimensions': {'model': 'gemini-2.5-flash-lite', 'location': 'global'}, 'quotaValue': '20'}]}, {'@type': 'type.googleapis.com/google.rpc.RetryInfo', 'retryDelay': '48s'}]}}
+2026-05-03 09:11:11,402 [INFO] root: AFC is enabled with max remote calls: 10.
+2026-05-03 09:11:12,318 [WARNING] app.ai.description: gemini-2.5-flash rate-limited, brief retry...
+2026-05-03 09:11:14,318 [INFO] root: AFC is enabled with max remote calls: 10.
+2026-05-03 09:11:15,372 [WARNING] app.ai.description: Model gemini-2.5-flash quota exhausted, cooling down for 1800s
+2026-05-03 09:11:15,372 [INFO] root: AFC is enabled with max remote calls: 10.
+2026-05-03 09:11:16,261 [WARNING] app.ai.description: gemini-2.5-flash-lite rate-limited, brief retry...
+2026-05-03 09:11:18,262 [INFO] root: AFC is enabled with max remote calls: 10.
+2026-05-03 09:11:19,161 [WARNING] app.ai.description: Model gemini-2.5-flash-lite quota exhausted, cooling down for 1800s
+2026-05-03 09:11:19,161 [WARNING] app.ai.description: Gemini description failed, using smart fallback: 429 RESOURCE_EXHAUSTED. {'error': {'code': 429, 'message': 'You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://ai.google.dev/gemini-api/docs/rate-limits. To monitor your current usage, head to: https://ai.dev/rate-limit. \n* Quota exceeded for metric: generativelanguage.googleapis.com/generate_content_free_tier_requests, limit: 20, model: gemini-2.5-flash-lite\nPlease retry in 40.832655969s.', 'status': 'RESOURCE_EXHAUSTED', 'details': [{'@type': 'type.googleapis.com/google.rpc.Help', 'links': [{'description': 'Learn more about Gemini API quotas', 'url': 'https://ai.google.dev/gemini-api/docs/rate-limits'}]}, {'@type': 'type.googleapis.com/google.rpc.QuotaFailure', 'violations': [{'quotaMetric': 'generativelanguage.googleapis.com/generate_content_free_tier_requests', 'quotaId': 'GenerateRequestsPerDayPerProjectPerModel-FreeTier', 'quotaDimensions': {'location': 'global', 'model': 'gemini-2.5-flash-lite'}, 'quotaValue': '20'}]}, {'@type': 'type.googleapis.com/google.rpc.RetryInfo', 'retryDelay': '40s'}]}}
+2026-05-03 09:11:19,161 [INFO] root: AFC is enabled with max remote calls: 10.
+2026-05-03 09:11:20,184 [WARNING] app.ai.description: gemini-2.5-flash rate-limited, brief retry...
+2026-05-03 09:11:22,185 [INFO] root: AFC is enabled with max remote calls: 10.
+2026-05-03 09:11:23,119 [WARNING] app.ai.description: Model gemini-2.5-flash quota exhausted, cooling down for 1800s
+2026-05-03 09:11:23,119 [INFO] root: AFC is enabled with max remote calls: 10.
+2026-05-03 09:11:23,961 [WARNING] app.ai.description: gemini-2.5-flash-lite rate-limited, brief retry...
+2026-05-03 09:11:25,961 [INFO] root: AFC is enabled with max remote calls: 10.
+2026-05-03 09:11:27,456 [WARNING] app.ai.description: Model gemini-2.5-flash-lite quota exhausted, cooling down for 1800s
+2026-05-03 09:11:27,457 [WARNING] app.ai.description: Gemini price decision failed: 429 RESOURCE_EXHAUSTED. {'error': {'code': 429, 'message': 'You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://ai.google.dev/gemini-api/docs/rate-limits. To monitor your current usage, head to: https://ai.dev/rate-limit. \n* Quota exceeded for metric: generativelanguage.googleapis.com/generate_content_free_tier_requests, limit: 20, model: gemini-2.5-flash-lite\nPlease retry in 32.52524204s.', 'status': 'RESOURCE_EXHAUSTED', 'details': [{'@type': 'type.googleapis.com/google.rpc.Help', 'links': [{'description': 'Learn more about Gemini API quotas', 'url': 'https://ai.google.dev/gemini-api/docs/rate-limits'}]}, {'@type': 'type.googleapis.com/google.rpc.QuotaFailure', 'violations': [{'quotaMetric': 'generativelanguage.googleapis.com/generate_content_free_tier_requests', 'quotaId': 'GenerateRequestsPerDayPerProjectPerModel-FreeTier', 'quotaDimensions': {'location': 'global', 'model': 'gemini-2.5-flash-lite'}, 'quotaValue': '20'}]}, {'@type': 'type.googleapis.com/google.rpc.RetryInfo', 'retryDelay': '32s'}]}}
+2026-05-03 09:11:27,457 [INFO] root: AFC is enabled with max remote calls: 10.
+2026-05-03 09:11:28,371 [WARNING] app.ai.description: gemini-2.5-flash rate-limited, brief retry...
+2026-05-03 09:11:30,372 [INFO] root: AFC is enabled with max remote calls: 10.
+2026-05-03 09:11:31,249 [WARNING] app.ai.description: Model gemini-2.5-flash quota exhausted, cooling down for 1800s
+2026-05-03 09:11:31,249 [INFO] root: AFC is enabled with max remote calls: 10.
+2026-05-03 09:11:32,100 [WARNING] app.ai.description: gemini-2.5-flash-lite rate-limited, brief retry...
+2026-05-03 09:11:34,100 [INFO] root: AFC is enabled with max remote calls: 10.
+2026-05-03 09:11:34,949 [WARNING] app.ai.description: Model gemini-2.5-flash-lite quota exhausted, cooling down for 1800s
+2026-05-03 09:11:34,949 [WARNING] app.ai.description: Gemini description failed, using smart fallback: 429 RESOURCE_EXHAUSTED. {'error': {'code': 429, 'message': 'You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://ai.google.dev/gemini-api/docs/rate-limits. To monitor your current usage, head to: https://ai.dev/rate-limit. \n* Quota exceeded for metric: generativelanguage.googleapis.com/generate_content_free_tier_requests, limit: 20, model: gemini-2.5-flash-lite\nPlease retry in 25.038929942s.', 'status': 'RESOURCE_EXHAUSTED', 'details': [{'@type': 'type.googleapis.com/google.rpc.Help', 'links': [{'description': 'Learn more about Gemini API quotas', 'url': 'https://ai.google.dev/gemini-api/docs/rate-limits'}]}, {'@type': 'type.googleapis.com/google.rpc.QuotaFailure', 'violations': [{'quotaMetric': 'generativelanguage.googleapis.com/generate_content_free_tier_requests', 'quotaId': 'GenerateRequestsPerDayPerProjectPerModel-FreeTier', 'quotaDimensions': {'location': 'global', 'model': 'gemini-2.5-flash-lite'}, 'quotaValue': '20'}]}, {'@type': 'type.googleapis.com/google.rpc.RetryInfo', 'retryDelay': '25s'}]}}
+2026-05-03 09:11:34,949 [INFO] root: AFC is enabled with max remote calls: 10.
+2026-05-03 09:11:35,866 [WARNING] app.ai.description: gemini-2.5-flash rate-limited, brief retry...
+2026-05-03 09:11:37,867 [INFO] root: AFC is enabled with max remote calls: 10.
+2026-05-03 09:11:38,784 [WARNING] app.ai.description: Model gemini-2.5-flash quota exhausted, cooling down for 1800s
+2026-05-03 09:11:38,784 [INFO] root: AFC is enabled with max remote calls: 10.
+2026-05-03 09:11:39,564 [WARNING] app.ai.description: gemini-2.5-flash-lite rate-limited, brief retry...
+2026-05-03 09:11:41,565 [INFO] root: AFC is enabled with max remote calls: 10.
+2026-05-03 09:11:42,476 [WARNING] app.ai.description: Model gemini-2.5-flash-lite quota exhausted, cooling down for 1800s
+2026-05-03 09:11:42,477 [WARNING] app.ai.description: Gemini price decision failed: 429 RESOURCE_EXHAUSTED. {'error': {'code': 429, 'message': 'You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://ai.google.dev/gemini-api/docs/rate-limits. To monitor your current usage, head to: https://ai.dev/rate-limit. \n* Quota exceeded for metric: generativelanguage.googleapis.com/generate_content_free_tier_requests, limit: 20, model: gemini-2.5-flash-lite\nPlease retry in 17.51440215s.', 'status': 'RESOURCE_EXHAUSTED', 'details': [{'@type': 'type.googleapis.com/google.rpc.Help', 'links': [{'description': 'Learn more about Gemini API quotas', 'url': 'https://ai.google.dev/gemini-api/docs/rate-limits'}]}, {'@type': 'type.googleapis.com/google.rpc.QuotaFailure', 'violations': [{'quotaMetric': 'generativelanguage.googleapis.com/generate_content_free_tier_requests', 'quotaId': 'GenerateRequestsPerDayPerProjectPerModel-FreeTier', 'quotaDimensions': {'location': 'global', 'model': 'gemini-2.5-flash-lite'}, 'quotaValue': '20'}]}, {'@type': 'type.googleapis.com/google.rpc.RetryInfo', 'retryDelay': '17s'}]}}
+2026-05-03 09:11:42,477 [INFO] root: AFC is enabled with max remote calls: 10.
+2026-05-03 09:11:43,447 [WARNING] app.ai.description: gemini-2.5-flash rate-limited, brief retry...
+2026-05-03 09:11:45,448 [INFO] root: AFC is enabled with max remote calls: 10.
+2026-05-03 09:11:46,374 [WARNING] app.ai.description: Model gemini-2.5-flash quota exhausted, cooling down for 1800s
+2026-05-03 09:11:46,374 [INFO] root: AFC is enabled with max remote calls: 10.
+2026-05-03 09:11:47,253 [WARNING] app.ai.description: gemini-2.5-flash-lite rate-limited, brief retry...
+2026-05-03 09:11:49,253 [INFO] root: AFC is enabled with max remote calls: 10.
+2026-05-03 09:11:50,309 [WARNING] app.ai.description: Model gemini-2.5-flash-lite quota exhausted, cooling down for 1800s
+2026-05-03 09:11:50,309 [WARNING] app.ai.description: Gemini description failed, using smart fallback: 429 RESOURCE_EXHAUSTED. {'error': {'code': 429, 'message': 'You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://ai.google.dev/gemini-api/docs/rate-limits. To monitor your current usage, head to: https://ai.dev/rate-limit. \n* Quota exceeded for metric: generativelanguage.googleapis.com/generate_content_free_tier_requests, limit: 20, model: gemini-2.5-flash-lite\nPlease retry in 9.677327811s.', 'status': 'RESOURCE_EXHAUSTED', 'details': [{'@type': 'type.googleapis.com/google.rpc.Help', 'links': [{'description': 'Learn more about Gemini API quotas', 'url': 'https://ai.google.dev/gemini-api/docs/rate-limits'}]}, {'@type': 'type.googleapis.com/google.rpc.QuotaFailure', 'violations': [{'quotaMetric': 'generativelanguage.googleapis.com/generate_content_free_tier_requests', 'quotaId': 'GenerateRequestsPerDayPerProjectPerModel-FreeTier', 'quotaDimensions': {'location': 'global', 'model': 'gemini-2.5-flash-lite'}, 'quotaValue': '20'}]}, {'@type': 'type.googleapis.com/google.rpc.RetryInfo', 'retryDelay': '9s'}]}}
+2026-05-03 09:11:50,310 [INFO] root: AFC is enabled with max remote calls: 10.
+2026-05-03 09:11:51,495 [WARNING] app.ai.description: gemini-2.5-flash rate-limited, brief retry...
+2026-05-03 09:11:53,496 [INFO] root: AFC is enabled with max remote calls: 10.
+2026-05-03 09:11:54,429 [WARNING] app.ai.description: Model gemini-2.5-flash quota exhausted, cooling down for 1800s
+2026-05-03 09:11:54,430 [INFO] root: AFC is enabled with max remote calls: 10.
+2026-05-03 09:11:55,427 [WARNING] app.ai.description: gemini-2.5-flash-lite rate-limited, brief retry...
+2026-05-03 09:11:57,427 [INFO] root: AFC is enabled with max remote calls: 10.
+2026-05-03 09:11:58,535 [WARNING] app.ai.description: Model gemini-2.5-flash-lite quota exhausted, cooling down for 1800s
+2026-05-03 09:11:58,535 [WARNING] app.ai.description: Gemini price decision failed: 429 RESOURCE_EXHAUSTED. {'error': {'code': 429, 'message': 'You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://ai.google.dev/gemini-api/docs/rate-limits. To monitor your current usage, head to: https://ai.dev/rate-limit. \n* Quota exceeded for metric: generativelanguage.googleapis.com/generate_content_free_tier_requests, limit: 20, model: gemini-2.5-flash-lite\nPlease retry in 1.554414188s.', 'status': 'RESOURCE_EXHAUSTED', 'details': [{'@type': 'type.googleapis.com/google.rpc.Help', 'links': [{'description': 'Learn more about Gemini API quotas', 'url': 'https://ai.google.dev/gemini-api/docs/rate-limits'}]}, {'@type': 'type.googleapis.com/google.rpc.QuotaFailure', 'violations': [{'quotaMetric': 'generativelanguage.googleapis.com/generate_content_free_tier_requests', 'quotaId': 'GenerateRequestsPerDayPerProjectPerModel-FreeTier', 'quotaDimensions': {'location': 'global', 'model': 'gemini-2.5-flash-lite'}, 'quotaValue': '20'}]}, {'@type': 'type.googleapis.com/google.rpc.RetryInfo', 'retryDelay': '1s'}]}}
+2026-05-03 09:11:58,536 [INFO] root: AFC is enabled with max remote calls: 10.
+2026-05-03 09:11:59,413 [WARNING] app.ai.description: gemini-2.5-flash rate-limited, brief retry...
+2026-05-03 09:12:01,414 [INFO] root: AFC is enabled with max remote calls: 10.
+2026-05-03 09:12:02,497 [WARNING] app.ai.description: Model gemini-2.5-flash quota exhausted, cooling down for 1800s
+2026-05-03 09:12:02,498 [INFO] root: AFC is enabled with max remote calls: 10.
+2026-05-03 09:12:03,359 [WARNING] app.ai.description: gemini-2.5-flash-lite rate-limited, brief retry...
+2026-05-03 09:12:05,360 [INFO] root: AFC is enabled with max remote calls: 10.
+2026-05-03 09:12:06,295 [WARNING] app.ai.description: Model gemini-2.5-flash-lite quota exhausted, cooling down for 1800s
+2026-05-03 09:12:06,295 [WARNING] app.ai.description: Gemini description failed, using smart fallback: 429 RESOURCE_EXHAUSTED. {'error': {'code': 429, 'message': 'You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://ai.google.dev/gemini-api/docs/rate-limits. To monitor your current usage, head to: https://ai.dev/rate-limit. \n* Quota exceeded for metric: generativelanguage.googleapis.com/generate_content_free_tier_requests, limit: 20, model: gemini-2.5-flash-lite\nPlease retry in 53.726351899s.', 'status': 'RESOURCE_EXHAUSTED', 'details': [{'@type': 'type.googleapis.com/google.rpc.Help', 'links': [{'description': 'Learn more about Gemini API quotas', 'url': 'https://ai.google.dev/gemini-api/docs/rate-limits'}]}, {'@type': 'type.googleapis.com/google.rpc.QuotaFailure', 'violations': [{'quotaMetric': 'generativelanguage.googleapis.com/generate_content_free_tier_requests', 'quotaId': 'GenerateRequestsPerDayPerProjectPerModel-FreeTier', 'quotaDimensions': {'location': 'global', 'model': 'gemini-2.5-flash-lite'}, 'quotaValue': '20'}]}, {'@type': 'type.googleapis.com/google.rpc.RetryInfo', 'retryDelay': '53s'}]}}
+2026-05-03 09:12:06,296 [INFO] root: AFC is enabled with max remote calls: 10.
+2026-05-03 09:12:07,190 [WARNING] app.ai.description: gemini-2.5-flash rate-limited, brief retry...
+2026-05-03 09:12:09,191 [INFO] root: AFC is enabled with max remote calls: 10.
+2026-05-03 09:12:10,086 [WARNING] app.ai.description: Model gemini-2.5-flash quota exhausted, cooling down for 1800s
+2026-05-03 09:12:10,086 [INFO] root: AFC is enabled with max remote calls: 10.
+2026-05-03 09:12:10,982 [WARNING] app.ai.description: gemini-2.5-flash-lite rate-limited, brief retry...
+2026-05-03 09:12:12,983 [INFO] root: AFC is enabled with max remote calls: 10.
+2026-05-03 09:12:13,879 [WARNING] app.ai.description: Model gemini-2.5-flash-lite quota exhausted, cooling down for 1800s
+2026-05-03 09:12:13,880 [WARNING] app.ai.description: Gemini price decision failed: 429 RESOURCE_EXHAUSTED. {'error': {'code': 429, 'message': 'You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://ai.google.dev/gemini-api/docs/rate-limits. To monitor your current usage, head to: https://ai.dev/rate-limit. \n* Quota exceeded for metric: generativelanguage.googleapis.com/generate_content_free_tier_requests, limit: 20, model: gemini-2.5-flash-lite\nPlease retry in 46.110686637s.', 'status': 'RESOURCE_EXHAUSTED', 'details': [{'@type': 'type.googleapis.com/google.rpc.Help', 'links': [{'description': 'Learn more about Gemini API quotas', 'url': 'https://ai.google.dev/gemini-api/docs/rate-limits'}]}, {'@type': 'type.googleapis.com/google.rpc.QuotaFailure', 'violations': [{'quotaMetric': 'generativelanguage.googleapis.com/generate_content_free_tier_requests', 'quotaId': 'GenerateRequestsPerDayPerProjectPerModel-FreeTier', 'quotaDimensions': {'location': 'global', 'model': 'gemini-2.5-flash-lite'}, 'quotaValue': '20'}]}, {'@type': 'type.googleapis.com/google.rpc.RetryInfo', 'retryDelay': '46s'}]}}
+2026-05-03 09:12:13,880 [INFO] root: AFC is enabled with max remote calls: 10.
+2026-05-03 09:12:14,735 [WARNING] app.ai.description: gemini-2.5-flash rate-limited, brief retry...
+2026-05-03 09:12:16,736 [INFO] root: AFC is enabled with max remote calls: 10.
+2026-05-03 09:12:17,657 [WARNING] app.ai.description: Model gemini-2.5-flash quota exhausted, cooling down for 1800s
+2026-05-03 09:12:17,657 [INFO] root: AFC is enabled with max remote calls: 10.
+2026-05-03 09:12:18,536 [WARNING] app.ai.description: gemini-2.5-flash-lite rate-limited, brief retry...
+2026-05-03 09:12:20,537 [INFO] root: AFC is enabled with max remote calls: 10.
+2026-05-03 09:12:21,424 [WARNING] app.ai.description: Model gemini-2.5-flash-lite quota exhausted, cooling down for 1800s
+2026-05-03 09:12:21,424 [WARNING] app.ai.description: Gemini description failed, using smart fallback: 429 RESOURCE_EXHAUSTED. {'error': {'code': 429, 'message': 'You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://ai.google.dev/gemini-api/docs/rate-limits. To monitor your current usage, head to: https://ai.dev/rate-limit. \n* Quota exceeded for metric: generativelanguage.googleapis.com/generate_content_free_tier_requests, limit: 20, model: gemini-2.5-flash-lite\nPlease retry in 38.569448498s.', 'status': 'RESOURCE_EXHAUSTED', 'details': [{'@type': 'type.googleapis.com/google.rpc.Help', 'links': [{'description': 'Learn more about Gemini API quotas', 'url': 'https://ai.google.dev/gemini-api/docs/rate-limits'}]}, {'@type': 'type.googleapis.com/google.rpc.QuotaFailure', 'violations': [{'quotaMetric': 'generativelanguage.googleapis.com/generate_content_free_tier_requests', 'quotaId': 'GenerateRequestsPerDayPerProjectPerModel-FreeTier', 'quotaDimensions': {'location': 'global', 'model': 'gemini-2.5-flash-lite'}, 'quotaValue': '20'}]}, {'@type': 'type.googleapis.com/google.rpc.RetryInfo', 'retryDelay': '38s'}]}}
+2026-05-03 09:12:21,424 [INFO] root: AFC is enabled with max remote calls: 10.
+2026-05-03 09:12:22,281 [WARNING] app.ai.description: gemini-2.5-flash rate-limited, brief retry...
+2026-05-03 09:12:24,282 [INFO] root: AFC is enabled with max remote calls: 10.
+2026-05-03 09:12:25,316 [WARNING] app.ai.description: Model gemini-2.5-flash quota exhausted, cooling down for 1800s
+2026-05-03 09:12:25,316 [INFO] root: AFC is enabled with max remote calls: 10.
+2026-05-03 09:12:26,250 [WARNING] app.ai.description: gemini-2.5-flash-lite rate-limited, brief retry...
+2026-05-03 09:12:28,250 [INFO] root: AFC is enabled with max remote calls: 10.
+2026-05-03 09:12:29,181 [WARNING] app.ai.description: Model gemini-2.5-flash-lite quota exhausted, cooling down for 1800s
+2026-05-03 09:12:29,181 [WARNING] app.ai.description: Gemini price decision failed: 429 RESOURCE_EXHAUSTED. {'error': {'code': 429, 'message': 'You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://ai.google.dev/gemini-api/docs/rate-limits. To monitor your current usage, head to: https://ai.dev/rate-limit. \n* Quota exceeded for metric: generativelanguage.googleapis.com/generate_content_free_tier_requests, limit: 20, model: gemini-2.5-flash-lite\nPlease retry in 30.808388833s.', 'status': 'RESOURCE_EXHAUSTED', 'details': [{'@type': 'type.googleapis.com/google.rpc.Help', 'links': [{'description': 'Learn more about Gemini API quotas', 'url': 'https://ai.google.dev/gemini-api/docs/rate-limits'}]}, {'@type': 'type.googleapis.com/google.rpc.QuotaFailure', 'violations': [{'quotaMetric': 'generativelanguage.googleapis.com/generate_content_free_tier_requests', 'quotaId': 'GenerateRequestsPerDayPerProjectPerModel-FreeTier', 'quotaDimensions': {'model': 'gemini-2.5-flash-lite', 'location': 'global'}, 'quotaValue': '20'}]}, {'@type': 'type.googleapis.com/google.rpc.RetryInfo', 'retryDelay': '30s'}]}}
+2026-05-03 09:12:29,182 [INFO] root: AFC is enabled with max remote calls: 10.
+2026-05-03 09:12:30,119 [WARNING] app.ai.description: gemini-2.5-flash rate-limited, brief retry...
+2026-05-03 09:12:32,119 [INFO] root: AFC is enabled with max remote calls: 10.
+2026-05-03 09:12:33,023 [WARNING] app.ai.description: Model gemini-2.5-flash quota exhausted, cooling down for 1800s
+2026-05-03 09:12:33,023 [INFO] root: AFC is enabled with max remote calls: 10.
+2026-05-03 09:12:33,937 [WARNING] app.ai.description: gemini-2.5-flash-lite rate-limited, brief retry...
+2026-05-03 09:12:35,938 [INFO] root: AFC is enabled with max remote calls: 10.
+2026-05-03 09:12:36,889 [WARNING] app.ai.description: Model gemini-2.5-flash-lite quota exhausted, cooling down for 1800s
+2026-05-03 09:12:36,889 [WARNING] app.ai.description: Gemini description failed, using smart fallback: 429 RESOURCE_EXHAUSTED. {'error': {'code': 429, 'message': 'You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://ai.google.dev/gemini-api/docs/rate-limits. To monitor your current usage, head to: https://ai.dev/rate-limit. \n* Quota exceeded for metric: generativelanguage.googleapis.com/generate_content_free_tier_requests, limit: 20, model: gemini-2.5-flash-lite\nPlease retry in 23.097438668s.', 'status': 'RESOURCE_EXHAUSTED', 'details': [{'@type': 'type.googleapis.com/google.rpc.Help', 'links': [{'description': 'Learn more about Gemini API quotas', 'url': 'https://ai.google.dev/gemini-api/docs/rate-limits'}]}, {'@type': 'type.googleapis.com/google.rpc.QuotaFailure', 'violations': [{'quotaMetric': 'generativelanguage.googleapis.com/generate_content_free_tier_requests', 'quotaId': 'GenerateRequestsPerDayPerProjectPerModel-FreeTier', 'quotaDimensions': {'location': 'global', 'model': 'gemini-2.5-flash-lite'}, 'quotaValue': '20'}]}, {'@type': 'type.googleapis.com/google.rpc.RetryInfo', 'retryDelay': '23s'}]}}
+2026-05-03 09:12:36,889 [INFO] root: AFC is enabled with max remote calls: 10.
+2026-05-03 09:12:37,933 [WARNING] app.ai.description: gemini-2.5-flash rate-limited, brief retry...
+2026-05-03 09:12:39,933 [INFO] root: AFC is enabled with max remote calls: 10.
+2026-05-03 09:12:40,993 [WARNING] app.ai.description: Model gemini-2.5-flash quota exhausted, cooling down for 1800s
+2026-05-03 09:12:40,994 [INFO] root: AFC is enabled with max remote calls: 10.
+2026-05-03 09:12:41,975 [WARNING] app.ai.description: gemini-2.5-flash-lite rate-limited, brief retry...
+2026-05-03 09:12:43,976 [INFO] root: AFC is enabled with max remote calls: 10.
+2026-05-03 09:12:44,971 [WARNING] app.ai.description: Model gemini-2.5-flash-lite quota exhausted, cooling down for 1800s
+2026-05-03 09:12:44,971 [WARNING] app.ai.description: Gemini price decision failed: 429 RESOURCE_EXHAUSTED. {'error': {'code': 429, 'message': 'You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://ai.google.dev/gemini-api/docs/rate-limits. To monitor your current usage, head to: https://ai.dev/rate-limit. \n* Quota exceeded for metric: generativelanguage.googleapis.com/generate_content_free_tier_requests, limit: 20, model: gemini-2.5-flash-lite\nPlease retry in 15.026405749s.', 'status': 'RESOURCE_EXHAUSTED', 'details': [{'@type': 'type.googleapis.com/google.rpc.Help', 'links': [{'description': 'Learn more about Gemini API quotas', 'url': 'https://ai.google.dev/gemini-api/docs/rate-limits'}]}, {'@type': 'type.googleapis.com/google.rpc.QuotaFailure', 'violations': [{'quotaMetric': 'generativelanguage.googleapis.com/generate_content_free_tier_requests', 'quotaId': 'GenerateRequestsPerDayPerProjectPerModel-FreeTier', 'quotaDimensions': {'location': 'global', 'model': 'gemini-2.5-flash-lite'}, 'quotaValue': '20'}]}, {'@type': 'type.googleapis.com/google.rpc.RetryInfo', 'retryDelay': '15s'}]}}
+2026-05-03 09:12:44,972 [INFO] root: AFC is enabled with max remote calls: 10.
+2026-05-03 09:12:45,975 [WARNING] app.ai.description: gemini-2.5-flash rate-limited, brief retry...
+2026-05-03 09:12:47,975 [INFO] root: AFC is enabled with max remote calls: 10.
+2026-05-03 09:12:48,982 [WARNING] app.ai.description: Model gemini-2.5-flash quota exhausted, cooling down for 1800s
+2026-05-03 09:12:48,983 [INFO] root: AFC is enabled with max remote calls: 10.
+2026-05-03 09:12:49,976 [WARNING] app.ai.description: gemini-2.5-flash-lite rate-limited, brief retry...
+2026-05-03 09:12:51,977 [INFO] root: AFC is enabled with max remote calls: 10.
+2026-05-03 09:12:52,977 [WARNING] app.ai.description: Model gemini-2.5-flash-lite quota exhausted, cooling down for 1800s
+2026-05-03 09:12:52,977 [WARNING] app.ai.description: Gemini description failed, using smart fallback: 429 RESOURCE_EXHAUSTED. {'error': {'code': 429, 'message': 'You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://ai.google.dev/gemini-api/docs/rate-limits. To monitor your current usage, head to: https://ai.dev/rate-limit. \n* Quota exceeded for metric: generativelanguage.googleapis.com/generate_content_free_tier_requests, limit: 20, model: gemini-2.5-flash-lite\nPlease retry in 7.01921932s.', 'status': 'RESOURCE_EXHAUSTED', 'details': [{'@type': 'type.googleapis.com/google.rpc.Help', 'links': [{'description': 'Learn more about Gemini API quotas', 'url': 'https://ai.google.dev/gemini-api/docs/rate-limits'}]}, {'@type': 'type.googleapis.com/google.rpc.QuotaFailure', 'violations': [{'quotaMetric': 'generativelanguage.googleapis.com/generate_content_free_tier_requests', 'quotaId': 'GenerateRequestsPerDayPerProjectPerModel-FreeTier', 'quotaDimensions': {'location': 'global', 'model': 'gemini-2.5-flash-lite'}, 'quotaValue': '20'}]}, {'@type': 'type.googleapis.com/google.rpc.RetryInfo', 'retryDelay': '7s'}]}}
+2026-05-03 09:12:52,978 [INFO] root: AFC is enabled with max remote calls: 10.
+2026-05-03 09:12:54,016 [WARNING] app.ai.description: gemini-2.5-flash rate-limited, brief retry...
+2026-05-03 09:12:56,017 [INFO] root: AFC is enabled with max remote calls: 10.
+2026-05-03 09:12:57,059 [WARNING] app.ai.description: Model gemini-2.5-flash quota exhausted, cooling down for 1800s
+2026-05-03 09:12:57,059 [INFO] root: AFC is enabled with max remote calls: 10.
+2026-05-03 09:12:58,022 [WARNING] app.ai.description: gemini-2.5-flash-lite rate-limited, brief retry...
+2026-05-03 09:13:00,023 [INFO] root: AFC is enabled with max remote calls: 10.
+2026-05-03 09:13:01,015 [WARNING] app.ai.description: Model gemini-2.5-flash-lite quota exhausted, cooling down for 1800s
+2026-05-03 09:13:01,016 [WARNING] app.ai.description: Gemini price decision failed: 429 RESOURCE_EXHAUSTED. {'error': {'code': 429, 'message': 'You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://ai.google.dev/gemini-api/docs/rate-limits. To monitor your current usage, head to: https://ai.dev/rate-limit. \n* Quota exceeded for metric: generativelanguage.googleapis.com/generate_content_free_tier_requests, limit: 20, model: gemini-2.5-flash-lite\nPlease retry in 58.98604618s.', 'status': 'RESOURCE_EXHAUSTED', 'details': [{'@type': 'type.googleapis.com/google.rpc.Help', 'links': [{'description': 'Learn more about Gemini API quotas', 'url': 'https://ai.google.dev/gemini-api/docs/rate-limits'}]}, {'@type': 'type.googleapis.com/google.rpc.QuotaFailure', 'violations': [{'quotaMetric': 'generativelanguage.googleapis.com/generate_content_free_tier_requests', 'quotaId': 'GenerateRequestsPerDayPerProjectPerModel-FreeTier', 'quotaDimensions': {'location': 'global', 'model': 'gemini-2.5-flash-lite'}, 'quotaValue': '20'}]}, {'@type': 'type.googleapis.com/google.rpc.RetryInfo', 'retryDelay': '58s'}]}}
+2026-05-03 09:13:01,016 [INFO] root: AFC is enabled with max remote calls: 10.
+2026-05-03 09:13:01,971 [WARNING] app.ai.description: gemini-2.5-flash rate-limited, brief retry...
+2026-05-03 09:13:03,972 [INFO] root: AFC is enabled with max remote calls: 10.
+2026-05-03 09:13:04,810 [WARNING] app.ai.description: Model gemini-2.5-flash quota exhausted, cooling down for 1800s
+2026-05-03 09:13:04,810 [INFO] root: AFC is enabled with max remote calls: 10.
+2026-05-03 09:13:05,753 [WARNING] app.ai.description: gemini-2.5-flash-lite rate-limited, brief retry...
+2026-05-03 09:13:07,754 [INFO] root: AFC is enabled with max remote calls: 10.
+2026-05-03 09:13:08,712 [WARNING] app.ai.description: Model gemini-2.5-flash-lite quota exhausted, cooling down for 1800s
+2026-05-03 09:13:08,713 [WARNING] app.ai.description: Gemini description failed, using smart fallback: 429 RESOURCE_EXHAUSTED. {'error': {'code': 429, 'message': 'You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://ai.google.dev/gemini-api/docs/rate-limits. To monitor your current usage, head to: https://ai.dev/rate-limit. \n* Quota exceeded for metric: generativelanguage.googleapis.com/generate_content_free_tier_requests, limit: 20, model: gemini-2.5-flash-lite\nPlease retry in 51.295439734s.', 'status': 'RESOURCE_EXHAUSTED', 'details': [{'@type': 'type.googleapis.com/google.rpc.Help', 'links': [{'description': 'Learn more about Gemini API quotas', 'url': 'https://ai.google.dev/gemini-api/docs/rate-limits'}]}, {'@type': 'type.googleapis.com/google.rpc.QuotaFailure', 'violations': [{'quotaMetric': 'generativelanguage.googleapis.com/generate_content_free_tier_requests', 'quotaId': 'GenerateRequestsPerDayPerProjectPerModel-FreeTier', 'quotaDimensions': {'location': 'global', 'model': 'gemini-2.5-flash-lite'}, 'quotaValue': '20'}]}, {'@type': 'type.googleapis.com/google.rpc.RetryInfo', 'retryDelay': '51s'}]}}
+2026-05-03 09:13:08,713 [INFO] root: AFC is enabled with max remote calls: 10.
+2026-05-03 09:13:09,523 [WARNING] app.ai.description: gemini-2.5-flash rate-limited, brief retry...
+2026-05-03 09:13:11,524 [INFO] root: AFC is enabled with max remote calls: 10.
+2026-05-03 09:13:12,468 [WARNING] app.ai.description: Model gemini-2.5-flash quota exhausted, cooling down for 1800s
+2026-05-03 09:13:12,468 [INFO] root: AFC is enabled with max remote calls: 10.
+2026-05-03 09:13:13,357 [WARNING] app.ai.description: gemini-2.5-flash-lite rate-limited, brief retry...
+2026-05-03 09:13:15,358 [INFO] root: AFC is enabled with max remote calls: 10.
+2026-05-03 09:13:16,209 [WARNING] app.ai.description: Model gemini-2.5-flash-lite quota exhausted, cooling down for 1800s
+2026-05-03 09:13:16,209 [WARNING] app.ai.description: Gemini price decision failed: 429 RESOURCE_EXHAUSTED. {'error': {'code': 429, 'message': 'You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://ai.google.dev/gemini-api/docs/rate-limits. To monitor your current usage, head to: https://ai.dev/rate-limit. \n* Quota exceeded for metric: generativelanguage.googleapis.com/generate_content_free_tier_requests, limit: 20, model: gemini-2.5-flash-lite\nPlease retry in 43.778926508s.', 'status': 'RESOURCE_EXHAUSTED', 'details': [{'@type': 'type.googleapis.com/google.rpc.Help', 'links': [{'description': 'Learn more about Gemini API quotas', 'url': 'https://ai.google.dev/gemini-api/docs/rate-limits'}]}, {'@type': 'type.googleapis.com/google.rpc.QuotaFailure', 'violations': [{'quotaMetric': 'generativelanguage.googleapis.com/generate_content_free_tier_requests', 'quotaId': 'GenerateRequestsPerDayPerProjectPerModel-FreeTier', 'quotaDimensions': {'location': 'global', 'model': 'gemini-2.5-flash-lite'}, 'quotaValue': '20'}]}, {'@type': 'type.googleapis.com/google.rpc.RetryInfo', 'retryDelay': '43s'}]}}
+2026-05-03 09:13:16,210 [INFO] root: AFC is enabled with max remote calls: 10.
+2026-05-03 09:13:17,056 [WARNING] app.ai.description: gemini-2.5-flash rate-limited, brief retry...
+2026-05-03 09:13:19,057 [INFO] root: AFC is enabled with max remote calls: 10.
+2026-05-03 09:13:19,737 [WARNING] app.ai.description: Model gemini-2.5-flash quota exhausted, cooling down for 1800s
+2026-05-03 09:13:19,737 [INFO] root: AFC is enabled with max remote calls: 10.
+2026-05-03 09:13:20,517 [WARNING] app.ai.description: gemini-2.5-flash-lite rate-limited, brief retry...
+2026-05-03 09:13:22,518 [INFO] root: AFC is enabled with max remote calls: 10.
+2026-05-03 09:13:23,339 [WARNING] app.ai.description: Model gemini-2.5-flash-lite quota exhausted, cooling down for 1800s
+2026-05-03 09:13:23,339 [WARNING] app.ai.description: Gemini description failed, using smart fallback: 429 RESOURCE_EXHAUSTED. {'error': {'code': 429, 'message': 'You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://ai.google.dev/gemini-api/docs/rate-limits. To monitor your current usage, head to: https://ai.dev/rate-limit. \n* Quota exceeded for metric: generativelanguage.googleapis.com/generate_content_free_tier_requests, limit: 20, model: gemini-2.5-flash-lite\nPlease retry in 36.649918675s.', 'status': 'RESOURCE_EXHAUSTED', 'details': [{'@type': 'type.googleapis.com/google.rpc.Help', 'links': [{'description': 'Learn more about Gemini API quotas', 'url': 'https://ai.google.dev/gemini-api/docs/rate-limits'}]}, {'@type': 'type.googleapis.com/google.rpc.QuotaFailure', 'violations': [{'quotaMetric': 'generativelanguage.googleapis.com/generate_content_free_tier_requests', 'quotaId': 'GenerateRequestsPerDayPerProjectPerModel-FreeTier', 'quotaDimensions': {'location': 'global', 'model': 'gemini-2.5-flash-lite'}, 'quotaValue': '20'}]}, {'@type': 'type.googleapis.com/google.rpc.RetryInfo', 'retryDelay': '36s'}]}}
+2026-05-03 09:13:23,340 [INFO] root: AFC is enabled with max remote calls: 10.
+2026-05-03 09:13:23,990 [WARNING] app.ai.description: gemini-2.5-flash rate-limited, brief retry...
+2026-05-03 09:13:25,990 [INFO] root: AFC is enabled with max remote calls: 10.
+2026-05-03 09:13:26,812 [WARNING] app.ai.description: Model gemini-2.5-flash quota exhausted, cooling down for 1800s
+2026-05-03 09:13:26,812 [INFO] root: AFC is enabled with max remote calls: 10.
+2026-05-03 09:13:27,957 [WARNING] app.ai.description: gemini-2.5-flash-lite rate-limited, brief retry...
+2026-05-03 09:13:29,958 [INFO] root: AFC is enabled with max remote calls: 10.
+2026-05-03 09:13:30,868 [WARNING] app.ai.description: Model gemini-2.5-flash-lite quota exhausted, cooling down for 1800s
+2026-05-03 09:13:30,868 [WARNING] app.ai.description: Gemini price decision failed: 429 RESOURCE_EXHAUSTED. {'error': {'code': 429, 'message': 'You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://ai.google.dev/gemini-api/docs/rate-limits. To monitor your current usage, head to: https://ai.dev/rate-limit. \n* Quota exceeded for metric: generativelanguage.googleapis.com/generate_content_free_tier_requests, limit: 20, model: gemini-2.5-flash-lite\nPlease retry in 29.119993358s.', 'status': 'RESOURCE_EXHAUSTED', 'details': [{'@type': 'type.googleapis.com/google.rpc.Help', 'links': [{'description': 'Learn more about Gemini API quotas', 'url': 'https://ai.google.dev/gemini-api/docs/rate-limits'}]}, {'@type': 'type.googleapis.com/google.rpc.QuotaFailure', 'violations': [{'quotaMetric': 'generativelanguage.googleapis.com/generate_content_free_tier_requests', 'quotaId': 'GenerateRequestsPerDayPerProjectPerModel-FreeTier', 'quotaDimensions': {'model': 'gemini-2.5-flash-lite', 'location': 'global'}, 'quotaValue': '20'}]}, {'@type': 'type.googleapis.com/google.rpc.RetryInfo', 'retryDelay': '29s'}]}}
+2026-05-03 09:13:30,869 [INFO] root: AFC is enabled with max remote calls: 10.
+2026-05-03 09:13:31,830 [WARNING] app.ai.description: gemini-2.5-flash rate-limited, brief retry...
+2026-05-03 09:13:33,830 [INFO] root: AFC is enabled with max remote calls: 10.
+2026-05-03 09:13:34,792 [WARNING] app.ai.description: Model gemini-2.5-flash quota exhausted, cooling down for 1800s
+2026-05-03 09:13:34,792 [INFO] root: AFC is enabled with max remote calls: 10.
+2026-05-03 09:13:35,789 [WARNING] app.ai.description: gemini-2.5-flash-lite rate-limited, brief retry...
+2026-05-03 09:13:37,789 [INFO] root: AFC is enabled with max remote calls: 10.
+2026-05-03 09:13:38,690 [WARNING] app.ai.description: Model gemini-2.5-flash-lite quota exhausted, cooling down for 1800s
+2026-05-03 09:13:38,690 [WARNING] app.ai.description: Gemini description failed, using smart fallback: 429 RESOURCE_EXHAUSTED. {'error': {'code': 429, 'message': 'You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://ai.google.dev/gemini-api/docs/rate-limits. To monitor your current usage, head to: https://ai.dev/rate-limit. \n* Quota exceeded for metric: generativelanguage.googleapis.com/generate_content_free_tier_requests, limit: 20, model: gemini-2.5-flash-lite\nPlease retry in 21.313006326s.', 'status': 'RESOURCE_EXHAUSTED', 'details': [{'@type': 'type.googleapis.com/google.rpc.Help', 'links': [{'description': 'Learn more about Gemini API quotas', 'url': 'https://ai.google.dev/gemini-api/docs/rate-limits'}]}, {'@type': 'type.googleapis.com/google.rpc.QuotaFailure', 'violations': [{'quotaMetric': 'generativelanguage.googleapis.com/generate_content_free_tier_requests', 'quotaId': 'GenerateRequestsPerDayPerProjectPerModel-FreeTier', 'quotaDimensions': {'location': 'global', 'model': 'gemini-2.5-flash-lite'}, 'quotaValue': '20'}]}, {'@type': 'type.googleapis.com/google.rpc.RetryInfo', 'retryDelay': '21s'}]}}
+2026-05-03 09:14:28,485 [INFO] app.scraper.clients: Karma Piyasa Operasyonu (TR + Global): ESP32
+2026-05-03 09:14:30,804 [INFO] httpx: HTTP Request: GET https://www.findchips.com/search/ESP32?currency=EUR "HTTP/1.1 200 OK"
+2026-05-03 09:14:30,805 [INFO] httpx: HTTP Request: GET https://www.robolinkmarket.com/arama?q=ESP32 "HTTP/1.1 200 OK"
+2026-05-03 09:14:30,816 [INFO] httpx: HTTP Request: GET https://www.robo90.com/arama?q=ESP32 "HTTP/1.1 200 OK"
+2026-05-03 09:14:31,184 [INFO] httpx: HTTP Request: GET https://www.robotistan.com/arama?q=ESP32 "HTTP/1.1 200 OK"
+2026-05-03 09:14:31,538 [INFO] httpx: HTTP Request: GET https://www.komponentci.net/arama?q=ESP32 "HTTP/1.1 302 Object moved"
+2026-05-03 09:14:32,821 [INFO] httpx: HTTP Request: GET https://www.direnc.net/arama?q=ESP32 "HTTP/1.1 200 OK"
+2026-05-03 09:14:32,824 [INFO] httpx: HTTP Request: GET https://www.komponentci.net/ "HTTP/1.1 200 OK"
+2026-05-03 09:14:33,715 [INFO] root: AFC is enabled with max remote calls: 10.
+2026-05-03 09:14:34,859 [WARNING] app.ai.description: gemini-2.5-flash rate-limited, brief retry...
+2026-05-03 09:14:36,859 [INFO] root: AFC is enabled with max remote calls: 10.
+2026-05-03 09:14:37,731 [WARNING] app.ai.description: Model gemini-2.5-flash quota exhausted, cooling down for 1800s
+2026-05-03 09:14:37,732 [INFO] root: AFC is enabled with max remote calls: 10.
+2026-05-03 09:14:38,667 [WARNING] app.ai.description: gemini-2.5-flash-lite rate-limited, brief retry...
+2026-05-03 09:14:40,667 [INFO] root: AFC is enabled with max remote calls: 10.
+2026-05-03 09:14:41,471 [WARNING] app.ai.description: Model gemini-2.5-flash-lite quota exhausted, cooling down for 1800s
+2026-05-03 09:14:41,471 [WARNING] app.ai.description: Gemini price decision failed: 429 RESOURCE_EXHAUSTED. {'error': {'code': 429, 'message': 'You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://ai.google.dev/gemini-api/docs/rate-limits. To monitor your current usage, head to: https://ai.dev/rate-limit. \n* Quota exceeded for metric: generativelanguage.googleapis.com/generate_content_free_tier_requests, limit: 20, model: gemini-2.5-flash-lite\nPlease retry in 18.525606824s.', 'status': 'RESOURCE_EXHAUSTED', 'details': [{'@type': 'type.googleapis.com/google.rpc.Help', 'links': [{'description': 'Learn more about Gemini API quotas', 'url': 'https://ai.google.dev/gemini-api/docs/rate-limits'}]}, {'@type': 'type.googleapis.com/google.rpc.QuotaFailure', 'violations': [{'quotaMetric': 'generativelanguage.googleapis.com/generate_content_free_tier_requests', 'quotaId': 'GenerateRequestsPerDayPerProjectPerModel-FreeTier', 'quotaDimensions': {'model': 'gemini-2.5-flash-lite', 'location': 'global'}, 'quotaValue': '20'}]}, {'@type': 'type.googleapis.com/google.rpc.RetryInfo', 'retryDelay': '18s'}]}}
+2026-05-03 09:14:41,471 [INFO] root: AFC is enabled with max remote calls: 10.
+2026-05-03 09:14:42,273 [WARNING] app.ai.description: gemini-2.5-flash rate-limited, brief retry...
+2026-05-03 09:14:44,273 [INFO] root: AFC is enabled with max remote calls: 10.
+2026-05-03 09:14:45,084 [WARNING] app.ai.description: Model gemini-2.5-flash quota exhausted, cooling down for 1800s
+2026-05-03 09:14:45,084 [INFO] root: AFC is enabled with max remote calls: 10.
+2026-05-03 09:14:45,973 [WARNING] app.ai.description: gemini-2.5-flash-lite rate-limited, brief retry...
+2026-05-03 09:14:47,973 [INFO] root: AFC is enabled with max remote calls: 10.
+2026-05-03 09:14:48,833 [WARNING] app.ai.description: Model gemini-2.5-flash-lite quota exhausted, cooling down for 1800s
+2026-05-03 09:14:48,833 [WARNING] app.ai.description: Gemini price decision failed: 429 RESOURCE_EXHAUSTED. {'error': {'code': 429, 'message': 'You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://ai.google.dev/gemini-api/docs/rate-limits. To monitor your current usage, head to: https://ai.dev/rate-limit. \n* Quota exceeded for metric: generativelanguage.googleapis.com/generate_content_free_tier_requests, limit: 20, model: gemini-2.5-flash-lite\nPlease retry in 11.157651447s.', 'status': 'RESOURCE_EXHAUSTED', 'details': [{'@type': 'type.googleapis.com/google.rpc.Help', 'links': [{'description': 'Learn more about Gemini API quotas', 'url': 'https://ai.google.dev/gemini-api/docs/rate-limits'}]}, {'@type': 'type.googleapis.com/google.rpc.QuotaFailure', 'violations': [{'quotaMetric': 'generativelanguage.googleapis.com/generate_content_free_tier_requests', 'quotaId': 'GenerateRequestsPerDayPerProjectPerModel-FreeTier', 'quotaDimensions': {'location': 'global', 'model': 'gemini-2.5-flash-lite'}, 'quotaValue': '20'}]}, {'@type': 'type.googleapis.com/google.rpc.RetryInfo', 'retryDelay': '11s'}]}}
+2026-05-03 09:14:48,834 [INFO] root: AFC is enabled with max remote calls: 10.
+2026-05-03 09:14:49,716 [WARNING] app.ai.description: gemini-2.5-flash rate-limited, brief retry...
+2026-05-03 09:14:51,716 [INFO] root: AFC is enabled with max remote calls: 10.
+2026-05-03 09:14:52,561 [WARNING] app.ai.description: Model gemini-2.5-flash quota exhausted, cooling down for 1800s
+2026-05-03 09:14:52,561 [INFO] root: AFC is enabled with max remote calls: 10.
+2026-05-03 09:14:53,426 [WARNING] app.ai.description: gemini-2.5-flash-lite rate-limited, brief retry...
+2026-05-03 09:14:55,426 [INFO] root: AFC is enabled with max remote calls: 10.
+2026-05-03 09:14:56,418 [WARNING] app.ai.description: Model gemini-2.5-flash-lite quota exhausted, cooling down for 1800s
+2026-05-03 09:14:56,419 [WARNING] app.ai.description: Gemini price decision failed: 429 RESOURCE_EXHAUSTED. {'error': {'code': 429, 'message': 'You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://ai.google.dev/gemini-api/docs/rate-limits. To monitor your current usage, head to: https://ai.dev/rate-limit. \n* Quota exceeded for metric: generativelanguage.googleapis.com/generate_content_free_tier_requests, limit: 20, model: gemini-2.5-flash-lite\nPlease retry in 3.650834065s.', 'status': 'RESOURCE_EXHAUSTED', 'details': [{'@type': 'type.googleapis.com/google.rpc.Help', 'links': [{'description': 'Learn more about Gemini API quotas', 'url': 'https://ai.google.dev/gemini-api/docs/rate-limits'}]}, {'@type': 'type.googleapis.com/google.rpc.QuotaFailure', 'violations': [{'quotaMetric': 'generativelanguage.googleapis.com/generate_content_free_tier_requests', 'quotaId': 'GenerateRequestsPerDayPerProjectPerModel-FreeTier', 'quotaDimensions': {'location': 'global', 'model': 'gemini-2.5-flash-lite'}, 'quotaValue': '20'}]}, {'@type': 'type.googleapis.com/google.rpc.RetryInfo', 'retryDelay': '3s'}]}}
+2026-05-03 09:14:56,419 [INFO] root: AFC is enabled with max remote calls: 10.
+2026-05-03 09:14:57,360 [WARNING] app.ai.description: gemini-2.5-flash rate-limited, brief retry...
+2026-05-03 09:14:59,361 [INFO] root: AFC is enabled with max remote calls: 10.
+2026-05-03 09:15:00,266 [WARNING] app.ai.description: Model gemini-2.5-flash quota exhausted, cooling down for 1800s
+2026-05-03 09:15:00,266 [INFO] root: AFC is enabled with max remote calls: 10.
+2026-05-03 09:15:01,204 [WARNING] app.ai.description: gemini-2.5-flash-lite rate-limited, brief retry...
+2026-05-03 09:15:03,205 [INFO] root: AFC is enabled with max remote calls: 10.
+2026-05-03 09:15:04,080 [WARNING] app.ai.description: Model gemini-2.5-flash-lite quota exhausted, cooling down for 1800s
+2026-05-03 09:15:04,081 [WARNING] app.ai.description: Gemini price decision failed: 429 RESOURCE_EXHAUSTED. {'error': {'code': 429, 'message': 'You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://ai.google.dev/gemini-api/docs/rate-limits. To monitor your current usage, head to: https://ai.dev/rate-limit. \n* Quota exceeded for metric: generativelanguage.googleapis.com/generate_content_free_tier_requests, limit: 20, model: gemini-2.5-flash-lite\nPlease retry in 55.9139965s.', 'status': 'RESOURCE_EXHAUSTED', 'details': [{'@type': 'type.googleapis.com/google.rpc.Help', 'links': [{'description': 'Learn more about Gemini API quotas', 'url': 'https://ai.google.dev/gemini-api/docs/rate-limits'}]}, {'@type': 'type.googleapis.com/google.rpc.QuotaFailure', 'violations': [{'quotaMetric': 'generativelanguage.googleapis.com/generate_content_free_tier_requests', 'quotaId': 'GenerateRequestsPerDayPerProjectPerModel-FreeTier', 'quotaDimensions': {'location': 'global', 'model': 'gemini-2.5-flash-lite'}, 'quotaValue': '20'}]}, {'@type': 'type.googleapis.com/google.rpc.RetryInfo', 'retryDelay': '55s'}]}}
+2026-05-03 09:15:04,081 [INFO] root: AFC is enabled with max remote calls: 10.
+2026-05-03 09:15:05,031 [WARNING] app.ai.description: gemini-2.5-flash rate-limited, brief retry...
+2026-05-03 09:15:07,031 [INFO] root: AFC is enabled with max remote calls: 10.
+2026-05-03 09:15:07,946 [WARNING] app.ai.description: Model gemini-2.5-flash quota exhausted, cooling down for 1800s
+2026-05-03 09:15:07,946 [INFO] root: AFC is enabled with max remote calls: 10.
+2026-05-03 09:15:08,914 [WARNING] app.ai.description: gemini-2.5-flash-lite rate-limited, brief retry...
+2026-05-03 09:15:10,914 [INFO] root: AFC is enabled with max remote calls: 10.
+2026-05-03 09:15:11,799 [WARNING] app.ai.description: Model gemini-2.5-flash-lite quota exhausted, cooling down for 1800s
+2026-05-03 09:15:11,799 [WARNING] app.ai.description: Gemini price decision failed: 429 RESOURCE_EXHAUSTED. {'error': {'code': 429, 'message': 'You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://ai.google.dev/gemini-api/docs/rate-limits. To monitor your current usage, head to: https://ai.dev/rate-limit. \n* Quota exceeded for metric: generativelanguage.googleapis.com/generate_content_free_tier_requests, limit: 20, model: gemini-2.5-flash-lite\nPlease retry in 48.198444033s.', 'status': 'RESOURCE_EXHAUSTED', 'details': [{'@type': 'type.googleapis.com/google.rpc.Help', 'links': [{'description': 'Learn more about Gemini API quotas', 'url': 'https://ai.google.dev/gemini-api/docs/rate-limits'}]}, {'@type': 'type.googleapis.com/google.rpc.QuotaFailure', 'violations': [{'quotaMetric': 'generativelanguage.googleapis.com/generate_content_free_tier_requests', 'quotaId': 'GenerateRequestsPerDayPerProjectPerModel-FreeTier', 'quotaDimensions': {'location': 'global', 'model': 'gemini-2.5-flash-lite'}, 'quotaValue': '20'}]}, {'@type': 'type.googleapis.com/google.rpc.RetryInfo', 'retryDelay': '48s'}]}}
+2026-05-03 10:05:15,116 [INFO] app.scraper.clients: Karma Piyasa Operasyonu (TR + Global): ESP32
+2026-05-03 10:05:22,559 [INFO] httpx: HTTP Request: GET https://www.robolinkmarket.com/arama?q=ESP32 "HTTP/1.1 200 OK"
+2026-05-03 10:05:22,607 [INFO] httpx: HTTP Request: GET https://www.komponentci.net/arama?q=ESP32 "HTTP/1.1 302 Object moved"
+2026-05-03 10:05:22,620 [INFO] httpx: HTTP Request: GET https://www.findchips.com/search/ESP32?currency=EUR "HTTP/1.1 200 OK"
+2026-05-03 10:05:22,625 [INFO] httpx: HTTP Request: GET https://www.direnc.net/arama?q=ESP32 "HTTP/1.1 200 OK"
+2026-05-03 10:05:22,683 [INFO] httpx: HTTP Request: GET https://www.robo90.com/arama?q=ESP32 "HTTP/1.1 200 OK"
+2026-05-03 10:05:23,081 [INFO] httpx: HTTP Request: GET https://www.robotistan.com/arama?q=ESP32 "HTTP/1.1 200 OK"
+2026-05-03 10:05:25,073 [INFO] httpx: HTTP Request: GET https://www.komponentci.net/ "HTTP/1.1 200 OK"
+2026-05-03 10:05:30,817 [INFO] root: AFC is enabled with max remote calls: 10.
+2026-05-03 10:05:47,274 [INFO] root: AFC remote call 1 is done.
+2026-05-03 10:05:47,279 [INFO] root: AFC is enabled with max remote calls: 10.
+2026-05-03 10:05:56,012 [INFO] root: AFC remote call 1 is done.
+2026-05-03 10:05:56,014 [INFO] root: AFC is enabled with max remote calls: 10.
+2026-05-03 10:06:05,437 [INFO] root: AFC remote call 1 is done.
+2026-05-03 10:06:05,439 [INFO] root: AFC is enabled with max remote calls: 10.
+2026-05-03 10:06:17,065 [INFO] root: AFC remote call 1 is done.
+2026-05-03 10:06:17,067 [INFO] root: AFC is enabled with max remote calls: 10.
+2026-05-03 10:06:30,629 [INFO] root: AFC remote call 1 is done.
+2026-05-03 10:12:29,860 [INFO] app.scraper.clients: Karma Piyasa Operasyonu (TR + Global): NRF24L01
+2026-05-03 10:12:33,598 [INFO] app.scraper.clients: Karma Piyasa Operasyonu (TR + Global): NRF24L01
+2026-05-03 10:12:35,481 [INFO] httpx: HTTP Request: GET https://www.findchips.com/search/NRF24L01?currency=EUR "HTTP/1.1 200 OK"
+2026-05-03 10:12:35,484 [INFO] httpx: HTTP Request: GET https://www.robo90.com/arama?q=NRF24L01 "HTTP/1.1 200 OK"
+2026-05-03 10:12:35,487 [INFO] httpx: HTTP Request: GET https://www.robolinkmarket.com/arama?q=NRF24L01 "HTTP/1.1 200 OK"
+2026-05-03 10:12:35,494 [INFO] app.scraper.clients: Karma Piyasa Operasyonu (TR + Global): NRF24L01
+2026-05-03 10:12:37,803 [INFO] httpx: HTTP Request: GET https://www.robotistan.com/arama?q=NRF24L01 "HTTP/1.1 200 OK"
+2026-05-03 10:12:37,804 [INFO] httpx: HTTP Request: GET https://www.komponentci.net/arama?q=NRF24L01 "HTTP/1.1 302 Object moved"
+2026-05-03 10:12:37,830 [INFO] httpx: HTTP Request: GET https://www.komponentci.net/arama?q=NRF24L01 "HTTP/1.1 302 Object moved"
+2026-05-03 10:12:37,883 [INFO] httpx: HTTP Request: GET https://www.komponentci.net/arama?q=NRF24L01 "HTTP/1.1 302 Object moved"
+2026-05-03 10:12:37,992 [INFO] httpx: HTTP Request: GET https://www.robotistan.com/arama?q=NRF24L01 "HTTP/1.1 200 OK"
+2026-05-03 10:12:37,998 [INFO] httpx: HTTP Request: GET https://www.direnc.net/arama?q=NRF24L01 "HTTP/1.1 200 OK"
+2026-05-03 10:12:38,000 [INFO] httpx: HTTP Request: GET https://www.robotistan.com/arama?q=NRF24L01 "HTTP/1.1 200 OK"
+2026-05-03 10:12:38,004 [INFO] httpx: HTTP Request: GET https://www.direnc.net/arama?q=NRF24L01 "HTTP/1.1 200 OK"
+2026-05-03 10:12:38,006 [INFO] httpx: HTTP Request: GET https://www.direnc.net/arama?q=NRF24L01 "HTTP/1.1 200 OK"
+2026-05-03 10:12:38,137 [INFO] httpx: HTTP Request: GET https://www.robolinkmarket.com/arama?q=NRF24L01 "HTTP/1.1 200 OK"
+2026-05-03 10:12:38,139 [INFO] httpx: HTTP Request: GET https://www.robolinkmarket.com/arama?q=NRF24L01 "HTTP/1.1 200 OK"
+2026-05-03 10:12:38,140 [INFO] httpx: HTTP Request: GET https://www.robo90.com/arama?q=NRF24L01 "HTTP/1.1 200 OK"
+2026-05-03 10:12:38,143 [INFO] httpx: HTTP Request: GET https://www.robo90.com/arama?q=NRF24L01 "HTTP/1.1 200 OK"
+2026-05-03 10:12:38,833 [INFO] httpx: HTTP Request: GET https://www.findchips.com/search/NRF24L01?currency=EUR "HTTP/1.1 200 OK"
+2026-05-03 10:12:38,835 [INFO] httpx: HTTP Request: GET https://www.findchips.com/search/NRF24L01?currency=EUR "HTTP/1.1 200 OK"
+2026-05-03 10:12:39,051 [INFO] httpx: HTTP Request: GET https://www.komponentci.net/ "HTTP/1.1 200 OK"
+2026-05-03 10:12:39,059 [INFO] httpx: HTTP Request: GET https://www.komponentci.net/ "HTTP/1.1 200 OK"
+2026-05-03 10:12:39,066 [INFO] httpx: HTTP Request: GET https://www.komponentci.net/ "HTTP/1.1 200 OK"
+2026-05-03 10:12:40,521 [INFO] root: AFC is enabled with max remote calls: 10.
+2026-05-03 10:12:40,525 [INFO] root: AFC is enabled with max remote calls: 10.
+2026-05-03 10:12:40,531 [INFO] root: AFC is enabled with max remote calls: 10.
+2026-05-03 10:12:55,977 [INFO] root: AFC remote call 1 is done.
+2026-05-03 10:12:55,997 [INFO] root: AFC is enabled with max remote calls: 10.
+2026-05-03 10:12:59,148 [INFO] root: AFC remote call 1 is done.
+2026-05-03 10:12:59,150 [INFO] root: AFC is enabled with max remote calls: 10.
+2026-05-03 10:13:04,976 [INFO] root: AFC remote call 1 is done.
+2026-05-03 10:13:04,977 [INFO] root: AFC is enabled with max remote calls: 10.
+2026-05-03 10:13:06,335 [INFO] root: AFC remote call 1 is done.
+2026-05-03 10:13:06,336 [INFO] root: AFC is enabled with max remote calls: 10.
+2026-05-03 10:13:07,179 [WARNING] app.ai.description: gemini-2.5-flash rate-limited, brief retry...
+2026-05-03 10:13:08,277 [INFO] root: AFC remote call 1 is done.
+2026-05-03 10:13:08,278 [INFO] root: AFC is enabled with max remote calls: 10.
+2026-05-03 10:13:09,069 [WARNING] app.ai.description: gemini-2.5-flash rate-limited, brief retry...
+2026-05-03 10:13:09,180 [INFO] root: AFC is enabled with max remote calls: 10.
+2026-05-03 10:13:10,200 [WARNING] app.ai.description: Model gemini-2.5-flash quota exhausted, cooling down for 1800s
+2026-05-03 10:13:10,200 [INFO] root: AFC is enabled with max remote calls: 10.
+2026-05-03 10:13:10,311 [INFO] root: AFC remote call 1 is done.
+2026-05-03 10:13:10,313 [INFO] root: AFC is enabled with max remote calls: 10.
+2026-05-03 10:13:11,070 [INFO] root: AFC is enabled with max remote calls: 10.
+2026-05-03 10:13:11,837 [WARNING] app.ai.description: Model gemini-2.5-flash quota exhausted, cooling down for 1800s
+2026-05-03 10:13:11,837 [INFO] root: AFC is enabled with max remote calls: 10.
+2026-05-03 10:13:13,222 [INFO] root: AFC is enabled with max remote calls: 10.
+2026-05-03 10:13:17,785 [INFO] root: AFC remote call 1 is done.
+2026-05-03 10:13:17,785 [INFO] app.ai.description: Used fallback model: gemini-2.5-flash-lite
+2026-05-03 10:13:17,786 [INFO] root: AFC is enabled with max remote calls: 10.
+2026-05-03 10:13:21,667 [INFO] root: AFC remote call 1 is done.
+2026-05-03 10:13:21,667 [INFO] app.ai.description: Used fallback model: gemini-2.5-flash-lite
+2026-05-03 10:13:21,667 [INFO] root: AFC is enabled with max remote calls: 10.
+2026-05-03 10:13:25,557 [INFO] root: AFC remote call 1 is done.
+2026-05-03 10:13:25,558 [INFO] app.ai.description: Used fallback model: gemini-2.5-flash-lite
+2026-05-03 10:13:25,558 [INFO] root: AFC is enabled with max remote calls: 10.
+2026-05-03 10:13:26,275 [INFO] root: AFC remote call 1 is done.
+2026-05-03 10:13:26,275 [INFO] app.ai.description: Used fallback model: gemini-2.5-flash-lite
+2026-05-03 10:13:26,276 [INFO] root: AFC is enabled with max remote calls: 10.
+2026-05-03 10:13:28,322 [INFO] root: AFC remote call 1 is done.
+2026-05-03 10:13:28,323 [INFO] app.ai.description: Used fallback model: gemini-2.5-flash-lite
+2026-05-03 10:13:28,323 [INFO] root: AFC is enabled with max remote calls: 10.
+2026-05-03 10:13:31,553 [INFO] root: AFC remote call 1 is done.
+2026-05-03 10:13:31,554 [INFO] app.ai.description: Used fallback model: gemini-2.5-flash-lite
+2026-05-03 10:13:31,554 [INFO] root: AFC is enabled with max remote calls: 10.
+2026-05-03 10:13:33,319 [INFO] root: AFC remote call 1 is done.
+2026-05-03 10:13:33,320 [INFO] app.ai.description: Used fallback model: gemini-2.5-flash-lite
+2026-05-03 10:13:33,320 [INFO] root: AFC is enabled with max remote calls: 10.
+2026-05-03 10:13:34,774 [INFO] root: AFC remote call 1 is done.
+2026-05-03 10:13:34,774 [INFO] app.ai.description: Used fallback model: gemini-2.5-flash-lite
+2026-05-03 10:13:40,509 [INFO] root: AFC remote call 1 is done.
+2026-05-03 10:13:40,509 [INFO] app.ai.description: Used fallback model: gemini-2.5-flash-lite
+2026-05-03 10:13:41,947 [INFO] root: AFC remote call 1 is done.
+2026-05-03 10:13:41,947 [INFO] app.ai.description: Used fallback model: gemini-2.5-flash-lite
+2026-05-03 10:40:02,882 [INFO] app.scraper.clients: Karma Piyasa Operasyonu (TR + Global): NRF24L01
+2026-05-03 10:40:02,955 [INFO] app.scraper.clients: Karma Piyasa Operasyonu (TR + Global): NRF24L01
+2026-05-03 10:40:20,357 [INFO] httpx: HTTP Request: GET https://www.komponentci.net/arama?q=NRF24L01 "HTTP/1.1 302 Object moved"
+2026-05-03 10:40:20,392 [INFO] httpx: HTTP Request: GET https://www.komponentci.net/arama?q=NRF24L01 "HTTP/1.1 302 Object moved"
+2026-05-03 10:40:20,536 [INFO] httpx: HTTP Request: GET https://www.robo90.com/arama?q=NRF24L01 "HTTP/1.1 200 OK"
+2026-05-03 10:40:20,546 [INFO] httpx: HTTP Request: GET https://www.robolinkmarket.com/arama?q=NRF24L01 "HTTP/1.1 200 OK"
+2026-05-03 10:40:20,561 [INFO] httpx: HTTP Request: GET https://www.robolinkmarket.com/arama?q=NRF24L01 "HTTP/1.1 200 OK"
+2026-05-03 10:40:20,579 [INFO] httpx: HTTP Request: GET https://www.robotistan.com/arama?q=NRF24L01 "HTTP/1.1 200 OK"
+2026-05-03 10:40:21,168 [INFO] httpx: HTTP Request: GET https://www.direnc.net/arama?q=NRF24L01 "HTTP/1.1 200 OK"
+2026-05-03 10:40:21,177 [INFO] httpx: HTTP Request: GET https://www.komponentci.net/ "HTTP/1.1 200 OK"
+2026-05-03 10:40:21,212 [INFO] httpx: HTTP Request: GET https://www.robotistan.com/arama?q=NRF24L01 "HTTP/1.1 200 OK"
+2026-05-03 10:40:21,247 [INFO] httpx: HTTP Request: GET https://www.direnc.net/arama?q=NRF24L01 "HTTP/1.1 200 OK"
+2026-05-03 10:40:21,277 [INFO] httpx: HTTP Request: GET https://www.findchips.com/search/NRF24L01?currency=EUR "HTTP/1.1 200 OK"
+2026-05-03 10:40:21,307 [INFO] httpx: HTTP Request: GET https://www.komponentci.net/ "HTTP/1.1 200 OK"
+2026-05-03 10:40:21,315 [INFO] httpx: HTTP Request: GET https://www.findchips.com/search/NRF24L01?currency=EUR "HTTP/1.1 200 OK"
+2026-05-03 10:40:21,343 [INFO] httpx: HTTP Request: GET https://www.robo90.com/arama?q=NRF24L01 "HTTP/1.1 200 OK"

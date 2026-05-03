@@ -26,7 +26,7 @@ const Kullanim = () => {
       <div className="glass-card" style={{ padding: '40px', lineHeight: '1.8', color: 'var(--text-muted)' }}>
         <h2 style={{ fontSize: '1.4rem', color: 'var(--text-main)', marginBottom: '15px' }}>1. Şartların Kabulü</h2>
         <p style={{ marginBottom: '25px' }}>
-          SourceFlow AI platformunu ve ilgili servislerini ("Hizmet") kullanarak, bu sayfada belirtilen tüm kullanım şartlarını okuduğunuzu, anladığınızı ve yasal olarak bunlara bağlı kalacağınızı kabul etmiş sayılırsınız. Şartların herhangi bir bölümünü kabul etmiyorsanız, platformu kullanmayı derhal bırakmalısınız.
+          QuadCore platformunu ve ilgili servislerini ("Hizmet") kullanarak, bu sayfada belirtilen tüm kullanım şartlarını okuduğunuzu, anladığınızı ve yasal olarak bunlara bağlı kalacağınızı kabul etmiş sayılırsınız. Şartların herhangi bir bölümünü kabul etmiyorsanız, platformu kullanmayı derhal bırakmalısınız.
         </p>
 
         <h2 style={{ fontSize: '1.4rem', color: 'var(--text-main)', marginBottom: '15px' }}>2. Platform Kullanımı ve Sınırlamalar</h2>
@@ -36,7 +36,7 @@ const Kullanim = () => {
 
         <h2 style={{ fontSize: '1.4rem', color: 'var(--text-main)', marginBottom: '15px' }}>3. Doğruluk ve Garanti Reddi</h2>
         <p style={{ marginBottom: '25px' }}>
-          Platformumuz, 3. taraf tedarikçilerden API'ler aracılığıyla veri çekmektedir. Gösterilen fiyatlar, stok durumları ve teslimat süreleri bilgilendirme amaçlıdır ve anlık değişimlere tabidir. SourceFlow AI, gösterilen bu verilerin %100 doğruluğunu, güncelliğini veya kesintisiz sunulacağını garanti etmez. Yapılan satın alımlarda sorumluluk tamamen kullanıcıya aittir.
+          Platformumuz, 3. taraf tedarikçilerden API'ler aracılığıyla veri çekmektedir. Gösterilen fiyatlar, stok durumları ve teslimat süreleri bilgilendirme amaçlıdır ve anlık değişimlere tabidir. QuadCore, gösterilen bu verilerin %100 doğruluğunu, güncelliğini veya kesintisiz sunulacağını garanti etmez. Yapılan satın alımlarda sorumluluk tamamen kullanıcıya aittir.
         </p>
 
         <h2 style={{ fontSize: '1.4rem', color: 'var(--text-main)', marginBottom: '15px' }}>4. Premium Abonelik ve İadeler</h2>
@@ -46,7 +46,7 @@ const Kullanim = () => {
 
         <h2 style={{ fontSize: '1.4rem', color: 'var(--text-main)', marginBottom: '15px' }}>5. Değişiklik Hakkı</h2>
         <p style={{ marginBottom: '25px' }}>
-          SourceFlow AI, bu kullanım şartlarını önceden haber vermeksizin dilediği zaman güncelleme veya değiştirme hakkını saklı tutar. Yapılan değişiklikler bu sayfada yayımlandığı anda yürürlüğe girer.
+          QuadCore, bu kullanım şartlarını önceden haber vermeksizin dilediği zaman güncelleme veya değiştirme hakkını saklı tutar. Yapılan değişiklikler bu sayfada yayımlandığı anda yürürlüğe girer.
         </p>
       </div>
     </motion.div>

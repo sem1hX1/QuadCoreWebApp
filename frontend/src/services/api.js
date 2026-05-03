@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 // ============================================================================
-// SourceFlow AI — Frontend API Servisi
+// QuadCore — Frontend API Servisi
 // ============================================================================
 // Backend bağlantı ayarları:
 //   - Backend hazır olduğunda USE_MOCK = false yapılır

@@ -175,7 +175,7 @@ function Sidebar({ isOpen, setIsOpen, siteName }) {
               <Aperture size={16} color="#fff" />
             </div>
             <span style={{ fontSize: '1.05rem', fontWeight: '800', color: 'var(--text-main)', opacity: isExpanded ? 1 : 0, transition: 'opacity 0.2s', whiteSpace: 'nowrap', display: isExpanded ? 'block' : 'none' }}>
-              {siteName || 'SourceFlow'}
+              {siteName || 'QuadCore'}
             </span>
           </Link>
 
@@ -347,7 +347,7 @@ function Sidebar({ isOpen, setIsOpen, siteName }) {
           <div style={{ width: 22, height: 22, borderRadius: '4px', background: 'var(--accent)', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
             <Cpu size={12} color="#fff" />
           </div>
-          {isExpanded && <span style={{ fontSize: '0.8rem', color: 'var(--text-dim)' }}>{siteName || 'SourceFlow'} AI</span>}
+          {isExpanded && <span style={{ fontSize: '0.8rem', color: 'var(--text-dim)' }}>{siteName || 'QuadCore'} AI</span>}
         </div>
       </aside>
 
@@ -394,19 +394,7 @@ function Sidebar({ isOpen, setIsOpen, siteName }) {
   );
 }
 
-function ThemeToggle({ theme, toggleTheme }) {
-  const isDark = theme === 'dark';
-  return (
-    <button
-      onClick={toggleTheme}
-      className="theme-toggle-btn"
-      title={isDark ? 'Açık temaya geç' : 'Koyu temaya geç'}
-      aria-label="Tema değiştir"
-    >
-      {isDark ? <Sun size={18} /> : <Moon size={18} />}
-    </button>
-  );
-}
+// Theme toggling removed — dark mode button deleted per request
 
 function CurrencySelector() {
   const { currency, setCurrency } = useCurrency();
@@ -425,7 +413,7 @@ function CurrencySelector() {
   );
 }
 
-function TopNav({ isSidebarOpen, setIsSidebarOpen, siteName, theme, toggleTheme }) {
+function TopNav({ isSidebarOpen, setIsSidebarOpen, siteName }) {
   const location = useLocation();
   const navLinks = [
     { to: '/', label: 'Ana Sayfa' },
@@ -449,7 +437,7 @@ function TopNav({ isSidebarOpen, setIsSidebarOpen, siteName, theme, toggleTheme 
       <div style={{ display: 'flex', alignItems: 'center', gap: '15px' }}>
         {!isSidebarOpen && (
           <div style={{ display: 'flex', alignItems: 'center', gap: '8px', color: 'var(--text-main)', fontWeight: '700' }}>
-            <Cpu size={18} color="var(--accent)" /> {siteName || 'SourceFlow'}
+            <Cpu size={18} color="var(--accent)" /> {siteName || 'QuadCore'}
           </div>
         )}
       </div>
@@ -480,7 +468,6 @@ function TopNav({ isSidebarOpen, setIsSidebarOpen, siteName, theme, toggleTheme 
       </div>
       <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
         <CurrencySelector />
-        <ThemeToggle theme={theme} toggleTheme={toggleTheme} />
       </div>
     </nav>
   );
@@ -498,7 +485,7 @@ function Footer({ siteName }) {
       <div style={{ maxWidth: '1200px', margin: '0 auto', padding: '0 20px', display: 'flex', justifyContent: 'space-between', flexWrap: 'wrap', gap: '30px' }}>
         <div style={{ display: 'flex', flexDirection: 'column', gap: '10px', maxWidth: '300px' }}>
           <div style={{ display: 'flex', alignItems: 'center', gap: '8px', color: 'var(--text-main)', fontWeight: '700', fontSize: '1.2rem' }}>
-            <Cpu size={20} color="var(--accent)" /> {siteName || 'SourceFlow'} AI
+            <Cpu size={20} color="var(--accent)" /> {siteName || 'QuadCore'} AI
           </div>
           <p style={{ color: 'var(--text-muted)', fontSize: '0.85rem', lineHeight: '1.6' }}>
             Akıllı tedarik zinciri optimizasyonu ile donanım üretim süreçlerinizi hızlandırın. En iyi parçaları en uygun fiyata bulun.
@@ -562,9 +549,7 @@ function App() {
     localStorage.setItem('qc_theme', theme);
   }, [theme]);
 
-  const toggleTheme = React.useCallback(() => {
-    setTheme(t => (t === 'dark' ? 'light' : 'dark'));
-  }, []);
+  // Theme toggling removed — no-op removed per request
 
   useEffect(() => {
     const fetchSettings = async () => {
@@ -597,7 +582,7 @@ function App() {
           minHeight: '100vh',
           width: '100%'
         }}>
-          <TopNav isSidebarOpen={isSidebarOpen} setIsSidebarOpen={setIsSidebarOpen} siteName={siteName} theme={theme} toggleTheme={toggleTheme} />
+          <TopNav isSidebarOpen={isSidebarOpen} setIsSidebarOpen={setIsSidebarOpen} siteName={siteName} />
           
           <div style={{ paddingTop: '52px', flex: 1, display: 'flex', flexDirection: 'column' }}>
             <Routes>

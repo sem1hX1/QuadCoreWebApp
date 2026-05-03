@@ -26,7 +26,7 @@ const Gizlilik = () => {
       <div className="glass-card" style={{ padding: '40px', lineHeight: '1.8', color: 'var(--text-muted)' }}>
         <h2 style={{ fontSize: '1.4rem', color: 'var(--text-main)', marginBottom: '15px' }}>1. Veri Toplama ve Kullanımı</h2>
         <p style={{ marginBottom: '25px' }}>
-          SourceFlow AI olarak gizliliğinize büyük önem veriyoruz. Hizmetlerimizi kullanırken, bize sağladığınız (ad, e-posta adresi gibi) kişisel verileri ve platformu kullanırken oluşan (arama geçmişi, analiz tercihleri) kullanım verilerini topluyoruz. Bu veriler sadece size daha iyi, daha hızlı ve kişiselleştirilmiş bir analiz deneyimi sunmak amacıyla kullanılmaktadır.
+          QuadCore olarak gizliliğinize büyük önem veriyoruz. Hizmetlerimizi kullanırken, bize sağladığınız (ad, e-posta adresi gibi) kişisel verileri ve platformu kullanırken oluşan (arama geçmişi, analiz tercihleri) kullanım verilerini topluyoruz. Bu veriler sadece size daha iyi, daha hızlı ve kişiselleştirilmiş bir analiz deneyimi sunmak amacıyla kullanılmaktadır.
         </p>
 
         <h2 style={{ fontSize: '1.4rem', color: 'var(--text-main)', marginBottom: '15px' }}>2. Çerezler (Cookies) ve İzleme Teknolojileri</h2>

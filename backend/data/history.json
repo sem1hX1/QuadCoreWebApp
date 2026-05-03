@@ -1,12 +1,1 @@
-[
-  {
-    "id": 1777788353442,
-    "label": "ESP32",
-    "pinned": false
-  },
-  {
-    "id": 1777785601300,
-    "label": "STM32F103",
-    "pinned": false
-  }
-]
+[]
