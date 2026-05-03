@@ -4281,3 +4281,115 @@
 2026-05-03 10:40:21,307 [INFO] httpx: HTTP Request: GET https://www.komponentci.net/ "HTTP/1.1 200 OK"
 2026-05-03 10:40:21,315 [INFO] httpx: HTTP Request: GET https://www.findchips.com/search/NRF24L01?currency=EUR "HTTP/1.1 200 OK"
 2026-05-03 10:40:21,343 [INFO] httpx: HTTP Request: GET https://www.robo90.com/arama?q=NRF24L01 "HTTP/1.1 200 OK"
+2026-05-03 11:12:53,355 [INFO] app.main: Uygulama başlatılıyor...
+2026-05-03 11:14:19,660 [INFO] app.main: Uygulama başlatılıyor...
+2026-05-03 11:15:53,151 [INFO] app.scraper.clients: Karma Piyasa Operasyonu (TR + Global): ESP32
+2026-05-03 11:15:55,973 [INFO] httpx: HTTP Request: GET https://www.findchips.com/search/ESP32?currency=EUR "HTTP/1.1 200 OK"
+2026-05-03 11:15:56,055 [INFO] httpx: HTTP Request: GET https://www.robolinkmarket.com/arama?q=ESP32 "HTTP/1.1 200 OK"
+2026-05-03 11:15:56,102 [INFO] httpx: HTTP Request: GET https://www.robotistan.com/arama?q=ESP32 "HTTP/1.1 200 OK"
+2026-05-03 11:15:56,385 [INFO] httpx: HTTP Request: GET https://www.komponentci.net/arama?q=ESP32 "HTTP/1.1 302 Object moved"
+2026-05-03 11:15:56,388 [INFO] httpx: HTTP Request: GET https://www.robo90.com/arama?q=ESP32 "HTTP/1.1 200 OK"
+2026-05-03 11:15:56,392 [INFO] httpx: HTTP Request: GET https://www.direnc.net/arama?q=ESP32 "HTTP/1.1 200 OK"
+2026-05-03 11:15:57,572 [INFO] httpx: HTTP Request: GET https://www.komponentci.net/ "HTTP/1.1 200 OK"
+2026-05-03 11:15:59,401 [INFO] sentence_transformers.base.model: No device provided, using cpu
+2026-05-03 11:16:00,535 [INFO] httpx: HTTP Request: HEAD https://huggingface.co/sentence-transformers/all-MiniLM-L6-v2/resolve/main/modules.json "HTTP/1.1 307 Temporary Redirect"
+2026-05-03 11:16:00,536 [WARNING] huggingface_hub.utils._http: Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+2026-05-03 11:16:00,617 [INFO] httpx: HTTP Request: HEAD https://huggingface.co/api/resolve-cache/models/sentence-transformers/all-MiniLM-L6-v2/c9745ed1d9f207416be6d2e6f8de32d1f16199bf/modules.json "HTTP/1.1 200 OK"
+2026-05-03 11:16:00,856 [INFO] httpx: HTTP Request: HEAD https://huggingface.co/sentence-transformers/all-MiniLM-L6-v2/resolve/main/config_sentence_transformers.json "HTTP/1.1 307 Temporary Redirect"
+2026-05-03 11:16:00,924 [INFO] httpx: HTTP Request: HEAD https://huggingface.co/api/resolve-cache/models/sentence-transformers/all-MiniLM-L6-v2/c9745ed1d9f207416be6d2e6f8de32d1f16199bf/config_sentence_transformers.json "HTTP/1.1 200 OK"
+2026-05-03 11:16:00,934 [INFO] sentence_transformers.base.model: Loading SentenceTransformer model from sentence-transformers/all-MiniLM-L6-v2.
+2026-05-03 11:16:01,117 [INFO] httpx: HTTP Request: HEAD https://huggingface.co/sentence-transformers/all-MiniLM-L6-v2/resolve/main/config_sentence_transformers.json "HTTP/1.1 307 Temporary Redirect"
+2026-05-03 11:16:01,176 [INFO] httpx: HTTP Request: HEAD https://huggingface.co/api/resolve-cache/models/sentence-transformers/all-MiniLM-L6-v2/c9745ed1d9f207416be6d2e6f8de32d1f16199bf/config_sentence_transformers.json "HTTP/1.1 200 OK"
+2026-05-03 11:16:01,345 [INFO] httpx: HTTP Request: HEAD https://huggingface.co/sentence-transformers/all-MiniLM-L6-v2/resolve/main/README.md "HTTP/1.1 307 Temporary Redirect"
+2026-05-03 11:16:01,417 [INFO] httpx: HTTP Request: HEAD https://huggingface.co/api/resolve-cache/models/sentence-transformers/all-MiniLM-L6-v2/c9745ed1d9f207416be6d2e6f8de32d1f16199bf/README.md "HTTP/1.1 200 OK"
+2026-05-03 11:16:01,621 [INFO] httpx: HTTP Request: HEAD https://huggingface.co/sentence-transformers/all-MiniLM-L6-v2/resolve/main/modules.json "HTTP/1.1 307 Temporary Redirect"
+2026-05-03 11:16:01,688 [INFO] httpx: HTTP Request: HEAD https://huggingface.co/api/resolve-cache/models/sentence-transformers/all-MiniLM-L6-v2/c9745ed1d9f207416be6d2e6f8de32d1f16199bf/modules.json "HTTP/1.1 200 OK"
+2026-05-03 11:16:02,075 [INFO] httpx: HTTP Request: HEAD https://huggingface.co/sentence-transformers/all-MiniLM-L6-v2/resolve/main/sentence_bert_config.json "HTTP/1.1 307 Temporary Redirect"
+2026-05-03 11:16:02,172 [INFO] httpx: HTTP Request: HEAD https://huggingface.co/api/resolve-cache/models/sentence-transformers/all-MiniLM-L6-v2/c9745ed1d9f207416be6d2e6f8de32d1f16199bf/sentence_bert_config.json "HTTP/1.1 200 OK"
+2026-05-03 11:16:02,443 [INFO] httpx: HTTP Request: HEAD https://huggingface.co/sentence-transformers/all-MiniLM-L6-v2/resolve/main/adapter_config.json "HTTP/1.1 404 Not Found"
+2026-05-03 11:16:02,752 [INFO] httpx: HTTP Request: HEAD https://huggingface.co/sentence-transformers/all-MiniLM-L6-v2/resolve/main/config.json "HTTP/1.1 307 Temporary Redirect"
+2026-05-03 11:16:02,882 [INFO] httpx: HTTP Request: HEAD https://huggingface.co/api/resolve-cache/models/sentence-transformers/all-MiniLM-L6-v2/c9745ed1d9f207416be6d2e6f8de32d1f16199bf/config.json "HTTP/1.1 200 OK"
+2026-05-03 11:16:03,128 [INFO] app.scraper.clients: Karma Piyasa Operasyonu (TR + Global): ESP32
+2026-05-03 11:16:03,217 [INFO] httpx: HTTP Request: HEAD https://huggingface.co/sentence-transformers/all-MiniLM-L6-v2/resolve/main/processor_config.json "HTTP/1.1 404 Not Found"
+2026-05-03 11:16:03,381 [INFO] httpx: HTTP Request: HEAD https://huggingface.co/sentence-transformers/all-MiniLM-L6-v2/resolve/main/preprocessor_config.json "HTTP/1.1 404 Not Found"
+2026-05-03 11:16:03,545 [INFO] httpx: HTTP Request: HEAD https://huggingface.co/sentence-transformers/all-MiniLM-L6-v2/resolve/main/video_preprocessor_config.json "HTTP/1.1 404 Not Found"
+2026-05-03 11:16:03,712 [INFO] httpx: HTTP Request: HEAD https://huggingface.co/sentence-transformers/all-MiniLM-L6-v2/resolve/main/preprocessor_config.json "HTTP/1.1 404 Not Found"
+2026-05-03 11:16:03,872 [INFO] httpx: HTTP Request: HEAD https://huggingface.co/sentence-transformers/all-MiniLM-L6-v2/resolve/main/tokenizer_config.json "HTTP/1.1 307 Temporary Redirect"
+2026-05-03 11:16:03,945 [INFO] httpx: HTTP Request: HEAD https://huggingface.co/api/resolve-cache/models/sentence-transformers/all-MiniLM-L6-v2/c9745ed1d9f207416be6d2e6f8de32d1f16199bf/tokenizer_config.json "HTTP/1.1 200 OK"
+2026-05-03 11:16:04,118 [INFO] httpx: HTTP Request: HEAD https://huggingface.co/sentence-transformers/all-MiniLM-L6-v2/resolve/main/config.json "HTTP/1.1 307 Temporary Redirect"
+2026-05-03 11:16:04,180 [INFO] httpx: HTTP Request: HEAD https://huggingface.co/api/resolve-cache/models/sentence-transformers/all-MiniLM-L6-v2/c9745ed1d9f207416be6d2e6f8de32d1f16199bf/config.json "HTTP/1.1 200 OK"
+2026-05-03 11:16:04,353 [INFO] httpx: HTTP Request: HEAD https://huggingface.co/sentence-transformers/all-MiniLM-L6-v2/resolve/main/config.json "HTTP/1.1 307 Temporary Redirect"
+2026-05-03 11:16:04,420 [INFO] httpx: HTTP Request: HEAD https://huggingface.co/api/resolve-cache/models/sentence-transformers/all-MiniLM-L6-v2/c9745ed1d9f207416be6d2e6f8de32d1f16199bf/config.json "HTTP/1.1 200 OK"
+2026-05-03 11:16:04,582 [INFO] httpx: HTTP Request: HEAD https://huggingface.co/sentence-transformers/all-MiniLM-L6-v2/resolve/main/tokenizer_config.json "HTTP/1.1 307 Temporary Redirect"
+2026-05-03 11:16:04,660 [INFO] httpx: HTTP Request: HEAD https://huggingface.co/api/resolve-cache/models/sentence-transformers/all-MiniLM-L6-v2/c9745ed1d9f207416be6d2e6f8de32d1f16199bf/tokenizer_config.json "HTTP/1.1 200 OK"
+2026-05-03 11:16:04,833 [INFO] httpx: HTTP Request: GET https://huggingface.co/api/models/sentence-transformers/all-MiniLM-L6-v2/tree/main/additional_chat_templates?recursive=false&expand=false "HTTP/1.1 404 Not Found"
+2026-05-03 11:16:05,013 [INFO] httpx: HTTP Request: GET https://huggingface.co/api/models/sentence-transformers/all-MiniLM-L6-v2/tree/main?recursive=true&expand=false "HTTP/1.1 200 OK"
+2026-05-03 11:16:05,089 [INFO] httpx: HTTP Request: GET https://www.komponentci.net/arama?q=ESP32 "HTTP/1.1 302 Object moved"
+2026-05-03 11:16:05,227 [INFO] httpx: HTTP Request: GET https://www.robolinkmarket.com/arama?q=ESP32 "HTTP/1.1 200 OK"
+2026-05-03 11:16:05,251 [INFO] httpx: HTTP Request: GET https://www.direnc.net/arama?q=ESP32 "HTTP/1.1 200 OK"
+2026-05-03 11:16:05,279 [INFO] httpx: HTTP Request: HEAD https://huggingface.co/sentence-transformers/all-MiniLM-L6-v2/resolve/main/1_Pooling/config.json "HTTP/1.1 307 Temporary Redirect"
+2026-05-03 11:16:05,293 [INFO] httpx: HTTP Request: GET https://www.robotistan.com/arama?q=ESP32 "HTTP/1.1 200 OK"
+2026-05-03 11:16:05,375 [INFO] httpx: HTTP Request: HEAD https://huggingface.co/api/resolve-cache/models/sentence-transformers/all-MiniLM-L6-v2/c9745ed1d9f207416be6d2e6f8de32d1f16199bf/1_Pooling%2Fconfig.json "HTTP/1.1 200 OK"
+2026-05-03 11:16:05,493 [INFO] httpx: HTTP Request: GET https://www.robo90.com/arama?q=ESP32 "HTTP/1.1 200 OK"
+2026-05-03 11:16:05,783 [INFO] httpx: HTTP Request: GET https://huggingface.co/api/models/sentence-transformers/all-MiniLM-L6-v2 "HTTP/1.1 200 OK"
+2026-05-03 11:16:05,833 [INFO] httpx: HTTP Request: GET https://www.findchips.com/search/ESP32?currency=EUR "HTTP/1.1 200 OK"
+2026-05-03 11:16:05,836 [INFO] httpx: HTTP Request: GET https://www.komponentci.net/ "HTTP/1.1 200 OK"
+2026-05-03 11:16:06,177 [INFO] app.scraper.clients: Karma Piyasa Operasyonu (TR + Global): ESP32
+2026-05-03 11:16:06,793 [WARNING] app.ai.description: Gemini price decision failed: GEMINI_API_KEY not set
+2026-05-03 11:16:06,793 [WARNING] app.ai.description: Gemini description failed, using smart fallback: GEMINI_API_KEY not set
+2026-05-03 11:16:06,794 [WARNING] app.ai.description: Gemini price decision failed: GEMINI_API_KEY not set
+2026-05-03 11:16:06,795 [WARNING] app.ai.description: Gemini description failed, using smart fallback: GEMINI_API_KEY not set
+2026-05-03 11:16:06,796 [WARNING] app.ai.description: Gemini price decision failed: GEMINI_API_KEY not set
+2026-05-03 11:16:06,796 [WARNING] app.ai.description: Gemini description failed, using smart fallback: GEMINI_API_KEY not set
+2026-05-03 11:16:06,796 [WARNING] app.ai.description: Gemini price decision failed: GEMINI_API_KEY not set
+2026-05-03 11:16:06,797 [WARNING] app.ai.description: Gemini description failed, using smart fallback: GEMINI_API_KEY not set
+2026-05-03 11:16:06,797 [WARNING] app.ai.description: Gemini price decision failed: GEMINI_API_KEY not set
+2026-05-03 11:16:06,797 [WARNING] app.ai.description: Gemini description failed, using smart fallback: GEMINI_API_KEY not set
+2026-05-03 11:16:08,347 [INFO] app.scraper.clients: Karma Piyasa Operasyonu (TR + Global): ESP32
+2026-05-03 11:16:10,816 [INFO] httpx: HTTP Request: GET https://www.robotistan.com/arama?q=ESP32 "HTTP/1.1 200 OK"
+2026-05-03 11:16:10,823 [INFO] httpx: HTTP Request: GET https://www.findchips.com/search/ESP32?currency=EUR "HTTP/1.1 200 OK"
+2026-05-03 11:16:11,141 [INFO] httpx: HTTP Request: GET https://www.komponentci.net/arama?q=ESP32 "HTTP/1.1 302 Object moved"
+2026-05-03 11:16:11,143 [INFO] httpx: HTTP Request: GET https://www.komponentci.net/arama?q=ESP32 "HTTP/1.1 302 Object moved"
+2026-05-03 11:16:11,179 [INFO] httpx: HTTP Request: GET https://www.robolinkmarket.com/arama?q=ESP32 "HTTP/1.1 200 OK"
+2026-05-03 11:16:11,316 [INFO] httpx: HTTP Request: GET https://www.direnc.net/arama?q=ESP32 "HTTP/1.1 200 OK"
+2026-05-03 11:16:11,322 [INFO] httpx: HTTP Request: GET https://www.robotistan.com/arama?q=ESP32 "HTTP/1.1 200 OK"
+2026-05-03 11:16:11,326 [INFO] httpx: HTTP Request: GET https://www.robolinkmarket.com/arama?q=ESP32 "HTTP/1.1 200 OK"
+2026-05-03 11:16:11,329 [INFO] httpx: HTTP Request: GET https://www.robo90.com/arama?q=ESP32 "HTTP/1.1 200 OK"
+2026-05-03 11:16:11,359 [INFO] httpx: HTTP Request: GET https://www.direnc.net/arama?q=ESP32 "HTTP/1.1 200 OK"
+2026-05-03 11:16:11,912 [INFO] httpx: HTTP Request: GET https://www.robo90.com/arama?q=ESP32 "HTTP/1.1 200 OK"
+2026-05-03 11:16:13,536 [INFO] httpx: HTTP Request: GET https://www.findchips.com/search/ESP32?currency=EUR "HTTP/1.1 200 OK"
+2026-05-03 11:16:13,781 [INFO] httpx: HTTP Request: GET https://www.komponentci.net/ "HTTP/1.1 200 OK"
+2026-05-03 11:16:13,785 [INFO] httpx: HTTP Request: GET https://www.komponentci.net/ "HTTP/1.1 200 OK"
+2026-05-03 11:16:15,391 [WARNING] app.ai.description: Gemini price decision failed: GEMINI_API_KEY not set
+2026-05-03 11:16:15,392 [WARNING] app.ai.description: Gemini price decision failed: GEMINI_API_KEY not set
+2026-05-03 11:16:15,392 [WARNING] app.ai.description: Gemini price decision failed: GEMINI_API_KEY not set
+2026-05-03 11:16:15,392 [WARNING] app.ai.description: Gemini price decision failed: GEMINI_API_KEY not set
+2026-05-03 11:16:15,392 [WARNING] app.ai.description: Gemini price decision failed: GEMINI_API_KEY not set
+2026-05-03 11:16:16,014 [WARNING] app.ai.description: Gemini price decision failed: GEMINI_API_KEY not set
+2026-05-03 11:16:16,014 [WARNING] app.ai.description: Gemini price decision failed: GEMINI_API_KEY not set
+2026-05-03 11:16:16,015 [WARNING] app.ai.description: Gemini price decision failed: GEMINI_API_KEY not set
+2026-05-03 11:16:16,015 [WARNING] app.ai.description: Gemini price decision failed: GEMINI_API_KEY not set
+2026-05-03 11:16:16,015 [WARNING] app.ai.description: Gemini price decision failed: GEMINI_API_KEY not set
+2026-05-03 11:16:16,038 [WARNING] app.ai.description: Gemini price decision failed: GEMINI_API_KEY not set
+2026-05-03 11:16:16,038 [WARNING] app.ai.description: Gemini price decision failed: GEMINI_API_KEY not set
+2026-05-03 11:16:16,039 [WARNING] app.ai.description: Gemini price decision failed: GEMINI_API_KEY not set
+2026-05-03 11:16:16,039 [WARNING] app.ai.description: Gemini price decision failed: GEMINI_API_KEY not set
+2026-05-03 11:16:16,039 [WARNING] app.ai.description: Gemini price decision failed: GEMINI_API_KEY not set
+2026-05-03 11:17:34,445 [INFO] app.scraper.clients: Karma Piyasa Operasyonu (TR + Global): STM32F103
+2026-05-03 11:17:36,600 [INFO] httpx: HTTP Request: GET https://www.komponentci.net/arama?q=STM32F103 "HTTP/1.1 302 Object moved"
+2026-05-03 11:17:36,688 [INFO] httpx: HTTP Request: GET https://www.robolinkmarket.com/arama?q=STM32F103 "HTTP/1.1 200 OK"
+2026-05-03 11:17:36,838 [INFO] httpx: HTTP Request: GET https://www.direnc.net/arama?q=STM32F103 "HTTP/1.1 200 OK"
+2026-05-03 11:17:36,844 [INFO] httpx: HTTP Request: GET https://www.robo90.com/arama?q=STM32F103 "HTTP/1.1 200 OK"
+2026-05-03 11:17:36,885 [INFO] httpx: HTTP Request: GET https://www.robotistan.com/arama?q=STM32F103 "HTTP/1.1 200 OK"
+2026-05-03 11:17:37,328 [INFO] httpx: HTTP Request: GET https://www.findchips.com/search/STM32F103?currency=EUR "HTTP/1.1 200 OK"
+2026-05-03 11:17:37,330 [INFO] httpx: HTTP Request: GET https://www.komponentci.net/ "HTTP/1.1 200 OK"
+2026-05-03 11:17:40,292 [WARNING] app.ai.description: Gemini price decision failed: GEMINI_API_KEY not set
+2026-05-03 11:17:40,293 [WARNING] app.ai.description: Gemini description failed, using smart fallback: GEMINI_API_KEY not set
+2026-05-03 11:17:40,293 [WARNING] app.ai.description: Gemini price decision failed: GEMINI_API_KEY not set
+2026-05-03 11:17:40,293 [WARNING] app.ai.description: Gemini description failed, using smart fallback: GEMINI_API_KEY not set
+2026-05-03 11:17:40,294 [WARNING] app.ai.description: Gemini price decision failed: GEMINI_API_KEY not set
+2026-05-03 11:17:40,294 [WARNING] app.ai.description: Gemini description failed, using smart fallback: GEMINI_API_KEY not set
+2026-05-03 11:17:40,294 [WARNING] app.ai.description: Gemini price decision failed: GEMINI_API_KEY not set
+2026-05-03 11:17:40,294 [WARNING] app.ai.description: Gemini description failed, using smart fallback: GEMINI_API_KEY not set
+2026-05-03 11:17:40,295 [WARNING] app.ai.description: Gemini price decision failed: GEMINI_API_KEY not set
+2026-05-03 11:17:40,295 [WARNING] app.ai.description: Gemini description failed, using smart fallback: GEMINI_API_KEY not set

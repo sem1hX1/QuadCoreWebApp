@@ -536,13 +536,7 @@ class ErrorBoundary extends React.Component {
 function App() {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
   const [siteSettings, setSiteSettings] = useState(null);
-  const [theme, setTheme] = useState(() => {
-    // localStorage > sistem tercihi > açık (varsayılan)
-    if (typeof window === 'undefined') return 'light';
-    const saved = localStorage.getItem('qc_theme');
-    if (saved === 'dark' || saved === 'light') return saved;
-    return window.matchMedia?.('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
-  });
+  const [theme] = useState('light'); // Her zaman light mode
 
   useEffect(() => {
     document.documentElement.setAttribute('data-theme', theme);
