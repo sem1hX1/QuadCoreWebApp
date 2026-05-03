@@ -1,0 +1,21 @@
+[
+  {
+    "id": "stm32f103",
+    "name": "STM32F103C8T6",
+    "category": "Microcontrollers",
+    "sources": [
+      { "site": "Mouser", "price": 4.50, "currency": "USD", "stock": 1200, "shipping": "2-3 Gün", "trustScore": 98 },
+      { "site": "DigiKey", "price": 4.75, "currency": "USD", "stock": 800, "shipping": "2-4 Gün", "trustScore": 99 },
+      { "site": "LCSC", "price": 3.80, "currency": "USD", "stock": 5000, "shipping": "7-12 Gün", "trustScore": 92 }
+    ]
+  },
+  {
+    "id": "res-10k-0603",
+    "name": "10k Ohm Resistor 0603",
+    "category": "Resistors",
+    "sources": [
+      { "site": "Mouser", "price": 0.01, "currency": "USD", "stock": 100000, "shipping": "2-3 Gün", "trustScore": 98 },
+      { "site": "Farnell", "price": 0.012, "currency": "USD", "stock": 50000, "shipping": "1-2 Gün", "trustScore": 97 }
+    ]
+  }
+]
