@@ -3,14 +3,20 @@ import { Search, MoreHorizontal, Package, Truck, AlertTriangle, HelpCircle, Arro
 import { motion, AnimatePresence } from 'framer-motion';
 import { searchComponents, analyzeComponent, appendSearchHistory } from '../services/api';
 import { useLocation, useNavigate, Link } from 'react-router-dom';
+import { useCurrency, getCurrency, getRates, convertFromTRY, formatInCurrency, priceTRY, SYMBOLS } from '../services/currency';
 
-// TR satıcılar sadece TL üzerinden, Global satıcılar EUR + TL şeklinde gösterilir.
+// TR / Global ayrımı
 const isTR = (item) => item?.status === 'Türkiye' || item?.category === 'Yerel Piyasa';
-const formatPrice = (item) => {
-  const tl = item?.price_try ?? item?.price ?? 0;
-  if (isTR(item)) return `₺${tl.toFixed(2)}`;
-  const eur = item?.price ?? 0;
-  return `€${eur.toFixed(2)} = ₺${tl.toFixed(2)}`;
+
+// Currency-aware fiyat formatı.
+// Hook olmayan yerlerde global state okunur (PDF rapor gibi).
+// Hook olan yerlerde useCurrency() içindeki değer kullanılmalı (re-render için).
+const formatPrice = (item, currency, rates) => {
+  const cur = currency || getCurrency();
+  const r = rates || getRates();
+  const tl = priceTRY(item);
+  // Tek currency tek satır:
+  return formatInCurrency(tl, cur, r);
 };
 
 // HTML escape — PDF içeriği güvenli render edilsin
@@ -299,7 +305,9 @@ const SupplierBadge = ({ name, color }) => (
   </div>
 );
 
-const ComponentCard = ({ comp, index, isSelected, onClick }) => (
+const ComponentCard = ({ comp, index, isSelected, onClick }) => {
+  const { currency, rates } = useCurrency();
+  return (
   <motion.div
     initial={{ opacity: 0, y: 10 }}
     animate={{ opacity: 1, y: 0 }}
@@ -339,7 +347,7 @@ const ComponentCard = ({ comp, index, isSelected, onClick }) => (
           <SupplierBadge name={comp.supplier} color={comp.supplierColor} />
           <div style={{ textAlign: 'right' }}>
             <div style={{ fontSize: '0.9rem', fontWeight: '700', color: 'var(--text-main)' }}>
-              {formatPrice(comp)}
+              {formatPrice(comp, currency, rates)}
             </div>
             <div style={{ fontSize: '0.72rem', color: 'var(--text-muted)' }}>{comp.stock}</div>
           </div>
@@ -399,9 +407,14 @@ const ComponentCard = ({ comp, index, isSelected, onClick }) => (
       </div>
     </div>
   </motion.div>
-);
+  );
+};
 
 const DetailPanel = ({ comp, allResults }) => {
+  const { currency, rates, symbol } = useCurrency();
+  // Yerel display helper — TRY tutarını kullanıcının seçtiği para biriminde gösterir
+  const fmt = (tryAmount) => formatInCurrency(tryAmount, currency, rates);
+
   // Karşılaştırma listesi — isim eşleşmesine göre, fiyat sırasıyla
   const comparisons = allResults
     ? allResults.filter(r => r.name.toLowerCase().includes(comp.name.split(' ')[0].toLowerCase())).sort((a, b) => (a.price_try ?? a.price) - (b.price_try ?? b.price))
@@ -459,6 +472,8 @@ const DetailPanel = ({ comp, allResults }) => {
 
   const [salePrice, setSalePrice] = useState(Math.round(recommendedSale * 100) / 100);
 
+  const navigate = useNavigate();
+
   const kdvAmount = (salePrice * kdvPct) / 100;
   const commissionAmount = (salePrice * commissionPct) / 100;
   const totalDeductions = kdvAmount + Number(kargo || 0) + commissionAmount;
@@ -489,7 +504,7 @@ const DetailPanel = ({ comp, allResults }) => {
           <div style={{ fontSize: '0.75rem', color: 'var(--text-muted)', marginBottom: '8px', lineHeight: '1.4' }}>
             Kategori: {comp.category}<br/>
             Kaynak: {comp.supplier}<br/>
-            Birim Fiyat: {formatPrice(comp)}
+            Birim Fiyat: {fmt(priceTRY(comp))}
           </div>
           
           {comp.url && (
@@ -541,18 +556,18 @@ const DetailPanel = ({ comp, allResults }) => {
                   const recMargin = cost > 0 ? (recProfit / cost) * 100 : 0;
                   return recommendationStrategy === 'competitive' ? (
                     <>
-                      Rakiplerin ortalama satış fiyatı <strong>₺{stats.avg.toFixed(2)}</strong>.{' '}
-                      Bu ürünü <strong style={{ color: '#10b981' }}>₺{recommendedSale.toFixed(2)}</strong>'a satarsanız{' '}
+                      Rakiplerin ortalama satış fiyatı <strong>{fmt(stats.avg)}</strong>.{' '}
+                      Bu ürünü <strong style={{ color: '#10b981' }}>{fmt(recommendedSale)}</strong>'a satarsanız{' '}
                       pazarın altında kalıp giderlerden sonra{' '}
-                      <strong style={{ color: '#10b981' }}>≈ ₺{recProfit.toFixed(2)}</strong>{' '}
+                      <strong style={{ color: '#10b981' }}>≈ {fmt(recProfit)}</strong>{' '}
                       net kâr edersiniz (%{recMargin.toFixed(1)} marj).
                     </>
                   ) : (
                     <>
-                      Pazar ortalaması (<strong>₺{stats.avg.toFixed(2)}</strong>) bu ürünü kârlı satmak için düşük.{' '}
+                      Pazar ortalaması (<strong>{fmt(stats.avg)}</strong>) bu ürünü kârlı satmak için düşük.{' '}
                       KDV, kargo ve komisyon sonrası kâr edebilmek için{' '}
-                      <strong style={{ color: '#10b981' }}>en az ₺{recommendedSale.toFixed(2)}</strong>'a satmalısınız.{' '}
-                      Bu fiyatla net kâr <strong style={{ color: '#10b981' }}>≈ ₺{recProfit.toFixed(2)}</strong> (%{recMargin.toFixed(1)} marj).
+                      <strong style={{ color: '#10b981' }}>en az {fmt(recommendedSale)}</strong>'a satmalısınız.{' '}
+                      Bu fiyatla net kâr <strong style={{ color: '#10b981' }}>≈ {fmt(recProfit)}</strong> (%{recMargin.toFixed(1)} marj).
                     </>
                   );
                 })()}
@@ -574,7 +589,7 @@ const DetailPanel = ({ comp, allResults }) => {
             <div key={i} style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', paddingBottom: i !== comparisons.length - 1 ? '8px' : '0', borderBottom: i !== comparisons.length - 1 ? '1px solid var(--border)' : 'none' }}>
               <span style={{ fontSize: '0.85rem', color: item.id === comp.id ? 'var(--text-main)' : 'var(--text-muted)', fontWeight: item.id === comp.id ? '600' : '500' }}>{item.supplier}</span>
               <span style={{ fontSize: '0.85rem', color: item.id === comp.id ? 'var(--accent)' : 'var(--text-main)', fontWeight: item.id === comp.id ? '700' : '600' }}>
-                {formatPrice(item)}
+                {fmt(priceTRY(item))}
               </span>
             </div>
           ))}
@@ -592,9 +607,9 @@ const DetailPanel = ({ comp, allResults }) => {
         <div style={{ background: 'var(--bg)', padding: '14px', borderRadius: '8px', border: '1px solid var(--border)' }}>
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '8px', marginBottom: '14px' }}>
             {[
-              { label: 'En Düşük', value: `₺${stats.min.toFixed(2)}`, color: '#10b981' },
-              { label: 'Ortalama', value: `₺${stats.avg.toFixed(2)}`, color: 'var(--text-main)' },
-              { label: 'En Yüksek', value: `₺${stats.max.toFixed(2)}`, color: '#ef4444' },
+              { label: 'En Düşük', value: fmt(stats.min), color: '#10b981' },
+              { label: 'Ortalama', value: fmt(stats.avg), color: 'var(--text-main)' },
+              { label: 'En Yüksek', value: fmt(stats.max), color: '#ef4444' },
             ].map((s, i) => (
               <div key={i} style={{ textAlign: 'center', padding: '8px 4px', background: 'var(--bg-card)', borderRadius: '6px', border: '1px solid var(--border)' }}>
                 <div style={{ fontSize: '0.65rem', color: 'var(--text-muted)', textTransform: 'uppercase', letterSpacing: '0.4px', marginBottom: '4px', fontWeight: '600' }}>{s.label}</div>
@@ -607,7 +622,7 @@ const DetailPanel = ({ comp, allResults }) => {
             <div style={{ marginBottom: '10px' }}>
               <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: '0.7rem', color: 'var(--text-muted)', marginBottom: '6px' }}>
                 <span>Seçili ürün konumu</span>
-                <span style={{ fontWeight: '700', color: 'var(--accent)' }}>₺{currentTl.toFixed(2)}</span>
+                <span style={{ fontWeight: '700', color: 'var(--accent)' }}>{fmt(currentTl)}</span>
               </div>
               <div style={{ position: 'relative', height: '8px', background: 'linear-gradient(90deg, #10b981 0%, #f59e0b 50%, #ef4444 100%)', borderRadius: '4px', opacity: 0.3 }}>
                 <div style={{
@@ -657,7 +672,7 @@ const DetailPanel = ({ comp, allResults }) => {
             </div>
             <div style={{ textAlign: 'right' }}>
               <div style={{ fontSize: '0.7rem', color: 'var(--text-muted)', textTransform: 'uppercase', letterSpacing: '0.4px', fontWeight: '600' }}>Alış</div>
-              <div style={{ fontSize: '0.9rem', fontWeight: '700', color: 'var(--text-main)' }}>₺{cost.toFixed(2)}</div>
+              <div style={{ fontSize: '0.9rem', fontWeight: '700', color: 'var(--text-main)' }}>{fmt(cost)}</div>
             </div>
           </div>
 
@@ -689,7 +704,7 @@ const DetailPanel = ({ comp, allResults }) => {
             className="calc-suggest-btn"
           >
             <Sparkles size={12} />
-            AI önerisini uygula (₺{recommendedSale.toFixed(2)})
+            AI önerisini uygula ({fmt(recommendedSale)})
           </button>
 
           {/* Detay döküm */}
@@ -704,7 +719,7 @@ const DetailPanel = ({ comp, allResults }) => {
               <div key={i} style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', fontSize: '0.78rem', padding: '4px 0' }}>
                 <span style={{ color: 'var(--text-muted)' }}>{row.label}</span>
                 <span style={{ color: row.color, fontWeight: '600', fontFamily: 'ui-monospace, monospace' }}>
-                  {row.value < 0 ? '−' : ''}₺{Math.abs(row.value).toFixed(2)}
+                  {row.value < 0 ? '−' : ''}{fmt(Math.abs(row.value))}
                 </span>
               </div>
             ))}
@@ -732,7 +747,7 @@ const DetailPanel = ({ comp, allResults }) => {
             <div style={{ textAlign: 'right' }}>
               <div style={{ fontSize: '1.3rem', fontWeight: '800', color: isProfitable ? '#10b981' : '#ef4444', letterSpacing: '-0.02em', display: 'flex', alignItems: 'center', gap: '4px', justifyContent: 'flex-end' }}>
                 {isProfitable ? <CheckCircle2 size={16} /> : <AlertTriangle size={16} />}
-                {netProfit < 0 ? '−' : ''}₺{Math.abs(netProfit).toFixed(2)}
+                {netProfit < 0 ? '−' : ''}{fmt(Math.abs(netProfit))}
               </div>
             </div>
           </div>
@@ -973,74 +988,6 @@ const LandingView = ({ onSearch }) => {
           ))}
         </motion.div>
 
-        {/* ── Live demo card (decorative) ──────────────────────── */}
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: '-50px' }}
-          transition={{ duration: 0.6 }}
-          className="demo-card-wrap"
-        >
-          <div className="demo-card">
-            <div className="demo-card-header">
-              <div style={{ display: 'flex', gap: '6px' }}>
-                <span className="demo-dot" style={{ background: '#ef4444' }} />
-                <span className="demo-dot" style={{ background: '#f59e0b' }} />
-                <span className="demo-dot" style={{ background: '#10b981' }} />
-              </div>
-              <span style={{ fontSize: '0.78rem', color: 'var(--text-muted)', fontFamily: 'monospace' }}>esp32-wroom-32</span>
-              <motion.span
-                animate={{ opacity: [0.4, 1, 0.4] }}
-                transition={{ repeat: Infinity, duration: 2 }}
-                style={{
-                  display: 'inline-flex', alignItems: 'center', gap: '5px',
-                  fontSize: '0.7rem', color: '#10b981', fontWeight: '600'
-                }}
-              >
-                <span style={{ width: 6, height: 6, borderRadius: '50%', background: '#10b981' }} /> CANLI
-              </motion.span>
-            </div>
-            <div className="demo-card-body">
-              <motion.div
-                initial={{ x: -20, opacity: 0 }}
-                whileInView={{ x: 0, opacity: 1 }}
-                viewport={{ once: true }}
-                transition={{ delay: 0.3, duration: 0.5 }}
-                className="demo-row demo-row-tr"
-              >
-                <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
-                  <span className="demo-flag-tr">TR</span>
-                  <span style={{ fontSize: '0.9rem', fontWeight: '600', color: 'var(--text-main)' }}>Robotistan</span>
-                </div>
-                <span style={{ fontSize: '0.95rem', fontWeight: '700', color: 'var(--text-main)' }}>₺285,00</span>
-              </motion.div>
-              <motion.div
-                initial={{ x: 20, opacity: 0 }}
-                whileInView={{ x: 0, opacity: 1 }}
-                viewport={{ once: true }}
-                transition={{ delay: 0.45, duration: 0.5 }}
-                className="demo-row demo-row-global"
-              >
-                <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
-                  <span className="demo-flag-gl">GL</span>
-                  <span style={{ fontSize: '0.9rem', fontWeight: '600', color: 'var(--text-main)' }}>Mouser</span>
-                </div>
-                <span style={{ fontSize: '0.95rem', fontWeight: '700', color: 'var(--text-main)' }}>€7,80 = ₺312,40</span>
-              </motion.div>
-              <motion.div
-                initial={{ opacity: 0, scale: 0.9 }}
-                whileInView={{ opacity: 1, scale: 1 }}
-                viewport={{ once: true }}
-                transition={{ delay: 0.7, duration: 0.4 }}
-                className="demo-savings"
-              >
-                <ArrowDown size={14} />
-                <span>TR %8,8 daha ucuz</span>
-              </motion.div>
-            </div>
-          </div>
-        </motion.div>
-
         {/* ── How it works ─────────────────────────────────────── */}
         <motion.section
           initial={{ opacity: 0 }}
@@ -1049,24 +996,23 @@ const LandingView = ({ onSearch }) => {
           transition={{ duration: 0.5 }}
           style={{ width: '100%', maxWidth: '1000px', marginTop: '100px' }}
         >
-          <div style={{ textAlign: 'center', marginBottom: '40px' }}>
+          <div style={{ textAlign: 'center', marginBottom: '34px' }}>
             <span className="section-eyebrow">
-              <Layers size={14} /> Süreç
+              <Layers size={14} /> Nasıl Çalışır?
             </span>
             <h2 style={{ fontSize: 'clamp(1.6rem, 3vw, 2.1rem)', fontWeight: '700', color: 'var(--text-main)', marginTop: '12px', letterSpacing: '-0.02em' }}>
-              Bir aramanın <span className="hero-gradient-text">arka planında</span> ne olur?
+              Arama, kümeleme ve AI analizi tek akışta
             </h2>
           </div>
 
           <motion.div
             variants={stagger} initial="initial" whileInView="animate" viewport={{ once: true }}
-            className="steps-grid"
+            style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(220px, 1fr))', gap: '14px' }}
           >
             {steps.map((step, i) => (
               <motion.div
-                key={i}
+                key={step.title}
                 variants={fadeUp}
-                whileHover={{ y: -6, transition: { duration: 0.2 } }}
                 className="step-card"
                 style={{ '--step-color': step.color }}
               >

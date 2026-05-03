@@ -88,7 +88,7 @@ const About = () => {
       style={{ background: 'var(--bg)' }}
     >
       {/* ── Hero ─────────────────────────────────────────────────────────── */}
-      <section style={{
+      <section data-about-hero style={{
         position: 'relative',
         background: 'linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 45%, #f8fafc 100%)',
         borderBottom: '1px solid var(--border)',

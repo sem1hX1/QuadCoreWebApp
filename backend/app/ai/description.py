@@ -18,11 +18,29 @@ api_key = os.getenv("GEMINI_API_KEY") or os.getenv("GOOGLE_API_KEY") or ""
 if api_key:
     api_key = api_key.strip().strip('"').strip("'")
 
-# 2.5-flash-lite free tier'da çok daha yüksek günlük limite sahip
-GEMINI_MODEL = os.getenv("GEMINI_MODEL", "gemini-2.5-flash-lite")
+# Free tier'da farklı modeller AYRI quota bucket'larına sahip.
+# 2.0 serisini kullanmıyoruz; önce 2.5 flash, sonra 2.5 flash-lite deneriz.
+PRIMARY_MODEL = os.getenv("GEMINI_MODEL", "gemini-2.5-flash")
+GEMINI_MODEL = PRIMARY_MODEL  # Geriye dönük uyumluluk
+
+# Sıralama: en yetenekli → daha hafif/yedek
+_FALLBACK_MODELS = [
+    PRIMARY_MODEL,
+    "gemini-2.5-flash",
+    "gemini-2.5-flash-lite",
+]
+# Tekrarları kaldır, sırayı koru
+_seen = set()
+MODEL_CHAIN = [m for m in _FALLBACK_MODELS if not (m in _seen or _seen.add(m))]
+
+# Quota'sı dolan modelleri kısa süreliğine devre dışı bırak (cool-down)
+_model_cooldown_until = {}  # model_name -> unix_ts
+_COOLDOWN_SECONDS = 60 * 30  # 30 dakika
+
 client = genai.Client(api_key=api_key) if api_key else None
 
 _desc_cache = {}
+_alternatives_cache = {}
 _decision_cache = {}
 
 
@@ -31,24 +49,65 @@ def _is_rate_limit_error(err: Exception) -> bool:
     return "429" in msg or "RESOURCE_EXHAUSTED" in msg or "quota" in msg.lower()
 
 
+def _is_cooled_down(model: str) -> bool:
+    expires = _model_cooldown_until.get(model)
+    if expires is None:
+        return False
+    if time.time() >= expires:
+        _model_cooldown_until.pop(model, None)
+        return False
+    return True
+
+
+def _mark_quota_exhausted(model: str):
+    _model_cooldown_until[model] = time.time() + _COOLDOWN_SECONDS
+    logger.warning(f"Model {model} quota exhausted, cooling down for {_COOLDOWN_SECONDS}s")
+
+
 def _generate_with_retry(prompt: str, max_retries: int = 1) -> str:
-    """Gemini'yi 429 durumunda tek seferlik kısa retry ile çağırır."""
+    """
+    Model zincirinde sırayla dener. 429 alırsa o modeli cooldown'a alır,
+    bir sonraki modele geçer. Hepsi tükenirse son hatayı fırlatır.
+    """
+    if client is None:
+        raise RuntimeError("Gemini client not configured")
+
     last_err = None
-    for attempt in range(max_retries + 1):
-        try:
-            response = client.models.generate_content(
-                model=GEMINI_MODEL,
-                contents=prompt,
-            )
-            return (response.text or "").strip()
-        except Exception as e:
-            last_err = e
-            if attempt < max_retries and _is_rate_limit_error(e):
-                logger.warning(f"Gemini rate limit, retry in 3s... ({e})")
-                time.sleep(3)
-                continue
-            raise
-    raise last_err if last_err else RuntimeError("Gemini call failed")
+    available = [m for m in MODEL_CHAIN if not _is_cooled_down(m)]
+    if not available:
+        # Tüm modeller cooldown'da → yine de zinciri tek tek dene (best-effort)
+        available = MODEL_CHAIN
+
+    for model in available:
+        for attempt in range(max_retries + 1):
+            try:
+                response = client.models.generate_content(
+                    model=model,
+                    contents=prompt,
+                )
+                text = (response.text or "").strip()
+                if model != PRIMARY_MODEL:
+                    logger.info(f"Used fallback model: {model}")
+                return text
+            except Exception as e:
+                last_err = e
+                if _is_rate_limit_error(e):
+                    if attempt < max_retries:
+                        # Aynı model için kısa retry (geçici 429)
+                        logger.warning(f"{model} rate-limited, brief retry...")
+                        time.sleep(2)
+                        continue
+                    # Kalıcı quota → bu modeli cooldown'a al, sonrakine geç
+                    _mark_quota_exhausted(model)
+                    break  # bu model'i bırak, dış for sonraki modele geçecek
+                # Başka tip hata — retry kalmışsa dene, yoksa sonraki modele geç
+                if attempt < max_retries:
+                    time.sleep(1)
+                    continue
+                logger.warning(f"{model} non-rate-limit error: {e}; trying next model")
+                break  # sonraki modele
+
+    raise last_err if last_err else RuntimeError("All Gemini models failed")
 
 
 def generate_description_cached(product):
@@ -177,3 +236,77 @@ Kurallar:
     except Exception as e:
         logger.warning(f"Gemini price decision failed: {e}")
         return None
+
+
+def generate_alternatives(product_query: str, top_n: int = 4):
+    """
+    Aranan ürün için drop-in / parametrik olarak benzer alternatifler önerir.
+    Sonuç: [{"name": "...", "reason": "...", "differs": "..."}] formatında liste döner.
+    """
+    import json
+
+    cache_key = (product_query or "").strip().lower()
+    if not cache_key:
+        return []
+    if cache_key in _alternatives_cache:
+        return _alternatives_cache[cache_key]
+
+    if client is None:
+        # Gemini yoksa boş döndür — frontend zaten boş listeyi gracefully handle ediyor
+        return []
+
+    prompt = f"""
+Sen deneyimli bir elektronik komponent uzmanısın.
+Kullanıcı şu ürünü arıyor: "{product_query}"
+
+Bu ürüne **parametrik olarak benzer (drop-in / pin-uyumlu / işlevsel eşdeğer)** {top_n} alternatif öner.
+Tercihen: aynı paket, aynı temel özellikler, küçük farklılıklar (üretici, kapasite, hız vs.).
+
+KESINLIKLE sadece geçerli JSON dizisi döndür (markdown/açıklama yazma):
+[
+  {{"name": "ALT-PART-1", "reason": "Aynı pinout ve voltaj, daha ucuz alternatif", "differs": "Üretici farkı: ON Semi"}},
+  {{"name": "ALT-PART-2", "reason": "...", "differs": "..."}}
+]
+
+Kurallar:
+- "name" alanı somut bir parça numarası olmalı (örn. STM32F103C8T6, LM7805CT, ATmega328P-AU).
+- "reason" Türkçe, 1 cümle, neden uyumlu olduğunu söyle.
+- "differs" Türkçe, 1 kısa cümle, ana farkı belirt (fiyat, üretici, performans vs.).
+- En fazla {top_n} öneri.
+- Boş alternatif yok.
+"""
+
+    try:
+        text = _generate_with_retry(prompt)
+        if not text:
+            return []
+        # Markdown fence varsa temizle
+        cleaned = text.strip()
+        if cleaned.startswith("```json"):
+            cleaned = cleaned.split("```json", 1)[1].split("```", 1)[0].strip()
+        elif cleaned.startswith("```"):
+            cleaned = cleaned.split("```", 1)[1].split("```", 1)[0].strip()
+
+        data = json.loads(cleaned)
+        if not isinstance(data, list):
+            return []
+        # Sadece beklenen alanları al, sınırla
+        cleaned_list = []
+        for item in data[:top_n]:
+            if not isinstance(item, dict):
+                continue
+            name = (item.get("name") or "").strip()
+            if not name:
+                continue
+            cleaned_list.append({
+                "name": name,
+                "reason": (item.get("reason") or "").strip()[:200],
+                "differs": (item.get("differs") or "").strip()[:200],
+            })
+
+        _alternatives_cache[cache_key] = cleaned_list
+        return cleaned_list
+
+    except Exception as e:
+        logger.warning(f"Gemini alternatives failed: {e}")
+        return []

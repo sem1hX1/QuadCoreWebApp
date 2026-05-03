@@ -164,6 +164,26 @@ export const analyzeComponent = async (productId) => {
   }
 };
 
+// ─── 3.5 Alternatif Ürün Önerileri ────────────────────────────────────────
+// Backend endpoint: GET /products/alternatives?q=...
+export const getAlternatives = async (query) => {
+  if (!query || !query.trim()) return [];
+  if (USE_MOCK) {
+    await mockDelay(400);
+    return [];
+  }
+  try {
+    const response = await apiClient.get('/products/alternatives', {
+      params: { q: query },
+      timeout: 30000, // AI çağrısı, biraz daha uzun timeout
+    });
+    return Array.isArray(response.data) ? response.data : [];
+  } catch (error) {
+    console.error('[API] getAlternatives hatası:', error.message);
+    return [];
+  }
+};
+
 // ─── 4. Tüm Ürünleri Listele ────────────────────────────────────────────────
 // Backend endpoint: GET /products
 export const listProducts = async () => {

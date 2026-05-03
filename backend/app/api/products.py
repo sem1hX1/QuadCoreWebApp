@@ -1,12 +1,44 @@
 from fastapi import APIRouter, Depends, HTTPException, status
 from sqlalchemy.orm import Session
-from typing import List
+from typing import List, Dict
 from ..db.session import get_db
 from ..db import models as db_models
 from ..schemas import product as schemas
 from ..services.trade_service import TradeService
 
 router = APIRouter(prefix="/products", tags=["Products & Analysis"])
+
+
+@router.get("/alternatives", response_model=List[Dict])
+async def get_alternatives(q: str):
+    """Aranan ürün için drop-in / parametrik olarak benzer alternatifler önerir."""
+    try:
+        from ..ai.description import generate_alternatives
+        return generate_alternatives(q)
+    except Exception:
+        return []
+
+
+@router.get("/currency-rates", response_model=Dict)
+async def get_currency_rates():
+    """TRY base alınarak EUR ve USD kurlarını döner (frontend currency selector için)."""
+    try:
+        from ..ai.currency import get_rates
+        rates = get_rates("try")
+        return {
+            "base": "TRY",
+            "TRY": 1.0,
+            "EUR": float(rates.get("eur", 0)) or None,
+            "USD": float(rates.get("usd", 0)) or None,
+        }
+    except Exception:
+        # Canlı kur alınamazsa makul varsayılanlar (yaklaşık 2026 değerleri)
+        return {
+            "base": "TRY",
+            "TRY": 1.0,
+            "EUR": 1 / 45.0,  # 1 TRY ≈ 0.022 EUR
+            "USD": 1 / 40.0,  # 1 TRY ≈ 0.025 USD
+        }
 
 
 @router.get("/search", response_model=List[schemas.AIAnalysisResult])

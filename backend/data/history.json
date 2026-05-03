@@ -1,12 +1,12 @@
 [
   {
-    "id": 1777775986106,
-    "label": "cc1101",
+    "id": 1777785601300,
+    "label": "STM32F103",
     "pinned": false
   },
   {
-    "id": 1777775723175,
-    "label": "NRF24L01",
+    "id": 1777785408299,
+    "label": "ESP32",
     "pinned": false
   }
 ]

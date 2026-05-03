@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { BrowserRouter as Router, Routes, Route, Link, useLocation } from 'react-router-dom';
 import { AnimatePresence, motion } from 'framer-motion';
-import { Settings, Cpu, Search, History, Plus, MessageSquare, Menu, X, Clock, Edit, Aperture, MoreHorizontal, Pin, Trash2, BookOpen, HelpCircle, ChevronLeft, ChevronRight } from 'lucide-react';
+import { Settings, Cpu, Search, History, Plus, MessageSquare, Menu, X, Clock, Edit, Aperture, MoreHorizontal, Pin, Trash2, BookOpen, HelpCircle, ChevronLeft, ChevronRight, Sun, Moon } from 'lucide-react';
 import Dashboard from './pages/Dashboard';
 import About from './pages/About';
 import Iletisim from './pages/Iletisim';
@@ -9,6 +9,7 @@ import Sss from './pages/Sss';
 import Gizlilik from './pages/Gizlilik';
 import Kullanim from './pages/Kullanim';
 import { getSettings, getSearchHistory, saveSearchHistory } from './services/api';
+import { useCurrency, fetchRates, SUPPORTED_CURRENCIES } from './services/currency';
 
 function Sidebar({ isOpen, setIsOpen, siteName }) {
   const [isHovered, setIsHovered] = useState(false);
@@ -393,7 +394,38 @@ function Sidebar({ isOpen, setIsOpen, siteName }) {
   );
 }
 
-function TopNav({ isSidebarOpen, setIsSidebarOpen, siteName }) {
+function ThemeToggle({ theme, toggleTheme }) {
+  const isDark = theme === 'dark';
+  return (
+    <button
+      onClick={toggleTheme}
+      className="theme-toggle-btn"
+      title={isDark ? 'Açık temaya geç' : 'Koyu temaya geç'}
+      aria-label="Tema değiştir"
+    >
+      {isDark ? <Sun size={18} /> : <Moon size={18} />}
+    </button>
+  );
+}
+
+function CurrencySelector() {
+  const { currency, setCurrency } = useCurrency();
+  return (
+    <div className="currency-selector" title="Görüntüleme para birimi">
+      {SUPPORTED_CURRENCIES.map(c => (
+        <button
+          key={c}
+          onClick={() => setCurrency(c)}
+          className={`currency-btn ${currency === c ? 'active' : ''}`}
+        >
+          {c}
+        </button>
+      ))}
+    </div>
+  );
+}
+
+function TopNav({ isSidebarOpen, setIsSidebarOpen, siteName, theme, toggleTheme }) {
   const location = useLocation();
   const navLinks = [
     { to: '/', label: 'Ana Sayfa' },
@@ -403,16 +435,16 @@ function TopNav({ isSidebarOpen, setIsSidebarOpen, siteName }) {
   ];
 
   return (
-    <nav style={{
+    <nav data-app-topnav style={{
       position: 'fixed', top: 0, left: isSidebarOpen ? '220px' : '64px', right: 0,
       height: '52px', zIndex: 40,
-      background: 'rgba(255,255,255,0.85)',
+      background: 'var(--nav-bg, rgba(255,255,255,0.85))',
       borderBottom: '1px solid var(--border)',
       backdropFilter: 'blur(12px)',
       display: 'flex', alignItems: 'center',
       justifyContent: 'space-between',
       padding: '0 28px',
-      transition: 'left 0.28s cubic-bezier(0.32, 0.72, 0.24, 1)'
+      transition: 'left 0.28s cubic-bezier(0.32, 0.72, 0.24, 1), background 0.25s ease'
     }}>
       <div style={{ display: 'flex', alignItems: 'center', gap: '15px' }}>
         {!isSidebarOpen && (
@@ -446,7 +478,10 @@ function TopNav({ isSidebarOpen, setIsSidebarOpen, siteName }) {
           );
         })}
       </div>
-      <div style={{ width: '40px' }}></div>
+      <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
+        <CurrencySelector />
+        <ThemeToggle theme={theme} toggleTheme={toggleTheme} />
+      </div>
     </nav>
   );
 }
@@ -514,6 +549,22 @@ class ErrorBoundary extends React.Component {
 function App() {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
   const [siteSettings, setSiteSettings] = useState(null);
+  const [theme, setTheme] = useState(() => {
+    // localStorage > sistem tercihi > açık (varsayılan)
+    if (typeof window === 'undefined') return 'light';
+    const saved = localStorage.getItem('qc_theme');
+    if (saved === 'dark' || saved === 'light') return saved;
+    return window.matchMedia?.('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+  });
+
+  useEffect(() => {
+    document.documentElement.setAttribute('data-theme', theme);
+    localStorage.setItem('qc_theme', theme);
+  }, [theme]);
+
+  const toggleTheme = React.useCallback(() => {
+    setTheme(t => (t === 'dark' ? 'light' : 'dark'));
+  }, []);
 
   useEffect(() => {
     const fetchSettings = async () => {
@@ -525,6 +576,8 @@ function App() {
       }
     };
     fetchSettings();
+    // Para birimi kurlarını arka planda yükle
+    fetchRates();
   }, []);
 
   const siteName = siteSettings?.siteName;
@@ -544,7 +597,7 @@ function App() {
           minHeight: '100vh',
           width: '100%'
         }}>
-          <TopNav isSidebarOpen={isSidebarOpen} setIsSidebarOpen={setIsSidebarOpen} siteName={siteName} />
+          <TopNav isSidebarOpen={isSidebarOpen} setIsSidebarOpen={setIsSidebarOpen} siteName={siteName} theme={theme} toggleTheme={toggleTheme} />
           
           <div style={{ paddingTop: '52px', flex: 1, display: 'flex', flexDirection: 'column' }}>
             <Routes>
