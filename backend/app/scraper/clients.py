@@ -78,7 +78,6 @@ class MasterScraper:
                                                 "title": part_name, "price": p_val,
                                                 "source": name, "region": "global", "currency": "EUR", "url": url
                                             })
-                                            break
                                 except: pass
         except: pass
         return results
@@ -109,6 +108,7 @@ class MasterScraper:
         }
 
         async def scrape_single_tr(name, cfg):
+            site_results = []
             try:
                 async with httpx.AsyncClient(headers=self.headers, timeout=15.0, follow_redirects=True) as client:
                     resp = await client.get(cfg["url"])
@@ -123,20 +123,25 @@ class MasterScraper:
                                 if "stokta yok" in item.text.lower() or "tükendi" in item.text.lower(): continue
                                 if len(title) < 5: continue
                                 
-                                return {
+                                site_results.append({
                                     "title": title,
                                     "price": _parse_price(price_el.text),
                                     "source": name,
                                     "region": "TR",
                                     "currency": "TRY",
                                     "url": cfg["url"]
-                                }
+                                })
             except: pass
-            return None
+            return site_results
 
         tr_tasks = [scrape_single_tr(name, config) for name, config in configs.items()]
-        tr_results = await asyncio.gather(*tr_tasks)
-        return [r for r in tr_results if r]
+        tr_results_nested = await asyncio.gather(*tr_tasks)
+        
+        final_tr = []
+        for sublist in tr_results_nested:
+            if sublist:
+                final_tr.extend(sublist)
+        return final_tr
 
 master_scraper = MasterScraper()
 

@@ -16,7 +16,23 @@
   --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
   --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.1);
   --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.1);
+  --nav-bg: rgba(255, 255, 255, 0.85);
   color-scheme: light;
+}
+
+:root[data-theme="dark"] {
+  --bg: #0f172a;
+  --bg-sidebar: #1e293b;
+  --bg-card: #1e293b;
+  --border: #334155;
+  --text-main: #f1f5f9;
+  --text-muted: #94a3b8;
+  --text-dim: #64748b;
+  --accent: #38bdf8;
+  --accent-soft: rgba(56, 189, 248, 0.1);
+  --shadow-color: 0, 0, 0;
+  --nav-bg: rgba(15, 23, 42, 0.85);
+  color-scheme: dark;
 }
 
 
